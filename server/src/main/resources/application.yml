@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: dev
+
+logging:
+  level:
+    com.zhangyun.portalknight.client: info
+  config: classpath:logback-spring.xml
+
+file:
+  client:
+    interval: 3000
+  server:
+    port: 8090

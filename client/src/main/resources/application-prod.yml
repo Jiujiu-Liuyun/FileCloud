@@ -1,0 +1,8 @@
+file:
+  server:
+    host: 175.178.33.41
+  client:
+    path: /Users/zhangyun/test/source
+    maxsize: 10
+server:
+  port: 8081
