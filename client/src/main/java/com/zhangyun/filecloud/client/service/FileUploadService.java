@@ -59,6 +59,6 @@ public class FileUploadService implements ApplicationRunner {
             SEMAPHORE.acquire();
         }
         channel.close().sync();
-        log.info("消息已全部处理，连接关闭！");
+        log.info("file upload message消息已全部处理，连接关闭！");
     }
 }

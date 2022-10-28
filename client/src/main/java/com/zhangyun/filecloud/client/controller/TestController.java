@@ -19,4 +19,9 @@ public class TestController {
     public String testWeb() {
         return "success";
     }
+
+    @GetMapping("null")
+    public String testNull() {
+        return null;
+    }
 }

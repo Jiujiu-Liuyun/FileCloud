@@ -72,14 +72,8 @@ public class FileUtil {
     }
 
     public static File sourceMapToTarget(File sourceFile, String sourcePath, String targetPath) {
-        if (ObjectUtil.isEmpty(sourceFile)) {
-            throw new InvalidArgumentsException("目标文件为null，删除异常！");
-        }
-        if (!sourceFile.getPath().startsWith(sourcePath)) {
-            throw new InvalidArgumentsException("文件不在 "
-                    + sourcePath + " 目录下！");
-        }
         String targetFile = sourceFile.getPath().replace(sourcePath, targetPath);
+        log.info("{} =====> {}", sourceFile, targetFile);
         return new File(targetFile);
     }
 }

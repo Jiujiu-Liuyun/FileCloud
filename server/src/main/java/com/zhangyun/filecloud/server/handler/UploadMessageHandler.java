@@ -74,8 +74,12 @@ public class UploadMessageHandler extends SimpleChannelInboundHandler<UploadMess
                 FileUtil.writeFile(msg, serverFile.toString());
                 break;
             case FILE_DELETE:
-                log.info("文件 {} 删除", serverFile);
-                Files.deleteIfExists(serverFile);
+                if (new File(String.valueOf(serverFile)).exists()) {
+                    log.info("文件 {} 删除", serverFile);
+                    Files.deleteIfExists(serverFile);
+                } else {
+                    log.warn("文件 {} 不存在，删除失败", serverFile);
+                }
                 break;
             default:
         }

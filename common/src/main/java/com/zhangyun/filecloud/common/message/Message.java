@@ -29,14 +29,18 @@ public abstract class Message implements Serializable {
     /**
      * 消息指令类型 - 文件标记指令
      */
-    public static final int FILE_TRANSFER_CMD = 1;
-    public static final int FILE_TRANSFER_RESPONSE_CMD = 2;
+    public static final int FILE_UPLOAD_CMD = 1;
+    public static final int FILE_UPLOAD_RESPONSE_CMD = 2;
+    public static final int FILE_COMPARE_CMD = 3;
+    public static final int FILE_COMPARE_RESPONSE_CMD = 4;
 
 
     private static final Map<Integer, Class<? extends Message>> MESSAGE_CLASSES = new HashMap<>();
     static {
-        MESSAGE_CLASSES.put(FILE_TRANSFER_CMD, UploadMessage.class);
-        MESSAGE_CLASSES.put(FILE_TRANSFER_RESPONSE_CMD, UploadResponseMessage.class);
+        MESSAGE_CLASSES.put(FILE_UPLOAD_CMD, UploadMessage.class);
+        MESSAGE_CLASSES.put(FILE_UPLOAD_RESPONSE_CMD, UploadResponseMessage.class);
+        MESSAGE_CLASSES.put(FILE_COMPARE_CMD, CompareMessage.class);
+        MESSAGE_CLASSES.put(FILE_COMPARE_RESPONSE_CMD, CompareResponseMessage.class);
     }
     /**
      * 根据消息类型字节，获得对应的消息 class

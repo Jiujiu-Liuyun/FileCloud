@@ -1,6 +1,7 @@
 package com.zhangyun.filecloud.client.monitor;
 
 import cn.hutool.core.util.ObjectUtil;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.apache.commons.io.monitor.FileAlterationMonitor;
@@ -20,7 +21,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
+@Data
 public class ClientFileMonitor implements ApplicationRunner {
+    private FileAlterationMonitor monitor;
+    private FileAlterationObserver observer;
 
     @Autowired
     private FileAlterationListenerAdaptor listener;    // 事件处理类对象
@@ -48,14 +52,14 @@ public class ClientFileMonitor implements ApplicationRunner {
         }
 
         // 设定观察者，监听文件
-        FileAlterationObserver observer = new FileAlterationObserver(path);
+        observer = new FileAlterationObserver(path);
 
         // 给观察者添加监听事件
         observer.addListener(listener);
 
         // 开启一个监视器，监听频率是interval
         // FileAlterationMonitor本身实现了 Runnable，是单独的一个线程，按照设定的时间间隔运行
-        FileAlterationMonitor monitor = new FileAlterationMonitor(interval);
+        monitor = new FileAlterationMonitor(interval);
 
         monitor.addObserver(observer);
 
@@ -75,12 +79,10 @@ public class ClientFileMonitor implements ApplicationRunner {
      */
     @Override
     public void run(ApplicationArguments args) {
-        clientExecutor.execute(() -> {
-            try {
-                start();
-            } catch (Exception e) {
-                log.error("启动文件监听器异常: {}", e.getMessage(), e);
-            }
-        });
+        try {
+            start();
+        } catch (Exception e) {
+            log.error("启动文件监听器异常: {}", e.getMessage(), e);
+        }
     }
 }
