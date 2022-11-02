@@ -1,0 +1,16 @@
+package com.zhangyun.filecloud.client.view;
+
+import de.felixroske.jfxsupport.AbstractFxmlView;
+import de.felixroske.jfxsupport.FXMLView;
+
+/**
+ * description:
+ *
+ * @author: zhangyun
+ * @date: 2022/11/2 15:20
+ * @since: 1.0
+ */
+@FXMLView("/fxml/login.fxml")
+public class LoginView extends AbstractFxmlView {
+
+}

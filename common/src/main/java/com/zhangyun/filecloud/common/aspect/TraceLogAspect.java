@@ -34,7 +34,7 @@ public class TraceLogAspect {
         long cost = System.currentTimeMillis() - start;
 
         // 获取方法名
-        String methodName = jp.getTarget().getClass().getName() + "."
+        String methodName = jp.getTarget().getClass().getSimpleName() + "."
                 + ((MethodSignature) jp.getSignature()).getName();
         // 请求参数
         StringBuilder params = new StringBuilder();

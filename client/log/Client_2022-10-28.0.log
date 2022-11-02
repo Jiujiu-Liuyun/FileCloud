@@ -1200,3 +1200,6 @@ java.lang.IllegalStateException: Monitor is already running
 2022-10-28 13:56:15.799 [nioEventLoopGroup-2-3] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"filePath":"/Users/zhangyun/test/source/未命名文件夹","lastModified":0,"messageType":1,"operationEnum":"DIRECTORY_DELETE","startPos":0,"statusEnum":"FINISHED"}
 2022-10-28 13:56:15.804 [nioEventLoopGroup-2-3] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"filePath":"/Users/zhangyun/test/source/未命名文件夹","messageType":2,"nextPos":-1,"operationEnum":"DIRECTORY_DELETE","statusEnum":"FINISHED"}
 2022-10-28 13:56:15.805 [pool-1-thread-1] INFO  c.z.filecloud.client.service.FileUploadService - file upload message消息已全部处理，连接关闭！
+2022-10-28 15:19:26.229 [http-nio-8081-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-10-28 15:19:26.229 [http-nio-8081-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-10-28 15:19:26.231 [http-nio-8081-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms

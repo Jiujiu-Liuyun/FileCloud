@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhangyun.filecloud.client.controller.LoginController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Button layoutX="258.0" layoutY="254.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="85.0" text="登录" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="258.0" layoutY="318.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="85.0" text="注册">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" layoutX="219.0" layoutY="37.0" prefHeight="49.0" prefWidth="162.0" text="FileCloud" textAlignment="CENTER">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <TextField layoutX="282.0" layoutY="130.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="130.0" prefHeight="27.0" prefWidth="57.0" text="用户名" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="179.0" prefHeight="27.0" prefWidth="57.0" text="密码" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <PasswordField layoutX="282.0" layoutY="179.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

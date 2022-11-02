@@ -12,3 +12,10 @@ file:
     interval: 3000
   server:
     port: 8090
+mybatis-plus:
+  mapper-locations: classpath:com/zhangyun/filecloud/server/mapper/xml/*Mapper.xml
+  type-aliases-package: com.zhangyun.filecloud.server.entity
+  configuration:
+    #驼峰命名规则
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

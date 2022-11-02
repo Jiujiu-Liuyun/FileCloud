@@ -6,7 +6,7 @@
         <artifactId>FileCloud</artifactId>
         <groupId>com.zhangyun</groupId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.zhangyun.filecloud</groupId>
     <artifactId>common</artifactId>

@@ -33,6 +33,8 @@ public abstract class Message implements Serializable {
     public static final int FILE_UPLOAD_RESPONSE_CMD = 2;
     public static final int FILE_COMPARE_CMD = 3;
     public static final int FILE_COMPARE_RESPONSE_CMD = 4;
+    public static final int LOGIN_CMD = 5;
+    public static final int LOGIN_RESPONSE_CMD = 6;
 
 
     private static final Map<Integer, Class<? extends Message>> MESSAGE_CLASSES = new HashMap<>();
@@ -41,6 +43,7 @@ public abstract class Message implements Serializable {
         MESSAGE_CLASSES.put(FILE_UPLOAD_RESPONSE_CMD, UploadResponseMessage.class);
         MESSAGE_CLASSES.put(FILE_COMPARE_CMD, CompareMessage.class);
         MESSAGE_CLASSES.put(FILE_COMPARE_RESPONSE_CMD, CompareResponseMessage.class);
+        MESSAGE_CLASSES.put(LOGIN_RESPONSE_CMD, LoginReseponseMessage.class);
     }
     /**
      * 根据消息类型字节，获得对应的消息 class
