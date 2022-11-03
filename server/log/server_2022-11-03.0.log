@@ -253,3 +253,51 @@ Caused by: java.lang.ClassCastException: com.alibaba.fastjson.JSONObject cannot 
 2022-11-03 11:03:23.732 [nioEventLoopGroup-3-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！"}
 2022-11-03 11:03:45.400 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2022-11-03 11:03:45.410 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-11-03 18:28:24.779 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 24830 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-03 18:28:24.781 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - The following profiles are active: dev
+2022-11-03 18:28:25.455 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-11-03 18:28:25.459 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-03 18:28:25.459 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-03 18:28:25.497 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-03 18:28:25.498 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 689 ms
+2022-11-03 18:28:25.938 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-03 18:28:26.102 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-03 18:28:26.103 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-03 18:28:26.110 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-03 18:28:26.121 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-03 18:28:26.175 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Started ServerApplication in 1.645 seconds (JVM running for 1.961)
+2022-11-03 18:28:26.177 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server starting...
+2022-11-03 18:28:26.179 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server start success
+2022-11-03 18:29:09.753 [nioEventLoopGroup-3-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-03 18:29:09.767 [nioEventLoopGroup-3-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-11-03 18:29:09.891 [nioEventLoopGroup-3-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-11-03 18:29:09.964 [nioEventLoopGroup-3-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 207ms
+2022-11-03 18:29:09.970 [nioEventLoopGroup-3-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！"}
+2022-11-03 18:29:44.501 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-11-03 18:29:44.506 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-11-03 18:33:36.970 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 25830 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-03 18:33:36.973 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - The following profiles are active: dev
+2022-11-03 18:33:37.714 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-11-03 18:33:37.719 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-03 18:33:37.719 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-03 18:33:37.760 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-03 18:33:37.760 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 755 ms
+2022-11-03 18:33:38.228 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-03 18:33:38.397 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-03 18:33:38.398 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-03 18:33:38.404 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-03 18:33:38.415 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-03 18:33:38.471 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Started ServerApplication in 1.802 seconds (JVM running for 2.137)
+2022-11-03 18:33:38.472 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server starting...
+2022-11-03 18:33:38.474 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server start success
+2022-11-03 18:34:22.890 [nioEventLoopGroup-3-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1129","username":"zhangyun"}
+2022-11-03 18:34:22.905 [nioEventLoopGroup-3-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-11-03 18:34:22.967 [nioEventLoopGroup-3-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-11-03 18:34:22.997 [nioEventLoopGroup-3-2] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 102ms
+2022-11-03 18:34:23.002 [nioEventLoopGroup-3-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":302,"messageType":6,"msg":"密码错误"}
+2022-11-03 18:34:35.702 [nioEventLoopGroup-3-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-03 18:34:35.706 [nioEventLoopGroup-3-2] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 3ms
+2022-11-03 18:34:35.707 [nioEventLoopGroup-3-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！"}
+2022-11-03 18:35:05.674 [nioEventLoopGroup-3-3] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-03 18:35:05.677 [nioEventLoopGroup-3-3] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 2ms
+2022-11-03 18:35:05.678 [nioEventLoopGroup-3-3] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！"}

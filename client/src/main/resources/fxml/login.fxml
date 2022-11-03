@@ -8,12 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.zhangyun.filecloud.client.controller.LoginButtonController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhangyun.filecloud.client.controller.LoginButtonController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="600.0">
+      <Pane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFF5EE;">
          <children>
-            <Button layoutX="258.0" layoutY="254.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="85.0" text="登录" textAlignment="CENTER" onAction="#login">
+            <Button layoutX="258.0" layoutY="254.0" mnemonicParsing="false" onAction="#login" prefHeight="38.0" prefWidth="85.0" text="登录" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>

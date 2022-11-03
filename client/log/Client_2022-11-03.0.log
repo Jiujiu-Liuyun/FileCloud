@@ -835,3 +835,162 @@ Caused by: java.net.ConnectException: Connection refused
 2022-11-03 11:03:23.738 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"messageType":6,"msg":"登录成功！"}
 2022-11-03 11:03:23.740 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.sendLoginMessage, 参数: username:"zhangyun"password:"1120" ====> LoginReseponseMessage(code=200, msg=登录成功！), 时间: 98ms
 2022-11-03 11:03:23.740 [JavaFX Application Thread] INFO  c.z.f.client.controller.LoginButtonController - 登录成功
+2022-11-03 17:26:56.179 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 20095 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-03 17:26:56.181 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-03 17:26:56.881 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-03 17:26:56.887 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-03 17:26:56.887 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-03 17:26:56.923 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-03 17:26:56.924 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 710 ms
+2022-11-03 17:26:57.180 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-03 17:26:57.315 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-03 17:26:57.316 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-03 17:26:57.324 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-03 17:26:57.337 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-03 17:26:57.376 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 1.623 seconds (JVM running for 2.508)
+2022-11-03 17:26:57.386 [ForkJoinPool.commonPool-worker-1] INFO  c.z.filecloud.client.monitor.ClientFileMonitor - File Monitor启动成功！
+2022-11-03 17:26:57.386 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-03 17:26:57.391 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-03 17:26:57.430 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 连接失败: Connection refused: localhost/127.0.0.1:8090
+2022-11-03 17:26:57.430 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：null
+2022-11-03 17:32:03.277 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 21850 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-03 17:32:03.281 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-03 17:32:04.001 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-03 17:32:04.007 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-03 17:32:04.007 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-03 17:32:04.047 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-03 17:32:04.047 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 744 ms
+2022-11-03 17:32:04.305 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-03 17:32:04.448 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-03 17:32:04.449 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-03 17:32:04.460 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-03 17:32:04.473 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-03 17:32:04.514 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 1.594 seconds (JVM running for 2.131)
+2022-11-03 17:32:04.523 [ForkJoinPool.commonPool-worker-1] INFO  c.z.filecloud.client.monitor.ClientFileMonitor - File Monitor启动成功！
+2022-11-03 17:32:04.524 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-03 17:32:04.527 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-03 17:32:04.556 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 连接失败: Connection refused: localhost/127.0.0.1:8090
+2022-11-03 17:32:04.556 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：null
+2022-11-03 17:32:56.721 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 22316 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-03 17:32:56.723 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-03 17:32:57.409 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-03 17:32:57.414 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-03 17:32:57.414 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-03 17:32:57.453 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-03 17:32:57.453 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 703 ms
+2022-11-03 17:32:57.705 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-03 17:32:57.839 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-03 17:32:57.840 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-03 17:32:57.847 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-03 17:32:57.862 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-03 17:32:57.911 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 1.606 seconds (JVM running for 2.149)
+2022-11-03 17:32:57.920 [ForkJoinPool.commonPool-worker-1] INFO  c.z.filecloud.client.monitor.ClientFileMonitor - File Monitor启动成功！
+2022-11-03 17:32:57.920 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-03 17:32:57.923 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-03 17:32:57.951 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 连接失败: Connection refused: localhost/127.0.0.1:8090
+2022-11-03 17:32:57.952 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：null
+2022-11-03 17:33:01.793 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 连接失败: Connection refused: localhost/127.0.0.1:8090
+2022-11-03 17:33:01.794 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：null
+2022-11-03 17:33:03.186 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 连接失败: Connection refused: localhost/127.0.0.1:8090
+2022-11-03 17:33:03.187 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：null
+2022-11-03 17:33:57.843 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 22680 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-03 17:33:57.845 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-03 17:33:58.506 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-03 17:33:58.511 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-03 17:33:58.511 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-03 17:33:58.548 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-03 17:33:58.548 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 678 ms
+2022-11-03 17:33:58.807 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-03 17:33:58.932 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-03 17:33:58.933 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-03 17:33:58.940 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-03 17:33:58.953 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-03 17:33:58.992 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 1.59 seconds (JVM running for 2.114)
+2022-11-03 17:33:59.000 [ForkJoinPool.commonPool-worker-1] INFO  c.z.filecloud.client.monitor.ClientFileMonitor - File Monitor启动成功！
+2022-11-03 17:33:59.001 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-03 17:33:59.004 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-03 17:33:59.033 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 连接失败: Connection refused: localhost/127.0.0.1:8090
+2022-11-03 17:33:59.033 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：null
+2022-11-03 18:28:35.061 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 24866 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-03 18:28:35.063 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-03 18:28:35.693 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-03 18:28:35.698 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-03 18:28:35.698 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-03 18:28:35.732 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-03 18:28:35.732 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 643 ms
+2022-11-03 18:28:35.964 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-03 18:28:36.096 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-03 18:28:36.097 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-03 18:28:36.103 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-03 18:28:36.114 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-03 18:28:36.151 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 1.548 seconds (JVM running for 2.015)
+2022-11-03 18:28:36.159 [ForkJoinPool.commonPool-worker-1] INFO  c.z.filecloud.client.monitor.ClientFileMonitor - File Monitor启动成功！
+2022-11-03 18:28:36.160 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-03 18:28:36.163 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-03 18:28:36.192 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0x44d28c14, L:/127.0.0.1:54174 - R:localhost/127.0.0.1:8090]
+2022-11-03 18:29:09.709 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-03 18:29:09.978 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"messageType":6,"msg":"登录成功！"}
+2022-11-03 18:29:09.979 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.sendLoginMessage, 参数: username:"zhangyun"password:"1120" ====> LoginReseponseMessage(code=200, msg=登录成功！), 时间: 326ms
+2022-11-03 18:29:09.979 [JavaFX Application Thread] INFO  c.z.f.client.controller.LoginButtonController - 登录成功：zhangyun, 1120
+2022-11-03 18:33:42.989 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 25852 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-03 18:33:42.991 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-03 18:33:43.722 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-03 18:33:43.727 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-03 18:33:43.727 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-03 18:33:43.765 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-03 18:33:43.765 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 716 ms
+2022-11-03 18:33:44.009 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-03 18:33:44.147 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-03 18:33:44.147 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-03 18:33:44.153 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-03 18:33:44.166 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-03 18:33:44.207 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 1.701 seconds (JVM running for 2.297)
+2022-11-03 18:33:44.217 [ForkJoinPool.commonPool-worker-1] INFO  c.z.filecloud.client.monitor.ClientFileMonitor - File Monitor启动成功！
+2022-11-03 18:33:44.224 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-03 18:33:44.229 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-03 18:33:44.257 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0x1df2c3ca, L:/127.0.0.1:54555 - R:localhost/127.0.0.1:8090]
+2022-11-03 18:34:10.481 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 25940 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-03 18:34:10.483 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-03 18:34:11.215 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-03 18:34:11.220 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-03 18:34:11.220 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-03 18:34:11.257 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-03 18:34:11.258 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 751 ms
+2022-11-03 18:34:11.514 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-03 18:34:11.657 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-03 18:34:11.658 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-03 18:34:11.664 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-03 18:34:11.677 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-03 18:34:11.717 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 1.643 seconds (JVM running for 2.171)
+2022-11-03 18:34:11.726 [ForkJoinPool.commonPool-worker-1] INFO  c.z.filecloud.client.monitor.ClientFileMonitor - File Monitor启动成功！
+2022-11-03 18:34:11.726 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-03 18:34:11.730 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-03 18:34:11.758 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0xf889cb49, L:/127.0.0.1:54598 - R:localhost/127.0.0.1:8090]
+2022-11-03 18:34:22.852 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"messageType":5,"password":"1129","username":"zhangyun"}
+2022-11-03 18:34:23.009 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":302,"messageType":6,"msg":"密码错误"}
+2022-11-03 18:34:23.010 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.sendLoginMessage, 参数: username:"zhangyun"password:"1129" ====> LoginReseponseMessage(code=302, msg=密码错误), 时间: 204ms
+2022-11-03 18:34:35.699 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-03 18:34:35.708 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"messageType":6,"msg":"登录成功！"}
+2022-11-03 18:34:35.708 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.sendLoginMessage, 参数: username:"zhangyun"password:"1120" ====> LoginReseponseMessage(code=200, msg=登录成功！), 时间: 9ms
+2022-11-03 18:34:35.708 [JavaFX Application Thread] INFO  c.z.f.client.controller.LoginButtonController - 登录成功
+2022-11-03 18:34:59.080 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 26098 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-03 18:34:59.084 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-03 18:34:59.796 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-03 18:34:59.801 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-03 18:34:59.801 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-03 18:34:59.846 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-03 18:34:59.846 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 738 ms
+2022-11-03 18:35:00.087 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-03 18:35:00.227 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-03 18:35:00.228 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-03 18:35:00.234 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-03 18:35:00.247 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-03 18:35:00.285 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 1.544 seconds (JVM running for 2.106)
+2022-11-03 18:35:00.292 [ForkJoinPool.commonPool-worker-1] INFO  c.z.filecloud.client.monitor.ClientFileMonitor - File Monitor启动成功！
+2022-11-03 18:35:00.293 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-03 18:35:00.297 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-03 18:35:00.327 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0x3a77ad34, L:/127.0.0.1:54684 - R:localhost/127.0.0.1:8090]
+2022-11-03 18:35:05.668 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-03 18:35:05.684 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"messageType":6,"msg":"登录成功！"}
+2022-11-03 18:35:05.685 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.sendLoginMessage, 参数: username:"zhangyun"password:"1120" ====> LoginReseponseMessage(code=200, msg=登录成功！), 时间: 47ms
+2022-11-03 18:35:05.686 [JavaFX Application Thread] INFO  c.z.f.client.controller.LoginButtonController - 登录成功
