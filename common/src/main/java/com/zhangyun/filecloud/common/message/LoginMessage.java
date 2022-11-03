@@ -16,6 +16,6 @@ public class LoginMessage extends Message {
 
     @Override
     public int getMessageType() {
-        return FILE_COMPARE_CMD;
+        return LOGIN_CMD;
     }
 }

@@ -1,8 +1,8 @@
 package com.zhangyun.filecloud.client.service;
 
-import com.zhangyun.filecloud.client.handler.CompareResponseMessageHandler;
-import com.zhangyun.filecloud.client.handler.UploadResponseMessageHandler;
-import com.zhangyun.filecloud.common.message.CompareResponseMessage;
+import com.zhangyun.filecloud.client.handler.CompareResponseHandler;
+import com.zhangyun.filecloud.client.handler.LoginResponseHandler;
+import com.zhangyun.filecloud.client.handler.UploadResponseHandler;
 import com.zhangyun.filecloud.common.protocol.FrameDecoder;
 import com.zhangyun.filecloud.common.protocol.MessageCodecSharable;
 import io.netty.bootstrap.Bootstrap;
@@ -30,7 +30,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class NettyClient implements ApplicationRunner {
-
     @Value("${file.server.port}")
     private int serverPort;
 
@@ -38,14 +37,17 @@ public class NettyClient implements ApplicationRunner {
     private String serverHost;
 
     @Autowired
-    private UploadResponseMessageHandler uploadResponseMessageHandler;
+    private UploadResponseHandler uploadResponseHandler;
     @Autowired
-    private CompareResponseMessageHandler compareResponseMessageHandler;
+    private CompareResponseHandler compareResponseHandler;
+    @Autowired
+    private LoginResponseHandler loginResponseHandler;
 
     private Bootstrap bootstrap;
     private NioEventLoopGroup group = new NioEventLoopGroup();
     private LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
     private MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
+    private Channel channel = null;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -59,19 +61,24 @@ public class NettyClient implements ApplicationRunner {
                         ch.pipeline().addLast(new FrameDecoder());
                         ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(MESSAGE_CODEC);
-                        ch.pipeline().addLast(uploadResponseMessageHandler);
-                        ch.pipeline().addLast(compareResponseMessageHandler);
+                        ch.pipeline().addLast(uploadResponseHandler);
+                        ch.pipeline().addLast(compareResponseHandler);
+                        ch.pipeline().addLast(loginResponseHandler);
                     }
                 });
         log.info("netty client start success");
+        getChannel();
     }
 
     public Channel getChannel() {
-        Channel channel = null;
-        try {
-            channel = bootstrap.connect(serverHost, serverPort).sync().channel();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        // 尝试建立连接
+        if (channel == null) {
+            try {
+                channel = bootstrap.connect(serverHost, serverPort).sync().channel();
+            } catch (Exception e) {
+                log.info("连接失败: {}", e.getMessage());
+            }
+            log.info("建立连接：{}", channel);
         }
         return channel;
     }

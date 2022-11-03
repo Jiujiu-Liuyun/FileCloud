@@ -8,13 +8,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.awt.*;
+
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.zhangyun.filecloud"})
 public class ClientApplication extends AbstractJavaFxApplicationSupport {
 
     public static void main(String[] args) {
         launch(ClientApplication.class, LoginView.class, args);
-        SpringApplication.run(ClientApplication.class, args);
+//        SpringApplication.run(ClientApplication.class, args);
     }
 
     @Override

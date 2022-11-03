@@ -43,6 +43,7 @@ public abstract class Message implements Serializable {
         MESSAGE_CLASSES.put(FILE_UPLOAD_RESPONSE_CMD, UploadResponseMessage.class);
         MESSAGE_CLASSES.put(FILE_COMPARE_CMD, CompareMessage.class);
         MESSAGE_CLASSES.put(FILE_COMPARE_RESPONSE_CMD, CompareResponseMessage.class);
+        MESSAGE_CLASSES.put(LOGIN_CMD, LoginMessage.class);
         MESSAGE_CLASSES.put(LOGIN_RESPONSE_CMD, LoginReseponseMessage.class);
     }
     /**

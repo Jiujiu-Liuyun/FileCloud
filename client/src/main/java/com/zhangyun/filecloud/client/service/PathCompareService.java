@@ -66,8 +66,7 @@ public class PathCompareService {
             // 等待该文件传送完毕
             semaphore.acquire();
         }
-        channel.close().sync();
-        log.info("compare message消息已全部处理，连接关闭！");
+        log.info("compare message消息已全部处理！");
 
         isComparing.set(false);
         return compareResultList;

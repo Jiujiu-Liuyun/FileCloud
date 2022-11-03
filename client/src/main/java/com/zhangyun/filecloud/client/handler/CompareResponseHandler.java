@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 @ChannelHandler.Sharable
-public class CompareResponseMessageHandler extends SimpleChannelInboundHandler<CompareResponseMessage> {
+public class CompareResponseHandler extends SimpleChannelInboundHandler<CompareResponseMessage> {
     @Autowired
     private PathCompareService pathCompareService;
     @Autowired

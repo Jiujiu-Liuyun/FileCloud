@@ -18,4 +18,12 @@ public class LoginReseponseMessage extends Message{
     public int getMessageType() {
         return LOGIN_RESPONSE_CMD;
     }
+
+    public LoginReseponseMessage() {
+    }
+
+    public LoginReseponseMessage(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
 }

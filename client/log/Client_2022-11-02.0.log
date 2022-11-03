@@ -589,3 +589,19 @@ Caused by: java.lang.IllegalStateException: Location is not set.
 2022-11-02 22:50:41.152 [main] INFO  c.z.filecloud.client.monitor.ClientFileMonitor - File Monitor启动成功！
 2022-11-02 22:50:41.153 [main] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
 2022-11-02 22:50:41.153 [main] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-02 23:04:22.973 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 79534 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-02 23:04:22.976 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-02 23:04:23.817 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-02 23:04:23.822 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-02 23:04:23.823 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-02 23:04:23.861 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-02 23:04:23.861 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 824 ms
+2022-11-02 23:04:24.156 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-02 23:04:24.325 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-02 23:04:24.325 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-02 23:04:24.332 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-02 23:04:24.345 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-02 23:04:24.389 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 1.941 seconds (JVM running for 2.728)
+2022-11-02 23:04:24.398 [ForkJoinPool.commonPool-worker-1] INFO  c.z.filecloud.client.monitor.ClientFileMonitor - File Monitor启动成功！
+2022-11-02 23:04:24.399 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-02 23:04:24.404 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success

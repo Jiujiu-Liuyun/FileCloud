@@ -1028,3 +1028,24 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 2022-11-02 22:00:58.957 [http-nio-8080-exec-8] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
 2022-11-02 22:07:23.653 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2022-11-02 22:07:23.659 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-11-02 23:19:30.780 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 82694 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-02 23:19:30.782 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - The following profiles are active: dev
+2022-11-02 23:19:31.640 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-11-02 23:19:31.645 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-02 23:19:31.645 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-02 23:19:31.682 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-02 23:19:31.683 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 869 ms
+2022-11-02 23:19:32.178 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-02 23:19:32.357 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-02 23:19:32.358 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-02 23:19:32.364 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-02 23:19:32.375 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-02 23:19:32.424 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Started ServerApplication in 1.902 seconds (JVM running for 2.343)
+2022-11-02 23:19:32.425 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server starting...
+2022-11-02 23:19:32.428 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server start success
+2022-11-02 23:20:00.703 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-11-02 23:20:00.706 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-11-02 23:20:00.713 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2022-11-02 23:20:00.747 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-11-02 23:20:00.863 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-11-02 23:20:00.929 [http-nio-8080-exec-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"z" ====> null, 时间: 171ms

@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @GetMapping("/getUserByName")
+    @GetMapping("/selectUserByName")
     public User selectUserByName(@RequestParam String username) {
         return userService.selectUserByName(username);
     }

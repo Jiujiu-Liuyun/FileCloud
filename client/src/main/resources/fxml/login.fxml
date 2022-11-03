@@ -8,11 +8,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhangyun.filecloud.client.controller.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.zhangyun.filecloud.client.controller.LoginButtonController">
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Button layoutX="258.0" layoutY="254.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="85.0" text="登录" textAlignment="CENTER">
+            <Button layoutX="258.0" layoutY="254.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="85.0" text="登录" textAlignment="CENTER" onAction="#login">
                <font>
                   <Font size="18.0" />
                </font>
@@ -27,7 +28,7 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <TextField layoutX="282.0" layoutY="130.0" />
+            <TextField fx:id="textField" layoutX="282.0" layoutY="130.0" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="130.0" prefHeight="27.0" prefWidth="57.0" text="用户名" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
@@ -38,7 +39,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <PasswordField layoutX="282.0" layoutY="179.0" />
+            <PasswordField fx:id="passwordField" layoutX="282.0" layoutY="179.0" />
          </children>
       </Pane>
    </children>

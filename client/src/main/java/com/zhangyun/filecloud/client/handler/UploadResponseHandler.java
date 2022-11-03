@@ -21,7 +21,7 @@ import java.io.File;
  */
 @Component
 @ChannelHandler.Sharable
-public class UploadResponseMessageHandler extends SimpleChannelInboundHandler<UploadResponseMessage> {
+public class UploadResponseHandler extends SimpleChannelInboundHandler<UploadResponseMessage> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, UploadResponseMessage msg) throws Exception {
         // 传输完成

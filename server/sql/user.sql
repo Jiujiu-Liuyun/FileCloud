@@ -10,4 +10,10 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SELECT * from `user`;
 
+update `user`
+set `user_id` = 1
+where `username` = 'zhangyun';
+
+SET SQL_SAFE_UPDATES = 0;
+
 # insert into user(username, password) values('zhangyun', '1120'); 

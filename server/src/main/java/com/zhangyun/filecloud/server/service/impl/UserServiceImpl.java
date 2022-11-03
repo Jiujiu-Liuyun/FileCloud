@@ -1,5 +1,6 @@
 package com.zhangyun.filecloud.server.service.impl;
 
+import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
@@ -33,8 +34,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public boolean createUser(String username, String password) {
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
-
+        user.setPassword(DigestUtil.md5Hex(password));
+        // 插入数据库
         Integer insert = userMapper.insert(user);
         return insert > 0;
     }
