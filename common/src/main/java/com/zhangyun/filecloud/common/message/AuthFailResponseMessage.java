@@ -3,18 +3,19 @@ package com.zhangyun.filecloud.common.message;
 import lombok.Data;
 
 /**
- * description: 登录消息
+ * description:
  *
  * @author: zhangyun
- * @date: 2022/11/2 22:31
+ * @date: 2022/11/4 16:59
  * @since: 1.0
  */
 @Data
-public class LoginMessage extends Message {
-    private String password;
+public class AuthFailResponseMessage extends Message{
+    private Integer code;
+    private String msg;
 
     @Override
     public int getMessageType() {
-        return LOGIN_CMD;
+        return AUTH_FAIL_CMD;
     }
 }

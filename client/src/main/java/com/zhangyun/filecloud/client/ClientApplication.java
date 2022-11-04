@@ -1,5 +1,6 @@
 package com.zhangyun.filecloud.client;
 
+import com.zhangyun.filecloud.client.view.AppView;
 import com.zhangyun.filecloud.client.view.LoginView;
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import javafx.stage.Stage;

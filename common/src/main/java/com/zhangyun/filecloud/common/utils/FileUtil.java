@@ -1,14 +1,15 @@
 package com.zhangyun.filecloud.common.utils;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.enums.FileStatusEnum;
 import com.zhangyun.filecloud.common.exception.InvalidArgumentsException;
 import com.zhangyun.filecloud.common.message.UploadMessage;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
+import java.nio.file.Path;
+import java.util.Properties;
 
 /**
  * description:
@@ -75,5 +76,28 @@ public class FileUtil {
         String targetFile = sourceFile.getPath().replace(sourcePath, targetPath);
         log.info("{} =====> {}", sourceFile, targetFile);
         return new File(targetFile);
+    }
+
+    @TraceLog
+    public static String getProperty(String filePath, String key) {
+        Properties properties = new Properties();
+        InputStream inputStream = null;
+        String res = null;
+        try {
+            inputStream = new FileInputStream(filePath);
+            properties.load(inputStream);
+            res = properties.getProperty(key);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(inputStream !=null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return res;
     }
 }

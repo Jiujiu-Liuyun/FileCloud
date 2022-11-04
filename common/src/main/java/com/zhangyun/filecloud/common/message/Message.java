@@ -19,7 +19,16 @@ public abstract class Message implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 用户名
+     */
+    private String username;
+
     private int messageType;
+    /**
+     * token，用于认证权限
+     */
+    private String token;
 
     /**
      * 返回消息类型
@@ -35,6 +44,7 @@ public abstract class Message implements Serializable {
     public static final int FILE_COMPARE_RESPONSE_CMD = 4;
     public static final int LOGIN_CMD = 5;
     public static final int LOGIN_RESPONSE_CMD = 6;
+    public static final int AUTH_FAIL_CMD = 7;
 
 
     private static final Map<Integer, Class<? extends Message>> MESSAGE_CLASSES = new HashMap<>();
@@ -45,6 +55,7 @@ public abstract class Message implements Serializable {
         MESSAGE_CLASSES.put(FILE_COMPARE_RESPONSE_CMD, CompareResponseMessage.class);
         MESSAGE_CLASSES.put(LOGIN_CMD, LoginMessage.class);
         MESSAGE_CLASSES.put(LOGIN_RESPONSE_CMD, LoginReseponseMessage.class);
+        MESSAGE_CLASSES.put(AUTH_FAIL_CMD, AuthFailResponseMessage.class);
     }
     /**
      * 根据消息类型字节，获得对应的消息 class

@@ -4,6 +4,7 @@ import com.zhangyun.filecloud.common.protocol.FrameDecoder;
 import com.zhangyun.filecloud.common.protocol.MessageCodecSharable;
 import com.zhangyun.filecloud.server.handler.CompareMessageHandler;
 import com.zhangyun.filecloud.server.handler.LoginHandler;
+import com.zhangyun.filecloud.server.handler.MessageFilterHandler;
 import com.zhangyun.filecloud.server.handler.UploadMessageHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -43,6 +44,8 @@ public class NettyServer implements ApplicationRunner {
     private CompareMessageHandler compareMessageHandler;
     @Autowired
     private LoginHandler loginHandler;
+    @Autowired
+    private MessageFilterHandler messageFilterHandler;
 
     private ServerBootstrap serverBootstrap = new ServerBootstrap();
     private NioEventLoopGroup boss = new NioEventLoopGroup();
@@ -62,6 +65,7 @@ public class NettyServer implements ApplicationRunner {
                         ch.pipeline().addLast(new FrameDecoder());
                         ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(MESSAGE_CODEC);
+                        ch.pipeline().addLast(messageFilterHandler);
                         ch.pipeline().addLast(uploadMessageHandler);
                         ch.pipeline().addLast(compareMessageHandler);
                         ch.pipeline().addLast(loginHandler);
@@ -70,12 +74,12 @@ public class NettyServer implements ApplicationRunner {
         log.info("netty server start success");
         try {
             Channel channel = serverBootstrap.bind(serverHost, serverPort).sync().channel();
-            channel.closeFuture().sync();
+//            channel.closeFuture().sync();
          } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            boss.shutdownGracefully();
-            worker.shutdownGracefully();
+//            boss.shutdownGracefully();
+//            worker.shutdownGracefully();
         }
     }
 

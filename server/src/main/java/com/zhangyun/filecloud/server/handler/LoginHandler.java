@@ -5,6 +5,7 @@ import cn.hutool.crypto.digest.DigestUtil;
 import com.zhangyun.filecloud.common.message.LoginMessage;
 import com.zhangyun.filecloud.common.message.LoginReseponseMessage;
 import com.zhangyun.filecloud.server.entity.User;
+import com.zhangyun.filecloud.server.service.RedisService;
 import com.zhangyun.filecloud.server.service.impl.UserServiceImpl;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,6 +13,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 /**
  * description:
@@ -26,6 +29,8 @@ import org.springframework.stereotype.Component;
 public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private RedisService redisService;
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginMessage msg) throws Exception {
@@ -44,6 +49,11 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
                 reseponseMessage = new LoginReseponseMessage(302, "密码错误");
             } else {
                 reseponseMessage = new LoginReseponseMessage(200, "登录成功！");
+                // 生成token
+                String token = UUID.randomUUID().toString();
+                reseponseMessage.setToken(token);
+                // 将token写入Redis
+                redisService.setToken(token, msg.getUsername());
             }
         }
         ctx.writeAndFlush(reseponseMessage);

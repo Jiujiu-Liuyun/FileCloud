@@ -13,6 +13,7 @@ import lombok.Data;
 public class LoginReseponseMessage extends Message{
     private Integer code;
     private String msg;
+    private String token;
 
     @Override
     public int getMessageType() {
