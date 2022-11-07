@@ -26,7 +26,7 @@ import java.util.Properties;
 public class CommonTest {
     @Test
     public void testNull() {
-        System.out.println(" " + null);
+        System.out.println(new File("").isDirectory());
     }
     
     @Test
