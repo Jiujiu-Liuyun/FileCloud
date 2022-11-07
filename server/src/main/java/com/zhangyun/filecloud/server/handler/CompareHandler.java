@@ -1,6 +1,7 @@
 package com.zhangyun.filecloud.server.handler;
 
 import cn.hutool.crypto.digest.DigestUtil;
+import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.CompareMessage;
 import com.zhangyun.filecloud.common.message.CompareResponseMessage;
 import com.zhangyun.filecloud.common.utils.FileUtil;
@@ -21,7 +22,7 @@ import java.io.File;
  */
 @Component
 @ChannelHandler.Sharable
-public class CompareMessageHandler extends SimpleChannelInboundHandler<CompareMessage> {
+public class CompareHandler extends SimpleChannelInboundHandler<CompareMessage> {
     @Value("${file.server.path}")
     private String serverPath;
 
@@ -29,6 +30,7 @@ public class CompareMessageHandler extends SimpleChannelInboundHandler<CompareMe
     private String clientPath;
 
     @Override
+    @TraceLog
     protected void channelRead0(ChannelHandlerContext ctx, CompareMessage msg) throws Exception {
         File file = FileUtil.sourceMapToTarget(new File(msg.getFilePath()), clientPath, serverPath);
         CompareResponseMessage responseMessage = new CompareResponseMessage();

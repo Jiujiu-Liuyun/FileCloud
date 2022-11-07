@@ -10,20 +10,22 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class LoginReseponseMessage extends Message{
+public class LoginResponseMessage extends Message{
     private Integer code;
     private String msg;
     private String token;
+    // 该设备是否注册
+    private Boolean isRegister;
 
     @Override
     public int getMessageType() {
         return LOGIN_RESPONSE_CMD;
     }
 
-    public LoginReseponseMessage() {
+    public LoginResponseMessage() {
     }
 
-    public LoginReseponseMessage(Integer code, String msg) {
+    public LoginResponseMessage(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }

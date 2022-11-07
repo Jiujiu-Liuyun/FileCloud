@@ -1,0 +1,197 @@
+2022-11-06 10:59:28.581 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 1.8.0_342 on zhangyundeAir.lan with PID 9191 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-06 10:59:28.583 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - The following profiles are active: dev
+2022-11-06 10:59:29.009 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-11-06 10:59:29.010 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-11-06 10:59:29.025 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2022-11-06 10:59:29.366 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-11-06 10:59:29.371 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-06 10:59:29.372 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-06 10:59:29.416 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-06 10:59:29.416 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 804 ms
+2022-11-06 10:59:31.454 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-06 10:59:31.674 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2022-11-06 10:59:31.721 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-06 10:59:31.721 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-06 10:59:31.728 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-06 10:59:31.739 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-06 10:59:31.792 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Started ServerApplication in 3.484 seconds (JVM running for 3.875)
+2022-11-06 10:59:31.793 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server starting...
+2022-11-06 10:59:31.795 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server start success
+2022-11-06 10:59:38.690 [nioEventLoopGroup-5-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 10:59:38.704 [nioEventLoopGroup-5-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-11-06 10:59:38.770 [nioEventLoopGroup-5-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-11-06 10:59:38.798 [nioEventLoopGroup-5-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 105ms
+2022-11-06 10:59:39.010 [nioEventLoopGroup-5-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"bc7b173c-528b-4250-8c66-a74223e83398"}
+2022-11-06 12:10:46.893 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m5s534ms).
+2022-11-06 12:21:47.204 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m30s287ms).
+2022-11-06 12:35:16.773 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m59s554ms).
+2022-11-06 12:45:07.465 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m20s684ms).
+2022-11-06 14:28:47.280 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m9s197ms).
+2022-11-06 14:31:58.579 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m11s299ms).
+2022-11-06 15:40:10.057 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h8m11s477ms).
+2022-11-06 16:29:45.297 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49m35s241ms).
+2022-11-06 17:37:13.455 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h7m28s158ms).
+2022-11-06 18:19:37.273 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=42m23s818ms).
+2022-11-06 19:09:47.077 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=50m9s802ms).
+2022-11-06 19:10:39.607 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-11-06 19:10:39.609 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-11-06 20:50:00.337 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 50926 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-06 20:50:00.339 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - The following profiles are active: dev
+2022-11-06 20:50:00.780 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-11-06 20:50:00.781 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-11-06 20:50:00.794 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2022-11-06 20:50:01.124 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-11-06 20:50:01.129 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-06 20:50:01.129 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-06 20:50:01.166 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-06 20:50:01.166 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 797 ms
+2022-11-06 20:50:03.233 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-06 20:50:03.454 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2022-11-06 20:50:03.511 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-06 20:50:03.512 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-06 20:50:03.519 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-06 20:50:03.528 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-06 20:50:03.575 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Started ServerApplication in 3.504 seconds (JVM running for 3.761)
+2022-11-06 20:50:03.576 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server starting...
+2022-11-06 20:50:03.577 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server start success
+2022-11-06 21:01:24.423 [nioEventLoopGroup-5-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 21:01:24.437 [nioEventLoopGroup-5-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-11-06 21:01:24.501 [nioEventLoopGroup-5-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-11-06 21:01:24.529 [nioEventLoopGroup-5-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 101ms
+2022-11-06 21:01:24.726 [nioEventLoopGroup-5-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"fab4918d-1757-42a8-815b-6ed0ddb150b6"}
+2022-11-06 21:04:00.108 [nioEventLoopGroup-5-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 21:04:00.112 [nioEventLoopGroup-5-2] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 3ms
+2022-11-06 21:04:00.115 [nioEventLoopGroup-5-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"d03f1314-49fa-4844-8a51-cb8126261056"}
+2022-11-06 21:05:54.735 [nioEventLoopGroup-5-3] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 21:05:54.738 [nioEventLoopGroup-5-3] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 3ms
+2022-11-06 21:05:54.740 [nioEventLoopGroup-5-3] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"6f355f78-2597-47ae-a78c-42df336cf97d"}
+2022-11-06 21:14:42.024 [nioEventLoopGroup-5-4] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 21:14:42.030 [nioEventLoopGroup-5-4] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 4ms
+2022-11-06 21:14:42.032 [nioEventLoopGroup-5-4] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"ad846303-b688-412b-aa1a-46b370aa2448"}
+2022-11-06 21:16:16.742 [nioEventLoopGroup-5-5] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 21:16:16.745 [nioEventLoopGroup-5-5] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 2ms
+2022-11-06 21:16:16.746 [nioEventLoopGroup-5-5] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"0a64d0a4-24a8-40f8-bfe7-2d4fcad33cd5"}
+2022-11-06 21:47:47.666 [nioEventLoopGroup-5-6] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 21:47:47.670 [nioEventLoopGroup-5-6] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 3ms
+2022-11-06 21:47:47.672 [nioEventLoopGroup-5-6] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"98653839-6183-408e-b633-395ff1362ca0"}
+2022-11-06 21:51:12.992 [nioEventLoopGroup-5-7] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 21:51:12.996 [nioEventLoopGroup-5-7] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 3ms
+2022-11-06 21:51:12.997 [nioEventLoopGroup-5-7] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"a3314fd2-868d-445a-ace5-3d0d9492691f"}
+2022-11-06 21:57:41.328 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-11-06 21:57:41.332 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-11-06 21:57:43.282 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 63867 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-06 21:57:43.286 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - The following profiles are active: dev
+2022-11-06 21:57:43.752 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-11-06 21:57:43.753 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-11-06 21:57:43.766 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2022-11-06 21:57:44.060 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-11-06 21:57:44.065 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-06 21:57:44.065 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-06 21:57:44.107 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-06 21:57:44.107 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 766 ms
+2022-11-06 21:57:46.330 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-06 21:57:46.533 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2022-11-06 21:57:46.578 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-06 21:57:46.579 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-06 21:57:46.584 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-06 21:57:46.594 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-06 21:57:46.639 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Started ServerApplication in 3.705 seconds (JVM running for 4.155)
+2022-11-06 21:57:46.640 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server starting...
+2022-11-06 21:57:46.642 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server start success
+2022-11-06 22:05:27.691 [nioEventLoopGroup-5-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 22:05:27.706 [nioEventLoopGroup-5-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-11-06 22:05:27.767 [nioEventLoopGroup-5-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-11-06 22:05:27.806 [nioEventLoopGroup-5-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 110ms
+2022-11-06 22:05:27.987 [nioEventLoopGroup-5-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"c799a969-b264-4d63-8744-0de4afc314f3"}
+2022-11-06 22:13:53.513 [nioEventLoopGroup-5-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 22:13:53.519 [nioEventLoopGroup-5-2] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 5ms
+2022-11-06 22:13:53.521 [nioEventLoopGroup-5-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"0e153188-b3bc-4eb9-8f5f-a4dc183de898"}
+2022-11-06 22:16:39.546 [nioEventLoopGroup-5-3] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 22:16:39.549 [nioEventLoopGroup-5-3] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 2ms
+2022-11-06 22:16:39.550 [nioEventLoopGroup-5-3] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"1271c9ce-c036-467e-ad95-64b2285876ca"}
+2022-11-06 22:17:44.304 [nioEventLoopGroup-5-4] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 22:17:44.306 [nioEventLoopGroup-5-4] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 1ms
+2022-11-06 22:17:44.307 [nioEventLoopGroup-5-4] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"32786393-e67b-4806-87f1-c9c9a849ec24"}
+2022-11-06 22:19:26.880 [nioEventLoopGroup-5-5] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 22:19:26.886 [nioEventLoopGroup-5-5] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 5ms
+2022-11-06 22:19:26.888 [nioEventLoopGroup-5-5] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"56b7dda5-7907-47dc-9e23-b3a888c9addb"}
+2022-11-06 22:20:25.896 [nioEventLoopGroup-5-6] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 22:20:25.898 [nioEventLoopGroup-5-6] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 1ms
+2022-11-06 22:20:25.910 [nioEventLoopGroup-5-6] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"3780dc8a-d027-4389-8c82-2d3a7a5e3fa9"}
+2022-11-06 22:22:45.551 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-11-06 22:22:45.557 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-11-06 22:23:06.236 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 68731 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-06 22:23:06.237 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - The following profiles are active: dev
+2022-11-06 22:23:06.645 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-11-06 22:23:06.646 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-11-06 22:23:06.658 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2022-11-06 22:23:06.950 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-11-06 22:23:06.954 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-06 22:23:06.954 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-06 22:23:06.990 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-06 22:23:06.990 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 724 ms
+2022-11-06 22:23:09.452 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-06 22:23:09.710 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2022-11-06 22:23:09.767 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-06 22:23:09.768 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-06 22:23:09.776 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-06 22:23:09.790 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-06 22:23:09.857 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Started ServerApplication in 4.044 seconds (JVM running for 4.338)
+2022-11-06 22:23:09.859 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server starting...
+2022-11-06 22:23:09.860 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server start success
+2022-11-06 22:23:16.536 [nioEventLoopGroup-5-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 22:23:16.550 [nioEventLoopGroup-5-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-11-06 22:23:16.607 [nioEventLoopGroup-5-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-11-06 22:23:16.634 [nioEventLoopGroup-5-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 95ms
+2022-11-06 22:23:16.830 [nioEventLoopGroup-5-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"2659ee59-0aea-4ecc-a0b0-2aea41f7c206"}
+2022-11-06 22:46:15.047 [nioEventLoopGroup-5-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 22:46:15.053 [nioEventLoopGroup-5-2] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 5ms
+2022-11-06 22:46:15.055 [nioEventLoopGroup-5-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"a4972404-5a6d-4bb1-af3a-f82c5a90f321"}
+2022-11-06 23:08:00.254 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-11-06 23:08:00.258 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-11-06 23:09:05.325 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 11.0.15 on zhangyundeMacBook-Air.local with PID 77793 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-06 23:09:05.326 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - The following profiles are active: dev
+2022-11-06 23:09:05.764 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-11-06 23:09:05.765 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-11-06 23:09:05.776 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2022-11-06 23:09:06.055 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-11-06 23:09:06.059 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-06 23:09:06.059 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-06 23:09:06.095 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-06 23:09:06.095 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 745 ms
+2022-11-06 23:09:07.741 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-06 23:09:07.931 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2022-11-06 23:09:07.978 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-06 23:09:07.979 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-06 23:09:07.983 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-06 23:09:07.991 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-06 23:09:08.036 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Started ServerApplication in 3.067 seconds (JVM running for 3.425)
+2022-11-06 23:09:08.037 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server starting...
+2022-11-06 23:09:08.038 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server start success
+2022-11-06 23:21:20.383 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 80314 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-06 23:21:20.385 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - The following profiles are active: dev
+2022-11-06 23:21:20.790 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-11-06 23:21:20.791 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-11-06 23:21:20.806 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2022-11-06 23:21:21.130 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-11-06 23:21:21.135 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-06 23:21:21.135 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-06 23:21:21.175 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-06 23:21:21.176 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 762 ms
+2022-11-06 23:21:23.166 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-06 23:21:23.373 [main] WARN  o.s.b.a.freemarker.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2022-11-06 23:21:23.420 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-11-06 23:21:23.421 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-06 23:21:23.426 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-06 23:21:23.437 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-06 23:21:23.482 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Started ServerApplication in 3.404 seconds (JVM running for 3.871)
+2022-11-06 23:21:23.483 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server starting...
+2022-11-06 23:21:23.484 [main] INFO  com.zhangyun.filecloud.server.service.NettyServer - netty server start success
+2022-11-06 23:25:02.832 [nioEventLoopGroup-5-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 23:25:02.847 [nioEventLoopGroup-5-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-11-06 23:25:02.907 [nioEventLoopGroup-5-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-11-06 23:25:02.948 [nioEventLoopGroup-5-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 111ms
+2022-11-06 23:25:03.153 [nioEventLoopGroup-5-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"1994009d-c393-41d0-a22e-2bb67bdd626f"}
+2022-11-06 23:57:36.899 [nioEventLoopGroup-5-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-06 23:57:36.916 [nioEventLoopGroup-5-2] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 16ms
+2022-11-06 23:57:36.918 [nioEventLoopGroup-5-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"086ed595-b3fb-42ac-b005-4c537d6cf56d"}

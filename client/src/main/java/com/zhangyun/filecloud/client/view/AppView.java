@@ -10,6 +10,6 @@ import de.felixroske.jfxsupport.FXMLView;
  * @date: 2022/11/3 16:01
  * @since: 1.0
  */
-@FXMLView("/fxml/app.fxml")
+@FXMLView("/fxml/App.fxml")
 public class AppView extends AbstractFxmlView {
 }

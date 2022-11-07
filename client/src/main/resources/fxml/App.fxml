@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="401.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhangyun.filecloud.client.controller.app.AppController">
+   <children>
+      <MenuBar>
+         <menus>
+            <Menu mnemonicParsing="false" text="账户">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="账户信息" />
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="登出" />
+                  <MenuItem mnemonicParsing="false" onAction="#setFilePath" text="设置" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="设备">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="设备信息" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="文件同步">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="关闭" />
+                  <MenuItem mnemonicParsing="false" text="开启" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label alignment="CENTER" layoutX="44.0" layoutY="58.0" prefHeight="99.0" prefWidth="314.0" text="欢迎使用FileCloud" textAlignment="CENTER" textFill="#6040e3">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

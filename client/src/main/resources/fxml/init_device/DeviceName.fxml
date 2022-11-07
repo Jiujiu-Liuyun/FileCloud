@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.zhangyun.filecloud.client.controller.registerdevice.DeviceNameController">
+   <children>
+      <Label alignment="CENTER" prefHeight="50.0" prefWidth="300.0" text="请输入设备名称" />
+      <TextField fx:id="deviceNameField" layoutX="40.0" layoutY="60.0" prefHeight="40.0" prefWidth="220.0" />
+      <Button layoutX="60.0" layoutY="120.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="60.0" text="上一步" />
+      <Button layoutX="180.0" layoutY="120.0" mnemonicParsing="false" onAction="#next" prefHeight="25.0" prefWidth="60.0" text="下一步" />
+   </children>
+</AnchorPane>

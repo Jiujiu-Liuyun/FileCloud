@@ -357,3 +357,51 @@ java.io.IOException: The server sockets created using the LocalRMIServerSocketFa
 2022-11-04 22:53:46.572 [nioEventLoopGroup-5-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
 2022-11-04 22:53:46.578 [nioEventLoopGroup-5-2] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 4ms
 2022-11-04 22:53:46.580 [nioEventLoopGroup-5-2] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"f1a5a94a-f96f-46e9-88b8-cb55bb322e14"}
+2022-11-04 23:11:47.337 [nioEventLoopGroup-5-3] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-04 23:11:47.343 [nioEventLoopGroup-5-3] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 4ms
+2022-11-04 23:11:47.345 [lettuce-kqueueEventLoop-6-1] ERROR io.netty.util.ResourceLeakDetector - LEAK: ByteBuf.release() was not called before it's garbage-collected. See https://netty.io/wiki/reference-counted-objects.html for more information.
+Recent access records: 
+Created at:
+	io.netty.buffer.PooledByteBufAllocator.newDirectBuffer(PooledByteBufAllocator.java:402)
+	io.netty.buffer.AbstractByteBufAllocator.directBuffer(AbstractByteBufAllocator.java:188)
+	io.netty.buffer.AbstractByteBufAllocator.buffer(AbstractByteBufAllocator.java:124)
+	io.netty.buffer.AbstractByteBuf.readBytes(AbstractByteBuf.java:871)
+	com.zhangyun.filecloud.common.protocol.MessageCodecSharable.decode(MessageCodecSharable.java:92)
+	com.zhangyun.filecloud.common.protocol.MessageCodecSharable.decode(MessageCodecSharable.java:23)
+	io.netty.handler.codec.MessageToMessageCodec$2.decode(MessageToMessageCodec.java:81)
+	io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:88)
+	io.netty.handler.codec.MessageToMessageCodec.channelRead(MessageToMessageCodec.java:111)
+	io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+	io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+	io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+	io.netty.handler.logging.LoggingHandler.channelRead(LoggingHandler.java:280)
+	io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+	io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+	io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+	io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:324)
+	io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:296)
+	io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+	io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+	io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+	io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)
+	io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+	io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)
+	io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)
+	io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:719)
+	io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655)
+	io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581)
+	io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493)
+	io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:986)
+	io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	java.lang.Thread.run(Thread.java:750)
+2022-11-04 23:11:47.346 [nioEventLoopGroup-5-3] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"31458a80-5e62-4da8-a626-c6710893a1fa"}
+2022-11-04 23:21:22.502 [nioEventLoopGroup-5-4] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-04 23:21:22.507 [nioEventLoopGroup-5-4] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 4ms
+2022-11-04 23:21:22.509 [nioEventLoopGroup-5-4] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"e172453d-ebfb-4ff9-a4e9-2f7b3456e66d"}
+2022-11-04 23:23:14.229 [nioEventLoopGroup-5-5] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"messageType":5,"password":"1120","username":"zhangyun"}
+2022-11-04 23:23:14.239 [nioEventLoopGroup-5-5] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: UserServiceImpl.selectUserByName, 参数: username:"zhangyun" ====> User{userId=1, username=zhangyun, password=c6036a69be21cb660499b75718a3ef24, createTime=Thu Nov 03 11:03:15 CST 2022, modifiedTime=Thu Nov 03 11:03:15 CST 2022}, 时间: 7ms
+2022-11-04 23:23:14.245 [nioEventLoopGroup-5-5] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"messageType":6,"msg":"登录成功！","token":"b4ce904e-abb5-4e3e-98e1-fad8bb4cb025"}
+2022-11-04 23:39:43.072 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-11-04 23:39:43.075 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

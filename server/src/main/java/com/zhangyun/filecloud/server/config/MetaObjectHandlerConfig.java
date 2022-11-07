@@ -21,7 +21,6 @@ import java.util.Date;
 @Component
 public class MetaObjectHandlerConfig implements MetaObjectHandler {
     @Override
-    @TraceLog
     public void insertFill(MetaObject metaObject) {
         Timestamp timestamp = new Timestamp(new Date().getTime());
         this.setFieldValByName("createTime", timestamp, metaObject);
@@ -30,7 +29,6 @@ public class MetaObjectHandlerConfig implements MetaObjectHandler {
     }
 
     @Override
-    @TraceLog
     public void updateFill(MetaObject metaObject) {
         Timestamp timestamp = new Timestamp(new Date().getTime());
         this.setFieldValByName("modifiedTime", timestamp, metaObject);

@@ -30,7 +30,7 @@ import java.nio.file.Paths;
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class UploadMessageHandler extends SimpleChannelInboundHandler<UploadMessage> {
+public class UploadHandler extends SimpleChannelInboundHandler<UploadMessage> {
     @Value("${file.server.path}")
     private String serverPath;
 

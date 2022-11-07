@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhangyun.filecloud.client.controller.registerdevice.RegisterDeviceController">
+   <children>
+      <Label alignment="CENTER" layoutY="30.0" prefHeight="50.0" prefWidth="300.0" text="您在该设备上尚未初始化,是否进行初始化操作?" />
+      <Button layoutX="50.0" layoutY="120.0" mnemonicParsing="false" onAction="#initDevice" text="是" />
+      <Button layoutX="200.0" layoutY="120.0" mnemonicParsing="false" onAction="#showLogin" text="否" />
+   </children>
+</AnchorPane>

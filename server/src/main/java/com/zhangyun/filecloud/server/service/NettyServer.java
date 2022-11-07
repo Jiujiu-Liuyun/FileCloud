@@ -2,10 +2,7 @@ package com.zhangyun.filecloud.server.service;
 
 import com.zhangyun.filecloud.common.protocol.FrameDecoder;
 import com.zhangyun.filecloud.common.protocol.MessageCodecSharable;
-import com.zhangyun.filecloud.server.handler.CompareMessageHandler;
-import com.zhangyun.filecloud.server.handler.LoginHandler;
-import com.zhangyun.filecloud.server.handler.MessageFilterHandler;
-import com.zhangyun.filecloud.server.handler.UploadMessageHandler;
+import com.zhangyun.filecloud.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -39,13 +36,15 @@ public class NettyServer implements ApplicationRunner {
     private String serverHost;
 
     @Autowired
-    private UploadMessageHandler uploadMessageHandler;
+    private UploadHandler uploadHandler;
     @Autowired
-    private CompareMessageHandler compareMessageHandler;
+    private CompareHandler compareHandler;
     @Autowired
     private LoginHandler loginHandler;
     @Autowired
     private MessageFilterHandler messageFilterHandler;
+    @Autowired
+    private RegisterDeviceHandler registerDeviceHandler;
 
     private ServerBootstrap serverBootstrap = new ServerBootstrap();
     private NioEventLoopGroup boss = new NioEventLoopGroup();
@@ -66,9 +65,10 @@ public class NettyServer implements ApplicationRunner {
                         ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(MESSAGE_CODEC);
                         ch.pipeline().addLast(messageFilterHandler);
-                        ch.pipeline().addLast(uploadMessageHandler);
-                        ch.pipeline().addLast(compareMessageHandler);
+                        ch.pipeline().addLast(uploadHandler);
+                        ch.pipeline().addLast(compareHandler);
                         ch.pipeline().addLast(loginHandler);
+                        ch.pipeline().addLast(registerDeviceHandler);
                     }
                 });
         log.info("netty server start success");

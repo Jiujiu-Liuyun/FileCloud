@@ -25,18 +25,20 @@ public class File extends Model<File> {
     /**
      * 文件id
      */
-    @TableId(value = "fileid", type = IdType.AUTO)
-    private Integer fileid;
+    @TableId(value = "file_id", type = IdType.AUTO)
+    private Integer fileId;
 
     /**
      * 用户id
      */
-    private String userid;
+    @TableField("userid")
+    private String userId;
 
     /**
      * 文件路径
      */
-    private String filepath;
+    @TableField("filepath")
+    private String filePath;
 
     /**
      * 是否为文件
@@ -61,26 +63,26 @@ public class File extends Model<File> {
     @TableField(value = "modified_time", fill = FieldFill.INSERT_UPDATE)
     private Date modifiedTime;
 
-    public Integer getFileid() {
-        return fileid;
+    public Integer getFileId() {
+        return fileId;
     }
 
-    public void setFileid(Integer fileid) {
-        this.fileid = fileid;
+    public void setFileId(Integer fileId) {
+        this.fileId = fileId;
     }
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-    public String getFilepath() {
-        return filepath;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setFilepath(String filepath) {
-        this.filepath = filepath;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
     public Integer getIsFile() {
         return isFile;
@@ -113,15 +115,15 @@ public class File extends Model<File> {
 
     @Override
     protected Serializable pkVal() {
-        return this.fileid;
+        return this.fileId;
     }
 
     @Override
     public String toString() {
         return "File{" +
-        "fileid=" + fileid +
-        ", userid=" + userid +
-        ", filepath=" + filepath +
+        "fileid=" + fileId +
+        ", userid=" + userId +
+        ", filepath=" + filePath +
         ", isFile=" + isFile +
         ", md5=" + md5 +
         ", createTime=" + createTime +

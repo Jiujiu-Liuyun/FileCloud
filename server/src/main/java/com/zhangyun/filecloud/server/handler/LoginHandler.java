@@ -2,10 +2,14 @@ package com.zhangyun.filecloud.server.handler;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.LoginMessage;
-import com.zhangyun.filecloud.common.message.LoginReseponseMessage;
+import com.zhangyun.filecloud.common.message.LoginResponseMessage;
+import com.zhangyun.filecloud.server.entity.Device;
 import com.zhangyun.filecloud.server.entity.User;
+import com.zhangyun.filecloud.server.service.IDeviceService;
 import com.zhangyun.filecloud.server.service.RedisService;
+import com.zhangyun.filecloud.server.service.impl.DeviceServiceImpl;
 import com.zhangyun.filecloud.server.service.impl.UserServiceImpl;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -31,31 +35,43 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
     private UserServiceImpl userService;
     @Autowired
     private RedisService redisService;
+    @Autowired
+    private IDeviceService deviceService;
 
     @Override
+    @TraceLog
     protected void channelRead0(ChannelHandlerContext ctx, LoginMessage msg) throws Exception {
         if (msg == null || msg.getUsername() == null || msg.getPassword() == null) {
             log.info("接收消息错误: {}", msg);
             return;
         }
         User user = userService.selectUserByName(msg.getUsername());
-        LoginReseponseMessage reseponseMessage;
+        LoginResponseMessage responseMessage;
         if (user == null) {
-            reseponseMessage = new LoginReseponseMessage(301, "该账户不存在！");
+            responseMessage = new LoginResponseMessage(301, "该账户不存在！");
         } else {
             String loginPassword = DigestUtil.md5Hex(msg.getPassword());
             // 判断密码是否相同
             if (ObjectUtil.notEqual(loginPassword, user.getPassword())) {
-                reseponseMessage = new LoginReseponseMessage(302, "密码错误");
+                responseMessage = new LoginResponseMessage(302, "密码错误");
             } else {
-                reseponseMessage = new LoginReseponseMessage(200, "登录成功！");
+                responseMessage = new LoginResponseMessage(200, "登录成功！");
                 // 生成token
                 String token = UUID.randomUUID().toString();
-                reseponseMessage.setToken(token);
+                responseMessage.setToken(token);
                 // 将token写入Redis
                 redisService.setToken(token, msg.getUsername());
             }
         }
-        ctx.writeAndFlush(reseponseMessage);
+
+        // 设备是否注册
+        if (msg.getDeviceId() == null || msg.getDeviceName() == null || msg.getRootPath() == null) {
+            responseMessage.setIsRegister(false);
+        } else {
+            Device device = deviceService.selectDeviceByDeviceId(msg.getDeviceId());
+            responseMessage.setIsRegister(device != null && msg.getDeviceName().equals(device.getDeviceName()) && msg.getRootPath().equals(device.getRootPath()));
+        }
+
+        ctx.writeAndFlush(responseMessage);
     }
 }

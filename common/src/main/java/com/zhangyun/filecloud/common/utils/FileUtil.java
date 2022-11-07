@@ -78,26 +78,5 @@ public class FileUtil {
         return new File(targetFile);
     }
 
-    @TraceLog
-    public static String getProperty(String filePath, String key) {
-        Properties properties = new Properties();
-        InputStream inputStream = null;
-        String res = null;
-        try {
-            inputStream = new FileInputStream(filePath);
-            properties.load(inputStream);
-            res = properties.getProperty(key);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if(inputStream !=null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return res;
-    }
+
 }

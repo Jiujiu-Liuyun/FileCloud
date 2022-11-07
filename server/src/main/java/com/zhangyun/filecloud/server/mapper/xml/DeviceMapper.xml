@@ -9,6 +9,7 @@
         <result column="device_name" property="deviceName" />
         <result column="create_time" property="createTime" />
         <result column="modified_time" property="modifiedTime" />
+        <result column="root_path" property="rootPath" />
     </resultMap>
 
 </mapper>

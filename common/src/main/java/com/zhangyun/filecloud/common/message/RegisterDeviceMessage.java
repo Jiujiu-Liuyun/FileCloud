@@ -10,14 +10,13 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class LoginMessage extends Message {
-    private String password;
-    private String deviceId;
-    private String rootPath;
+public class RegisterDeviceMessage extends Message {
+    private String username;
     private String deviceName;
+    private String rootPath;
 
     @Override
     public int getMessageType() {
-        return LOGIN_CMD;
+        return INIT_DEVICE_CMD;
     }
 }

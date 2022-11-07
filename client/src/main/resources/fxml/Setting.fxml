@@ -6,15 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhangyun.filecloud.client.controller.SettingController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhangyun.filecloud.client.controller.app.SettingController">
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="150.0" text="文件路径" />
             <Separator layoutX="146.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="14.0" />
-            <Button layoutX="520.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="选择" />
-            <Label layoutX="180.0" prefHeight="40.0" prefWidth="340.0" text="/Users/zhangyun/test" />
+            <Button fx:id="pathChooseButton" layoutX="520.0" mnemonicParsing="false" onAction="#dirSelect" prefHeight="40.0" prefWidth="80.0" text="选择" />
+            <Label fx:id="pathShowLabel" layoutX="180.0" prefHeight="40.0" prefWidth="340.0" text="/Users/zhangyun/test" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutY="40.0" prefHeight="40.0" prefWidth="150.0" text="设备号" />
             <Label layoutX="180.0" layoutY="40.0" prefHeight="40.0" prefWidth="340.0" text="DeviceId: " />
          </children>

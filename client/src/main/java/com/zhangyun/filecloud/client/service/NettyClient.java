@@ -1,8 +1,6 @@
 package com.zhangyun.filecloud.client.service;
 
-import com.zhangyun.filecloud.client.handler.CompareResponseHandler;
-import com.zhangyun.filecloud.client.handler.LoginResponseHandler;
-import com.zhangyun.filecloud.client.handler.UploadResponseHandler;
+import com.zhangyun.filecloud.client.handler.*;
 import com.zhangyun.filecloud.common.protocol.FrameDecoder;
 import com.zhangyun.filecloud.common.protocol.MessageCodecSharable;
 import io.netty.bootstrap.Bootstrap;
@@ -42,6 +40,10 @@ public class NettyClient implements ApplicationRunner {
     private CompareResponseHandler compareResponseHandler;
     @Autowired
     private LoginResponseHandler loginResponseHandler;
+    @Autowired
+    private RegisterDeviceResponseHandler registerDeviceResponseHandler;
+    @Autowired
+    private MessageOutboundHandler MESSAGE_OUTBOUND_HANDLER;
 
     private Bootstrap bootstrap;
     private NioEventLoopGroup group = new NioEventLoopGroup();
@@ -61,9 +63,11 @@ public class NettyClient implements ApplicationRunner {
                         ch.pipeline().addLast(new FrameDecoder());
                         ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(MESSAGE_CODEC);
+                        ch.pipeline().addLast(MESSAGE_OUTBOUND_HANDLER);
                         ch.pipeline().addLast(uploadResponseHandler);
                         ch.pipeline().addLast(compareResponseHandler);
                         ch.pipeline().addLast(loginResponseHandler);
+                        ch.pipeline().addLast(registerDeviceResponseHandler);
                     }
                 });
         log.info("netty client start success");

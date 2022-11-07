@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.zhangyun.filecloud.client.controller.registerdevice.SelectRootPathController">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="300.0">
+         <children>
+            <Label alignment="CENTER" layoutY="30.0" prefHeight="50.0" prefWidth="168.0" text="请选择同步文件夹" />
+            <Label fx:id="pathShowLabel" alignment="CENTER" layoutY="80.0" prefHeight="40.0" prefWidth="300.0" />
+            <Button layoutX="196.0" layoutY="42.0" mnemonicParsing="false" onAction="#selectPath" text="Browse" />
+            <Button layoutX="122.0" layoutY="138.0" mnemonicParsing="false" onAction="#next" text="下一步" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

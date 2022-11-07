@@ -10,7 +10,7 @@ import de.felixroske.jfxsupport.FXMLView;
  * @date: 2022/11/2 15:20
  * @since: 1.0
  */
-@FXMLView("/fxml/login.fxml")
+@FXMLView("/fxml/Login.fxml")
 public class LoginView extends AbstractFxmlView {
 
 }

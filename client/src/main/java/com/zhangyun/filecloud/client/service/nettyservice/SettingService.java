@@ -1,4 +1,4 @@
-package com.zhangyun.filecloud.client.service;
+package com.zhangyun.filecloud.client.service.nettyservice;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +21,7 @@ public class SettingService {
     public static Stage getSingleSettingStage() throws IOException {
         if (settingStage == null || !settingStage.isShowing()) {
             settingStage = new Stage();
-            Parent root = FXMLLoader.load(Objects.requireNonNull(SettingService.class.getResource("/fxml/setting.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(SettingService.class.getResource("/fxml/Setting.fxml")));
             settingStage.setScene(new Scene(root));
             settingStage.setTitle("设置");
         }

@@ -4,12 +4,8 @@ import com.zhangyun.filecloud.client.view.AppView;
 import com.zhangyun.filecloud.client.view.LoginView;
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import javafx.stage.Stage;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-
-import java.awt.*;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.zhangyun.filecloud"})

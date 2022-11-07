@@ -1,8 +1,9 @@
-package com.zhangyun.filecloud.client.service;
+package com.zhangyun.filecloud.client.service.nettyservice;
 
+import com.zhangyun.filecloud.client.service.NettyClient;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.LoginMessage;
-import com.zhangyun.filecloud.common.message.LoginReseponseMessage;
+import com.zhangyun.filecloud.common.message.LoginResponseMessage;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +32,20 @@ public class LoginService {
         return loginSemaphore;
     }
 
-    private LoginReseponseMessage responseMessage;
-    public void setResponseMessage(LoginReseponseMessage responseMessage) {
+    private LoginResponseMessage responseMessage;
+    public void setResponseMessage(LoginResponseMessage responseMessage) {
         this.responseMessage = responseMessage;
     }
 
     @TraceLog
-    public LoginReseponseMessage sendLoginMessage(String username, String password) throws InterruptedException {
+    public LoginResponseMessage sendLoginMessage(String username, String password, String deviceId, String rootPath, String deviceName) throws InterruptedException {
         responseMessage = null;
         LoginMessage loginMessage = new LoginMessage();
         loginMessage.setUsername(username);
         loginMessage.setPassword(password);
+        loginMessage.setDeviceId(deviceId);
+        loginMessage.setRootPath(rootPath);
+        loginMessage.setDeviceName(deviceName);
         // 获取channel
         Channel channel = nettyClient.getChannel();
         channel.writeAndFlush(loginMessage);

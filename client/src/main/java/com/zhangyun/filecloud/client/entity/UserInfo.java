@@ -14,4 +14,6 @@ public class UserInfo {
     private String username;
     private String deviceId;
     private String rootPath;
+    private String token;
+    private String deviceName;
 }

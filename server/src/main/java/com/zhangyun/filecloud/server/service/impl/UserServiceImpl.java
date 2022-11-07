@@ -10,6 +10,9 @@ import com.zhangyun.filecloud.server.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * <p>
  * 服务实现类
@@ -57,5 +60,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         wrapper.eq("username", user.getUsername());
         int update = userMapper.update(user, wrapper);
         return update > 0;
+    }
+
+    @Override
+    public Integer getIdByUsername(String username) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("username", username);
+        List<User> users = userMapper.selectByMap(map);
+        return users.get(0).getUserId();
     }
 }
