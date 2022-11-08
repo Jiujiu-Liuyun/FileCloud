@@ -5,6 +5,8 @@ import com.zhangyun.filecloud.common.protocol.MessageCodecSharable;
 import com.zhangyun.filecloud.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -47,6 +49,8 @@ public class NettyServer implements ApplicationRunner {
     private RegisterDeviceHandler registerDeviceHandler;
     @Autowired
     private LogoutHandler logoutHandler;
+    @Autowired
+    private QuitHandler QUIT_HANDLER;
 
     private ServerBootstrap serverBootstrap = new ServerBootstrap();
     private NioEventLoopGroup boss = new NioEventLoopGroup();
@@ -72,6 +76,9 @@ public class NettyServer implements ApplicationRunner {
                         ch.pipeline().addLast(loginHandler);
                         ch.pipeline().addLast(registerDeviceHandler);
                         ch.pipeline().addLast(logoutHandler);                   // 登出
+
+
+                        ch.pipeline().addLast(QUIT_HANDLER);        // 连接断开处理
                     }
                 });
         log.info("netty server start success");
