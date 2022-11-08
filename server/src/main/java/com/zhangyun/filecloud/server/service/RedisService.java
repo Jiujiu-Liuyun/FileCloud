@@ -30,12 +30,12 @@ public class RedisService {
      * @return
      */
     public boolean authTokenAndUpdateExpireTime(String token, String username) {
-        String key = TOKEN_PREFIX + token;
+        String key = TOKEN_PREFIX + username;
         String value = redisTemplate.opsForValue().get(key);
         if (value == null) {
             return false;
         }
-        if (value.equals(username)) {
+        if (value.equals(token)) {
             // 认证通过，更新过期时间
             redisTemplate.expire(key, TOKEN_EXPIRE_DAY, TimeUnit.DAYS);
             return true;
@@ -44,8 +44,8 @@ public class RedisService {
     }
 
     public void setToken(String token, String username) {
-        String key = TOKEN_PREFIX + token;
-        redisTemplate.opsForValue().set(key, username, TOKEN_EXPIRE_DAY, TimeUnit.DAYS);
+        String key = TOKEN_PREFIX + username;
+        redisTemplate.opsForValue().set(key, token, TOKEN_EXPIRE_DAY, TimeUnit.DAYS);
     }
 
 }

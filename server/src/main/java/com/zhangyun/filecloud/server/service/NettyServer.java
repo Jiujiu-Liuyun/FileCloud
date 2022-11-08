@@ -73,7 +73,7 @@ public class NettyServer implements ApplicationRunner {
                 });
         log.info("netty server start success");
         try {
-            Channel channel = serverBootstrap.bind(serverHost, serverPort).sync().channel();
+            Channel channel = serverBootstrap.bind(serverPort).sync().channel();
 //            channel.closeFuture().sync();
          } catch (InterruptedException e) {
             e.printStackTrace();
