@@ -2,10 +2,13 @@ package com.zhangyun.filecloud.client.controller.app;
 
 import com.zhangyun.filecloud.client.entity.UserInfo;
 import com.zhangyun.filecloud.client.service.ChangeViewService;
-import com.zhangyun.filecloud.client.service.nettyservice.SettingService;
+import com.zhangyun.filecloud.client.service.NettyClient;
+import com.zhangyun.filecloud.client.service.msgmanager.LoginManagerService;
+import com.zhangyun.filecloud.client.service.msgmanager.SettingService;
+import com.zhangyun.filecloud.common.message.LogoutMessage;
 import de.felixroske.jfxsupport.FXMLController;
+import io.netty.channel.Channel;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,10 @@ import java.util.ResourceBundle;
 public class AppController implements Initializable {
     @Autowired
     private ChangeViewService changeViewService;
+    @Autowired
+    private LoginManagerService loginManagerService;
+    @Autowired
+    private NettyClient nettyClient;
 
     private UserInfo userInfo = new UserInfo();
     public UserInfo getUserInfo() {
@@ -47,7 +54,11 @@ public class AppController implements Initializable {
     }
 
     public void logout() {
+        // 1.登出
+        loginManagerService.logout(userInfo.getUsername());
+        // 2.清空用户信息
         userInfo = new UserInfo();
+        // 3.切换视图
         changeViewService.goLoginView();
     }
 }

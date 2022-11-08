@@ -20,6 +20,6 @@ public class UploadResponseMessage extends Message{
 
     @Override
     public int getMessageType() {
-        return FILE_UPLOAD_RESPONSE_CMD;
+        return FILE_UPLOAD_RESPONSE_MSG;
     }
 }

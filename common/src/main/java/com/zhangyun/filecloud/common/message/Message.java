@@ -41,28 +41,30 @@ public abstract class Message implements Serializable {
     /**
      * 消息指令类型 - 文件标记指令
      */
-    public static final int FILE_UPLOAD_CMD = 1;
-    public static final int FILE_UPLOAD_RESPONSE_CMD = 2;
-    public static final int FILE_COMPARE_CMD = 3;
-    public static final int FILE_COMPARE_RESPONSE_CMD = 4;
-    public static final int LOGIN_CMD = 5;
-    public static final int LOGIN_RESPONSE_CMD = 6;
-    public static final int AUTH_FAIL_CMD = 7;
-    public static final int INIT_DEVICE_CMD = 8;
-    public static final int INIT_DEVICE_RESPONSE_CMD = 9;
+    public static final int FILE_UPLOAD_MSG = 1;
+    public static final int FILE_UPLOAD_RESPONSE_MSG = 2;
+    public static final int FILE_COMPARE_MSG = 3;
+    public static final int FILE_COMPARE_RESPONSE_MSG = 4;
+    public static final int LOGIN_MSG = 5;
+    public static final int LOGIN_RESPONSE_MSG = 6;
+    public static final int AUTH_FAIL_MSG = 7;
+    public static final int INIT_DEVICE_MSG = 8;
+    public static final int INIT_DEVICE_RESPONSE_MSG = 9;
+    public static final int LOGOUT_MSG = 10;
 
 
     private static final Map<Integer, Class<? extends Message>> MESSAGE_CLASSES = new HashMap<>();
     static {
-        MESSAGE_CLASSES.put(FILE_UPLOAD_CMD, UploadMessage.class);
-        MESSAGE_CLASSES.put(FILE_UPLOAD_RESPONSE_CMD, UploadResponseMessage.class);
-        MESSAGE_CLASSES.put(FILE_COMPARE_CMD, CompareMessage.class);
-        MESSAGE_CLASSES.put(FILE_COMPARE_RESPONSE_CMD, CompareResponseMessage.class);
-        MESSAGE_CLASSES.put(LOGIN_CMD, LoginMessage.class);
-        MESSAGE_CLASSES.put(LOGIN_RESPONSE_CMD, LoginResponseMessage.class);
-        MESSAGE_CLASSES.put(AUTH_FAIL_CMD, AuthFailResponseMessage.class);
-        MESSAGE_CLASSES.put(INIT_DEVICE_CMD, RegisterDeviceMessage.class);
-        MESSAGE_CLASSES.put(INIT_DEVICE_RESPONSE_CMD, RegisterDeviceResponseMessage.class);
+        MESSAGE_CLASSES.put(FILE_UPLOAD_MSG, UploadMessage.class);
+        MESSAGE_CLASSES.put(FILE_UPLOAD_RESPONSE_MSG, UploadResponseMessage.class);
+        MESSAGE_CLASSES.put(FILE_COMPARE_MSG, CompareMessage.class);
+        MESSAGE_CLASSES.put(FILE_COMPARE_RESPONSE_MSG, CompareResponseMessage.class);
+        MESSAGE_CLASSES.put(LOGIN_MSG, LoginMessage.class);
+        MESSAGE_CLASSES.put(LOGIN_RESPONSE_MSG, LoginResponseMessage.class);
+        MESSAGE_CLASSES.put(AUTH_FAIL_MSG, AuthFailResponseMessage.class);
+        MESSAGE_CLASSES.put(INIT_DEVICE_MSG, RegisterDeviceMessage.class);
+        MESSAGE_CLASSES.put(INIT_DEVICE_RESPONSE_MSG, RegisterDeviceResponseMessage.class);
+        MESSAGE_CLASSES.put(LOGOUT_MSG, LogoutMessage.class);
     }
     /**
      * 根据消息类型字节，获得对应的消息 class

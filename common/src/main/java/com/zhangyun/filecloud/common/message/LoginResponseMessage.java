@@ -19,7 +19,7 @@ public class LoginResponseMessage extends Message{
 
     @Override
     public int getMessageType() {
-        return LOGIN_RESPONSE_CMD;
+        return LOGIN_RESPONSE_MSG;
     }
 
     public LoginResponseMessage() {

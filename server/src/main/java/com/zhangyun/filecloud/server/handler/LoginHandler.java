@@ -11,6 +11,7 @@ import com.zhangyun.filecloud.server.service.IDeviceService;
 import com.zhangyun.filecloud.server.service.RedisService;
 import com.zhangyun.filecloud.server.service.impl.DeviceServiceImpl;
 import com.zhangyun.filecloud.server.service.impl.UserServiceImpl;
+import com.zhangyun.filecloud.server.service.session.SessionService;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -37,6 +38,8 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
     private RedisService redisService;
     @Autowired
     private IDeviceService deviceService;
+    @Autowired
+    private SessionService sessionService;
 
     @Override
     @TraceLog
@@ -61,6 +64,8 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
                 responseMessage.setToken(token);
                 // 将token写入Redis
                 redisService.setToken(token, msg.getUsername());
+                // 将连接加入会话管理器
+                sessionService.bind(ctx.channel(), msg.getUsername());
             }
         }
 

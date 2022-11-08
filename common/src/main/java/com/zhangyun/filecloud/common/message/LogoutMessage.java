@@ -6,16 +6,13 @@ import lombok.Data;
  * description:
  *
  * @author: zhangyun
- * @date: 2022/11/4 16:59
+ * @date: 2022/11/8 16:59
  * @since: 1.0
  */
 @Data
-public class AuthFailResponseMessage extends Message{
-    private Integer code;
-    private String msg;
-
+public class LogoutMessage extends Message{
     @Override
     public int getMessageType() {
-        return AUTH_FAIL_MSG;
+        return LOGOUT_MSG;
     }
 }

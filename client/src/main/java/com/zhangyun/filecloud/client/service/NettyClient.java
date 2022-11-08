@@ -71,12 +71,11 @@ public class NettyClient implements ApplicationRunner {
                     }
                 });
         log.info("netty client start success");
-        getChannel();
     }
 
     public Channel getChannel() {
         // 尝试建立连接
-        if (channel == null) {
+        if (channel == null || !channel.isActive()) {
             try {
                 channel = bootstrap.connect(serverHost, serverPort).sync().channel();
             } catch (Exception e) {
@@ -85,5 +84,13 @@ public class NettyClient implements ApplicationRunner {
             log.info("建立连接：{}", channel);
         }
         return channel;
+    }
+
+    public void closeChannel() throws InterruptedException {
+        if (channel != null) {
+            channel.close().sync();
+            log.info("关闭连接 {}", channel);
+            channel = null;
+        }
     }
 }

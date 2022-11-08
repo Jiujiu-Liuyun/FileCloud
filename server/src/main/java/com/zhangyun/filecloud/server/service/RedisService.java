@@ -48,4 +48,9 @@ public class RedisService {
         redisTemplate.opsForValue().set(key, token, TOKEN_EXPIRE_DAY, TimeUnit.DAYS);
     }
 
+    public void delToken(String username) {
+        String key = TOKEN_PREFIX + username;
+        redisTemplate.delete(key);
+    }
+
 }

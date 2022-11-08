@@ -1,7 +1,6 @@
 package com.zhangyun.filecloud.client.handler;
 
-import com.zhangyun.filecloud.client.controller.registerdevice.ConfirmController;
-import com.zhangyun.filecloud.client.service.nettyservice.RegisterDeviceService;
+import com.zhangyun.filecloud.client.service.msgmanager.RegisterDeviceService;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.RegisterDeviceResponseMessage;
 import io.netty.channel.ChannelHandler;

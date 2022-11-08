@@ -1,6 +1,5 @@
-package com.zhangyun.filecloud.client.service.nettyservice;
+package com.zhangyun.filecloud.client.service.msgmanager;
 
-import com.zhangyun.filecloud.client.entity.UserInfo;
 import com.zhangyun.filecloud.client.service.NettyClient;
 import com.zhangyun.filecloud.common.message.RegisterDeviceMessage;
 import com.zhangyun.filecloud.common.message.RegisterDeviceResponseMessage;

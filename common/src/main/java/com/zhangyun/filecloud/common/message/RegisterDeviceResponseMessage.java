@@ -15,6 +15,6 @@ public class RegisterDeviceResponseMessage extends Message {
 
     @Override
     public int getMessageType() {
-        return INIT_DEVICE_RESPONSE_CMD;
+        return INIT_DEVICE_RESPONSE_MSG;
     }
 }

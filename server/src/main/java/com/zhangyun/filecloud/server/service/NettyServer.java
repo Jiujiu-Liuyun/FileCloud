@@ -42,9 +42,11 @@ public class NettyServer implements ApplicationRunner {
     @Autowired
     private LoginHandler loginHandler;
     @Autowired
-    private MessageFilterHandler messageFilterHandler;
+    private MessageFilterHandler MESSAGE_FILTER_HANDLER;
     @Autowired
     private RegisterDeviceHandler registerDeviceHandler;
+    @Autowired
+    private LogoutHandler logoutHandler;
 
     private ServerBootstrap serverBootstrap = new ServerBootstrap();
     private NioEventLoopGroup boss = new NioEventLoopGroup();
@@ -64,11 +66,12 @@ public class NettyServer implements ApplicationRunner {
                         ch.pipeline().addLast(new FrameDecoder());
                         ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(MESSAGE_CODEC);
-                        ch.pipeline().addLast(messageFilterHandler);
+                        ch.pipeline().addLast(MESSAGE_FILTER_HANDLER);
                         ch.pipeline().addLast(uploadHandler);
                         ch.pipeline().addLast(compareHandler);
                         ch.pipeline().addLast(loginHandler);
                         ch.pipeline().addLast(registerDeviceHandler);
+                        ch.pipeline().addLast(logoutHandler);                   // 登出
                     }
                 });
         log.info("netty server start success");

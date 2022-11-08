@@ -1,7 +1,5 @@
 package com.zhangyun.filecloud.common.message;
 
-import com.zhangyun.filecloud.common.enums.FileOperationEnum;
-import com.zhangyun.filecloud.common.enums.FileStatusEnum;
 import lombok.Data;
 
 /**
@@ -17,6 +15,6 @@ public class CompareMessage extends Message{
 
     @Override
     public int getMessageType() {
-        return FILE_COMPARE_CMD;
+        return FILE_COMPARE_MSG;
     }
 }

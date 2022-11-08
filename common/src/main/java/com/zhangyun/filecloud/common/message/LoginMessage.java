@@ -18,6 +18,6 @@ public class LoginMessage extends Message {
 
     @Override
     public int getMessageType() {
-        return LOGIN_CMD;
+        return LOGIN_MSG;
     }
 }
