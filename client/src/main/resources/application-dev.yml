@@ -1,6 +1,6 @@
 file:
   server:
-    host: localhost
+    host: 192.168.1.198
   client:
     path: D:\rootPath
     maxsize: 10
