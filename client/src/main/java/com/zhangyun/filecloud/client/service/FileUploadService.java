@@ -1,6 +1,5 @@
 package com.zhangyun.filecloud.client.service;
 
-import com.zhangyun.filecloud.client.monitor.ClientExecutor;
 import com.zhangyun.filecloud.common.message.UploadMessage;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
@@ -27,26 +26,23 @@ public class FileUploadService implements ApplicationRunner {
     public static Semaphore SEMAPHORE = new Semaphore(0);
 
     @Autowired
-    private ClientExecutor clientExecutor;
-
-    @Autowired
     private NettyClient nettyClient;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        clientExecutor.execute(() -> {
-            while (true) {
-                try {
-                    if (!FILE_UPLOAD_MESSAGE_LIST.isEmpty()) {
-                        fileUpload();
-                    }
-                    // 休眠3s
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        clientExecutor.execute(() -> {
+//            while (true) {
+//                try {
+//                    if (!FILE_UPLOAD_MESSAGE_LIST.isEmpty()) {
+//                        fileUpload();
+//                    }
+//                    // 休眠3s
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
     public void fileUpload() throws InterruptedException {

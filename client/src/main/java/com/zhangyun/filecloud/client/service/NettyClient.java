@@ -44,11 +44,11 @@ public class NettyClient implements ApplicationRunner {
     private RegisterDeviceResponseHandler registerDeviceResponseHandler;
     @Autowired
     private MessageOutboundHandler MESSAGE_OUTBOUND_HANDLER;
+    private LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
+    private MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
 
     private Bootstrap bootstrap;
     private NioEventLoopGroup group = new NioEventLoopGroup();
-    private LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
-    private MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
     private Channel channel = null;
 
     @Override
@@ -87,10 +87,17 @@ public class NettyClient implements ApplicationRunner {
     }
 
     public void closeChannel() throws InterruptedException {
-        if (channel != null) {
+        if (channel != null && channel.isActive()) {
             channel.close().sync();
             log.info("关闭连接 {}", channel);
             channel = null;
         }
+    }
+
+    public void shutdownNettyClient() throws InterruptedException {
+        // 关闭连接
+        closeChannel();
+        // 关闭group
+        group.shutdownGracefully();
     }
 }

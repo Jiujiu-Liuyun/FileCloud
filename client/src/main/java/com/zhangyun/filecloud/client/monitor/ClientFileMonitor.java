@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-@Data
 public class ClientFileMonitor implements ApplicationRunner {
     private FileAlterationMonitor monitor;
     private FileAlterationObserver observer;
@@ -37,13 +36,10 @@ public class ClientFileMonitor implements ApplicationRunner {
     @Value("${file.client.interval}")
     private Integer interval;
 
-    @Autowired
-    private ClientExecutor clientExecutor;
-
     /***
      * 开启监听
      */
-    public void start() throws Exception {
+    private void start() throws Exception {
         if (ObjectUtil.isEmpty(path)) {
             throw new IllegalArgumentException("Listen path must not be blank");
         }
@@ -84,5 +80,15 @@ public class ClientFileMonitor implements ApplicationRunner {
         } catch (Exception e) {
             log.error("启动文件监听器异常: {}", e.getMessage(), e);
         }
+    }
+
+    public void closeMonitor() throws Exception {
+        monitor.stop();
+        log.info("停止文件监听器 {}", monitor);
+    }
+
+    public void startMonitor() throws Exception {
+        monitor.start();
+        log.info("启动文件监听器 {}", monitor);
     }
 }

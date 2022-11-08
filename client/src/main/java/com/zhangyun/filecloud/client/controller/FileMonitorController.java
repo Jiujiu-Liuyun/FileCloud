@@ -23,14 +23,14 @@ public class FileMonitorController {
 
     @GetMapping("stopMonitor")
     public String stopMonitor() throws Exception {
-        clientFileMonitor.getMonitor().stop();
+        clientFileMonitor.closeMonitor();
         log.info("File Monitor停止");
         return "stop";
     }
 
     @GetMapping("startMonitor")
     public String startMonitor() throws Exception {
-        clientFileMonitor.getMonitor().start();
+        clientFileMonitor.startMonitor();
         log.info("File Monitor启动");
         return "stop";
     }
