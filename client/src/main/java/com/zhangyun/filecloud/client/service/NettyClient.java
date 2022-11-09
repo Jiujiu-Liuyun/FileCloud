@@ -1,16 +1,22 @@
 package com.zhangyun.filecloud.client.service;
 
 import com.zhangyun.filecloud.client.handler.*;
+import com.zhangyun.filecloud.common.message.PingMessage;
 import com.zhangyun.filecloud.common.protocol.FrameDecoder;
 import com.zhangyun.filecloud.common.protocol.MessageCodecSharable;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelDuplexHandler;
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,8 +48,9 @@ public class NettyClient implements ApplicationRunner {
     private LoginResponseHandler loginResponseHandler;
     @Autowired
     private RegisterDeviceResponseHandler registerDeviceResponseHandler;
+
     @Autowired
-    private MessageOutboundHandler MESSAGE_OUTBOUND_HANDLER;
+    private AddTokenHandler ADD_TOKEN_HANDLER;
     private LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
     private MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
 
@@ -63,7 +70,23 @@ public class NettyClient implements ApplicationRunner {
                         ch.pipeline().addLast(new FrameDecoder());
                         ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(MESSAGE_CODEC);
-                        ch.pipeline().addLast(MESSAGE_OUTBOUND_HANDLER);
+
+                        // 写空闲，会触发一个 IdleState#WRITER_IDLE 事件
+                        ch.pipeline().addLast(new IdleStateHandler(0, 3, 0));
+                        ch.pipeline().addLast(new ChannelDuplexHandler() {
+                            // 用来触发特殊事件
+                            @Override
+                            public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception{
+                                IdleStateEvent event = (IdleStateEvent) evt;
+                                // 触发了写空闲事件
+                                if (event.state() == IdleState.WRITER_IDLE) {
+//                                log.debug("3s 没有写数据了，发送一个心跳包");
+                                    ctx.writeAndFlush(new PingMessage());
+                                }
+                            }
+                        });
+
+                        ch.pipeline().addLast(ADD_TOKEN_HANDLER);
                         ch.pipeline().addLast(uploadResponseHandler);
                         ch.pipeline().addLast(compareResponseHandler);
                         ch.pipeline().addLast(loginResponseHandler);

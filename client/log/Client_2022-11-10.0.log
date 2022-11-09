@@ -1,0 +1,33 @@
+2022-11-10 00:40:18.551 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 2437 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-10 00:40:18.553 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-10 00:40:19.489 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-10 00:40:19.494 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-10 00:40:19.495 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-10 00:40:19.533 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-10 00:40:19.533 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 922 ms
+2022-11-10 00:40:19.827 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-10 00:40:19.973 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-10 00:40:19.974 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-10 00:40:19.981 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-10 00:40:19.995 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-10 00:40:20.039 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 2.132 seconds (JVM running for 2.759)
+2022-11-10 00:40:20.041 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-10 00:40:20.044 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-10 00:40:26.315 [JavaFX Application Thread] WARN  c.z.f.client.service.monitor.FileMonitorService - monitor启动失败 null
+2022-11-10 00:40:26.316 [JavaFX Application Thread] INFO  c.z.f.client.service.monitor.FileMonitorService - 启动文件监听器 null
+2022-11-10 00:40:26.374 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0xaf78e2e3, L:/127.0.0.1:51314 - R:localhost/127.0.0.1:8090]
+2022-11-10 00:40:26.384 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.client.handler.AddTokenHandler - LoginMessage(password=1120, deviceId=933883a0-e655-49c8-a126-24166d0a2432, rootPath=/Users/zhangyun/Documents/javaProject/FileCloud/rootPath, deviceName=macbook air m1)
+2022-11-10 00:40:26.413 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","deviceName":"macbook air m1","messageType":5,"msgDesc":"LoginMessage","password":"1120","rootPath":"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath","username":"zhangyun"}
+2022-11-10 00:40:26.423 [nioEventLoopGroup-2-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: AddTokenHandler.write, 参数: ctx:{"removed":false}msg:{"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","deviceName":"macbook air m1","messageType":5,"msgDesc":"LoginMessage","password":"1120","rootPath":"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath","username":"zhangyun"}promise:{"cancellable":true,"cancelled":false,"done":false,"success":false,"void":false} ====> null, 时间: 37ms
+2022-11-10 00:40:26.846 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"isRegister":true,"messageType":6,"msg":"登录成功！","msgDesc":"LoginResponseMessage","token":"41be2b19-4707-4882-a56b-ec5f873aa960"}
+2022-11-10 00:40:26.846 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.login, 参数: username:"zhangyun"password:"1120"deviceId:"933883a0-e655-49c8-a126-24166d0a2432"rootPath:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath"deviceName:"macbook air m1" ====> LoginResponseMessage(code=200, msg=登录成功！, token=41be2b19-4707-4882-a56b-ec5f873aa960, isRegister=true), 时间: 536ms
+2022-11-10 00:40:26.846 [JavaFX Application Thread] INFO  c.z.f.client.controller.login.LoginController - 登录成功
+2022-11-10 00:40:54.457 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.client.handler.AddTokenHandler - LogoutMessage()
+2022-11-10 00:40:54.457 [JavaFX Application Thread] WARN  c.z.f.client.service.monitor.FileMonitorService - monitor关闭失败 null
+2022-11-10 00:40:54.458 [JavaFX Application Thread] INFO  c.z.f.client.service.monitor.FileMonitorService - 停止文件监听器 null
+2022-11-10 00:40:54.459 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.logout, 参数: username:"zhangyun" ====> null, 时间: 2ms
+2022-11-10 00:40:54.461 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"messageType":10,"msgDesc":"LogoutMessage","token":"41be2b19-4707-4882-a56b-ec5f873aa960","username":"zhangyun"}
+2022-11-10 00:40:54.462 [nioEventLoopGroup-2-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: AddTokenHandler.write, 参数: ctx:{"removed":false}msg:{"messageType":10,"msgDesc":"LogoutMessage","token":"41be2b19-4707-4882-a56b-ec5f873aa960","username":"zhangyun"}promise:{"cancellable":true,"cancelled":false,"done":false,"success":false,"void":false} ====> null, 时间: 5ms
+2022-11-10 00:41:02.423 [JavaFX Application Thread] WARN  c.z.f.client.service.monitor.FileMonitorService - monitor关闭失败 null
+2022-11-10 00:41:02.423 [JavaFX Application Thread] INFO  c.z.f.client.service.monitor.FileMonitorService - 停止文件监听器 null
+2022-11-10 00:41:02.423 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.ClientApplication - =========程序退出=========

@@ -3,6 +3,7 @@ package com.zhangyun.filecloud.common.protocol;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.zhangyun.filecloud.common.message.Message;
+import com.zhangyun.filecloud.common.message.PingMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -39,7 +40,9 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
      */
     @Override
     protected void encode(ChannelHandlerContext cxt, Message message, List<Object> list) throws Exception {
-        log.info("发送消息: {}", JSONObject.toJSONString(message));
+        if (message.getClass() != PingMessage.class) {
+            log.info("发送消息: {}", JSONObject.toJSONString(message));
+        }
         ByteBuf out = cxt.alloc().buffer();
         // magic --- 12bytes
         out.writeBytes(new byte[]{0x70, 0x6f, 0x72, 0x74, 0x61, 0x6c,
@@ -120,7 +123,9 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         }
 
         message.setMessageBody(messageBody);
-        log.info("接收消息: {}", JSONObject.toJSONString(message));
+        if (message.getClass() != PingMessage.class) {
+            log.info("接收消息: {}", JSONObject.toJSONString(message));
+        }
         list.add(message);
     }
 }

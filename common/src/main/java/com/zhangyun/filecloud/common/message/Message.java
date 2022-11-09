@@ -51,6 +51,7 @@ public abstract class Message implements Serializable {
     public static final int INIT_DEVICE_MSG = 8;
     public static final int INIT_DEVICE_RESPONSE_MSG = 9;
     public static final int LOGOUT_MSG = 10;
+    public static final int PING_MSG = 11;
 
 
     private static final Map<Integer, Class<? extends Message>> MESSAGE_CLASSES = new HashMap<>();
@@ -65,6 +66,7 @@ public abstract class Message implements Serializable {
         MESSAGE_CLASSES.put(INIT_DEVICE_MSG, RegisterDeviceMessage.class);
         MESSAGE_CLASSES.put(INIT_DEVICE_RESPONSE_MSG, RegisterDeviceResponseMessage.class);
         MESSAGE_CLASSES.put(LOGOUT_MSG, LogoutMessage.class);
+        MESSAGE_CLASSES.put(PING_MSG, PingMessage.class);
     }
     /**
      * 根据消息类型字节，获得对应的消息 class

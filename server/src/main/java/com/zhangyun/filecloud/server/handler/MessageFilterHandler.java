@@ -4,6 +4,7 @@ import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.AuthFailResponseMessage;
 import com.zhangyun.filecloud.common.message.LoginMessage;
 import com.zhangyun.filecloud.common.message.Message;
+import com.zhangyun.filecloud.common.message.PingMessage;
 import com.zhangyun.filecloud.server.service.RedisService;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -11,6 +12,9 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * description: 权限认证，非法消息过滤掉
@@ -23,6 +27,12 @@ import org.springframework.stereotype.Component;
 @ChannelHandler.Sharable
 @Component
 public class MessageFilterHandler extends SimpleChannelInboundHandler<Message> {
+    private static final List<Class<? extends Message>> IGNORE_CLASS_LIST = new ArrayList<>();
+    static {
+        IGNORE_CLASS_LIST.add(LoginMessage.class);
+        IGNORE_CLASS_LIST.add(PingMessage.class);
+    }
+
     @Autowired
     private RedisService redisService;
 
@@ -42,7 +52,7 @@ public class MessageFilterHandler extends SimpleChannelInboundHandler<Message> {
     @TraceLog
     private boolean authToken(Message msg, AuthFailResponseMessage authFailResponseMessage) {
         // 如果是登录消息，直接放行
-        if (msg instanceof LoginMessage) {
+        if (IGNORE_CLASS_LIST.contains(msg.getClass())) {
             return true;
         }
         // token is null

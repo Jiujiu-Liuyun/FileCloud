@@ -1,18 +1,14 @@
 package com.zhangyun.filecloud.client;
 
-import com.zhangyun.filecloud.client.monitor.ClientFileMonitor;
+import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.client.service.NettyClient;
 import com.zhangyun.filecloud.client.utils.SpringBeanUtil;
-import com.zhangyun.filecloud.client.view.AppView;
 import com.zhangyun.filecloud.client.view.LoginView;
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.monitor.FileAlterationMonitor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.zhangyun.filecloud"})
@@ -46,7 +42,7 @@ public class ClientApplication extends AbstractJavaFxApplicationSupport {
         }
         nettyClient.shutdownNettyClient();
         // 2. 关闭文件监听器
-        ClientFileMonitor monitor = SpringBeanUtil.getBean(ClientFileMonitor.class);
+        FileMonitorService monitor = SpringBeanUtil.getBean(FileMonitorService.class);
         if (monitor == null) {
             throw new RuntimeException("monitor获取bean失败");
         }

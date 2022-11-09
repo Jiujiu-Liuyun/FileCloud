@@ -1,6 +1,7 @@
 package com.zhangyun.filecloud.client.service.msgmanager;
 
 import com.zhangyun.filecloud.client.service.NettyClient;
+import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.LoginMessage;
 import com.zhangyun.filecloud.common.message.LoginResponseMessage;
@@ -21,9 +22,11 @@ import java.util.concurrent.Semaphore;
  */
 @Slf4j
 @Service
-public class LoginManagerService {
+public class LoginService {
     @Autowired
     private NettyClient nettyClient;
+    @Autowired
+    private FileMonitorService fileMonitorService;
 
     /**
      * 标识是否接收到来自服务器的登录响应消息
@@ -40,6 +43,9 @@ public class LoginManagerService {
 
     @TraceLog
     public LoginResponseMessage login(String username, String password, String deviceId, String rootPath, String deviceName) throws InterruptedException {
+        // 启动文件监听器
+        fileMonitorService.startMonitor();
+        // 构建登录消息
         responseMessage = null;
         LoginMessage loginMessage = new LoginMessage();
         loginMessage.setUsername(username);
@@ -47,7 +53,7 @@ public class LoginManagerService {
         loginMessage.setDeviceId(deviceId);
         loginMessage.setRootPath(rootPath);
         loginMessage.setDeviceName(deviceName);
-        // 发送消息
+        // 建立连接 发送消息
         Channel channel = nettyClient.getChannel();
         channel.writeAndFlush(loginMessage);
         // 等待响应
@@ -58,12 +64,14 @@ public class LoginManagerService {
 
     @TraceLog
     public void logout(String username) {
-        // 1.发送登出消息
+        // 1.构建登出消息
         LogoutMessage logoutMessage = new LogoutMessage();
         logoutMessage.setUsername(username);
-        // 发送消息
+        // 2.发送消息
         Channel channel = nettyClient.getChannel();
         channel.writeAndFlush(logoutMessage);
+        // 3.关闭文件监听器
+        fileMonitorService.closeMonitor();
     }
 
 }

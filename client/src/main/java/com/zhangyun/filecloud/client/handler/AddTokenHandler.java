@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class MessageOutboundHandler extends ChannelOutboundHandlerAdapter {
+public class AddTokenHandler extends ChannelOutboundHandlerAdapter {
     @Autowired
     private AppController appController;
 

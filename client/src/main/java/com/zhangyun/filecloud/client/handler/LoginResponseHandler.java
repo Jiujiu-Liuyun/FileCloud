@@ -1,6 +1,6 @@
 package com.zhangyun.filecloud.client.handler;
 
-import com.zhangyun.filecloud.client.service.msgmanager.LoginManagerService;
+import com.zhangyun.filecloud.client.service.msgmanager.LoginService;
 import com.zhangyun.filecloud.common.message.LoginResponseMessage;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -21,11 +21,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginResponseMessage> {
     @Autowired
-    private LoginManagerService loginManagerService;
+    private LoginService loginService;
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginResponseMessage msg) throws Exception {
-        loginManagerService.setResponseMessage(msg);
-        loginManagerService.getLoginSemaphore().release();
+        loginService.setResponseMessage(msg);
+        loginService.getLoginSemaphore().release();
     }
 }

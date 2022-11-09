@@ -1,4 +1,4 @@
-package com.zhangyun.filecloud.client.monitor;
+package com.zhangyun.filecloud.client.service.monitor;
 
 import com.zhangyun.filecloud.common.annotation.FileFilter;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
