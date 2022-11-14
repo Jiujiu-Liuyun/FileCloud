@@ -68,6 +68,8 @@ public class ConfirmController implements Initializable {
         // 发送设备注册消息，获取响应消息
         RegisterDeviceResponseMessage registerDeviceResponseMessage = registerDeviceService.registerDevice(
                 userInfo.getUsername(), userInfo.getDeviceName(), userInfo.getToken(), userInfo.getRootPath());
+        // 记录token
+        userInfo.setToken(registerDeviceResponseMessage.getToken());
 
         // 写入配置文件
         userInfo.setDeviceId(registerDeviceResponseMessage.getDeviceId());

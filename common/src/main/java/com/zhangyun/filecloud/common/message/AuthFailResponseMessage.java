@@ -18,4 +18,12 @@ public class AuthFailResponseMessage extends Message{
     public int getMessageType() {
         return AUTH_FAIL_MSG;
     }
+
+    public AuthFailResponseMessage() {
+    }
+
+    public AuthFailResponseMessage(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
 }

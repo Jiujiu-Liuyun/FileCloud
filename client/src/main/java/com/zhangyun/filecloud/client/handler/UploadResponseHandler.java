@@ -1,7 +1,7 @@
 package com.zhangyun.filecloud.client.handler;
 
 import com.zhangyun.filecloud.client.service.FileUploadService;
-import com.zhangyun.filecloud.common.enums.FileStatusEnum;
+import com.zhangyun.filecloud.common.enums.UploadStatusEnum;
 import com.zhangyun.filecloud.common.message.UploadMessage;
 import com.zhangyun.filecloud.common.message.UploadResponseMessage;
 import com.zhangyun.filecloud.common.utils.FileUtil;
@@ -25,7 +25,7 @@ public class UploadResponseHandler extends SimpleChannelInboundHandler<UploadRes
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, UploadResponseMessage msg) throws Exception {
         // 传输完成
-        if (msg.getStatusEnum() == FileStatusEnum.FINISHED) {
+        if (msg.getStatusEnum() == UploadStatusEnum.FINISHED) {
             // 计数加一
             FileUploadService.SEMAPHORE.release();
             return;

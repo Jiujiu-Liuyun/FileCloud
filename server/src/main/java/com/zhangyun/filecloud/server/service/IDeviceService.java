@@ -14,4 +14,5 @@ import com.zhangyun.filecloud.server.entity.Device;
 public interface IDeviceService extends IService<Device> {
     boolean createDevice(String deviceId, String username, String deviceName, String rootPath);
     Device selectDeviceByDeviceId(String deviceId);
+    boolean authDevice(String deviceId, String username);
 }

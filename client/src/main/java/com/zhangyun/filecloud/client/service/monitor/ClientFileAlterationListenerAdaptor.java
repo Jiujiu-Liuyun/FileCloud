@@ -4,7 +4,7 @@ import com.zhangyun.filecloud.common.annotation.FileFilter;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.client.service.FileUploadService;
 import com.zhangyun.filecloud.common.enums.FileOperationEnum;
-import com.zhangyun.filecloud.common.enums.FileStatusEnum;
+import com.zhangyun.filecloud.common.enums.UploadStatusEnum;
 import com.zhangyun.filecloud.common.message.UploadMessage;
 import com.zhangyun.filecloud.common.utils.FileUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -76,7 +76,7 @@ public class ClientFileAlterationListenerAdaptor extends FileAlterationListenerA
         if (read) {
             FileUtil.readFile(uploadMessage);
         } else {
-            uploadMessage.setStatusEnum(FileStatusEnum.FINISHED);
+            uploadMessage.setStatusEnum(UploadStatusEnum.FINISHED);
         }
         return uploadMessage;
     }

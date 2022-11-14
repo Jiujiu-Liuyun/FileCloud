@@ -12,7 +12,6 @@ import lombok.Data;
 @Data
 public class LoginMessage extends Message {
     private String password;
-    private String deviceId;
     private String rootPath;
     private String deviceName;
 

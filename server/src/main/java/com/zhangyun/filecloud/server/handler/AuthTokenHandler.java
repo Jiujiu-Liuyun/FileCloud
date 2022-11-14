@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 @ChannelHandler.Sharable
 @Component
-public class MessageFilterHandler extends SimpleChannelInboundHandler<Message> {
+public class AuthTokenHandler extends SimpleChannelInboundHandler<Message> {
     private static final List<Class<? extends Message>> IGNORE_CLASS_LIST = new ArrayList<>();
     static {
         IGNORE_CLASS_LIST.add(LoginMessage.class);
@@ -39,35 +39,21 @@ public class MessageFilterHandler extends SimpleChannelInboundHandler<Message> {
     @Override
     @TraceLog
     protected void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception {
-        AuthFailResponseMessage authFailResponseMessage = new AuthFailResponseMessage();
-        boolean authToken = authToken(msg, authFailResponseMessage);
+        boolean authToken = authToken(msg);
         if (authToken) {
             // 认证成功
             ctx.fireChannelRead(msg);
         } else {
-            ctx.writeAndFlush(authFailResponseMessage);
+            ctx.writeAndFlush(new AuthFailResponseMessage(301, "token 认证失败"));
         }
     }
 
     @TraceLog
-    private boolean authToken(Message msg, AuthFailResponseMessage authFailResponseMessage) {
-        // 如果是登录消息，直接放行
-        if (IGNORE_CLASS_LIST.contains(msg.getClass())) {
-            return true;
-        }
-        // token is null
-        if (msg.getToken() == null || msg.getUsername() ==null) {
-            authFailResponseMessage.setCode(301);
-            authFailResponseMessage.setMsg("消息内容不完整");
+    private boolean authToken(Message msg) {
+        if (msg.getUsername() ==null || msg.getToken() == null) {
             return false;
         }
         // 认证token
-        if (redisService.authTokenAndUpdateExpireTime(msg.getToken(), msg.getUsername())) {
-            return true;
-        } else {
-            authFailResponseMessage.setCode(301);
-            authFailResponseMessage.setMsg("token认证不通过");
-            return false;
-        }
+        return redisService.authTokenAndUpdateExpireTime(msg.getToken(), msg.getUsername(), msg.getDeviceId());
     }
 }

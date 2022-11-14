@@ -4,11 +4,13 @@ import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.RegisterDeviceMessage;
 import com.zhangyun.filecloud.common.message.RegisterDeviceResponseMessage;
 import com.zhangyun.filecloud.server.service.IDeviceService;
+import com.zhangyun.filecloud.server.service.RedisService;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -26,6 +28,8 @@ import java.util.UUID;
 public class RegisterDeviceHandler extends SimpleChannelInboundHandler<RegisterDeviceMessage> {
     @Autowired
     private IDeviceService deviceService;
+    @Autowired
+    private RedisService redisService;
 
     @Override
     @TraceLog
@@ -36,6 +40,9 @@ public class RegisterDeviceHandler extends SimpleChannelInboundHandler<RegisterD
         boolean isInsert = deviceService.createDevice(deviceId, msg.getUsername(), msg.getDeviceName(), msg.getRootPath());
         responseMessage.setDeviceId(deviceId);
         if (isInsert) {
+            // 生成token
+            String token = redisService.genToken(msg.getUsername(), deviceId);
+            responseMessage.setToken(token);
             ctx.writeAndFlush(responseMessage);
         } else {
             log.info("设备创建失败创建失败");

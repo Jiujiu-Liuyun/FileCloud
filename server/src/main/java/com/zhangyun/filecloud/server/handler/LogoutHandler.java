@@ -29,7 +29,7 @@ public class LogoutHandler extends SimpleChannelInboundHandler<LogoutMessage> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LogoutMessage msg) throws Exception {
         // 1.删除token
-        redisService.delToken(msg.getUsername());
+        redisService.delToken(msg.getUsername(), msg.getDeviceId());
         // 2.解除会话连接
         sessionService.unbind(ctx.channel());
         // 3.关闭连接

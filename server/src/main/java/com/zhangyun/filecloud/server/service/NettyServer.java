@@ -46,11 +46,13 @@ public class NettyServer implements ApplicationRunner {
     @Autowired
     private CompareHandler compareHandler;
     @Autowired
-    private LoginHandler loginHandler;
+    private LoginHandler LOGIN_HANDLER;
     @Autowired
-    private MessageFilterHandler MESSAGE_FILTER_HANDLER;
+    private AuthTokenHandler AUTH_TOKEN_HANDLER;
     @Autowired
-    private RegisterDeviceHandler registerDeviceHandler;
+    private AuthDeviceHandler AUTH_DEVICE_HANDLER;
+    @Autowired
+    private RegisterDeviceHandler REGISTER_DEVICE_HANDLER;
     @Autowired
     private LogoutHandler logoutHandler;
     @Autowired
@@ -92,11 +94,18 @@ public class NettyServer implements ApplicationRunner {
                             }
                         });
 
-                        ch.pipeline().addLast(MESSAGE_FILTER_HANDLER);
+                        // 1. 登录认证
+                        ch.pipeline().addLast(LOGIN_HANDLER);
+                        // 2. 注册设备
+                        ch.pipeline().addLast(REGISTER_DEVICE_HANDLER);
+
+                        // 2. token认证
+                        ch.pipeline().addLast(AUTH_TOKEN_HANDLER);
+                        // 3. 设备号认证
+                        ch.pipeline().addLast(AUTH_DEVICE_HANDLER);
+
                         ch.pipeline().addLast(uploadHandler);
                         ch.pipeline().addLast(compareHandler);
-                        ch.pipeline().addLast(loginHandler);
-                        ch.pipeline().addLast(registerDeviceHandler);
                         ch.pipeline().addLast(logoutHandler);                   // 登出
 
 

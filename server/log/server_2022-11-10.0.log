@@ -28,3 +28,5 @@
 2022-11-10 00:40:54.500 [nioEventLoopGroup-5-1] INFO  c.zhangyun.filecloud.server.handler.LogoutHandler - zhangyun 退出登录
 2022-11-10 00:40:54.501 [nioEventLoopGroup-5-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: SessionService.unbind, 参数: channel:{"active":false,"inputShutdown":true,"open":false,"outputShutdown":true,"registered":true,"shutdown":true,"writable":false} ====> null, 时间: 0ms
 2022-11-10 00:40:54.501 [nioEventLoopGroup-5-1] INFO  com.zhangyun.filecloud.server.handler.QuitHandler - 连接 [id: 0x3e6dc402, L:0.0.0.0/0.0.0.0:8090 ! R:/127.0.0.1:51314] 断开
+2022-11-10 00:43:51.584 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-11-10 00:43:51.590 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

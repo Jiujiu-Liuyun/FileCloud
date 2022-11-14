@@ -59,11 +59,6 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
                 responseMessage = new LoginResponseMessage(302, "密码错误");
             } else {
                 responseMessage = new LoginResponseMessage(200, "登录成功！");
-                // 生成token
-                String token = UUID.randomUUID().toString();
-                responseMessage.setToken(token);
-                // 将token写入Redis
-                redisService.setToken(token, msg.getUsername());
                 // 将连接加入会话管理器
                 sessionService.bind(ctx.channel(), msg.getUsername());
             }
@@ -75,6 +70,13 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
         } else {
             Device device = deviceService.selectDeviceByDeviceId(msg.getDeviceId());
             responseMessage.setIsRegister(device != null && msg.getDeviceName().equals(device.getDeviceName()) && msg.getRootPath().equals(device.getRootPath()));
+        }
+
+        // 当设备有效时生成token，否则在注册设备时生成token
+        if (responseMessage.getIsRegister()) {
+            // 生成token
+            String token = redisService.genToken(msg.getUsername(), msg.getDeviceId());
+            responseMessage.setToken(token);
         }
 
         ctx.writeAndFlush(responseMessage);

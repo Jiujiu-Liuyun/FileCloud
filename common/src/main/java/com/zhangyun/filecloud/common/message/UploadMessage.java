@@ -1,7 +1,7 @@
 package com.zhangyun.filecloud.common.message;
 
 import com.zhangyun.filecloud.common.enums.FileOperationEnum;
-import com.zhangyun.filecloud.common.enums.FileStatusEnum;
+import com.zhangyun.filecloud.common.enums.UploadStatusEnum;
 import lombok.Data;
 
 /**
@@ -13,7 +13,7 @@ import lombok.Data;
  */
 @Data
 public class UploadMessage extends Message {
-    private FileStatusEnum statusEnum;
+    private UploadStatusEnum statusEnum;
     private FileOperationEnum operationEnum;
     private String filePath;
     private Long startPos;

@@ -3,6 +3,7 @@ package com.zhangyun.filecloud.server.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.server.entity.Device;
+import com.zhangyun.filecloud.server.entity.User;
 import com.zhangyun.filecloud.server.mapper.DeviceMapper;
 import com.zhangyun.filecloud.server.service.IDeviceService;
 import com.zhangyun.filecloud.server.service.IUserService;
@@ -14,7 +15,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author zhangyun
@@ -48,5 +49,18 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device> impleme
             return null;
         }
         return devices.get(0);
+    }
+
+    @Override
+    public boolean authDevice(String deviceId, String username) {
+        Device device = selectDeviceByDeviceId(deviceId);
+        if (device == null) {
+            return false;
+        }
+        User user = userService.getById(device.getUserId());
+        if (user == null) {
+            return false;
+        }
+        return user.getUsername().equals(username);
     }
 }

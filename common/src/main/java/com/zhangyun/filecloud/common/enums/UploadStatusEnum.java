@@ -3,7 +3,7 @@ package com.zhangyun.filecloud.common.enums;
 
 import java.util.Objects;
 
-public enum FileStatusEnum {
+public enum UploadStatusEnum {
     UPLOADING(1, "正在上传"),
     FINISHED(2, "上传完毕"),
     ;
@@ -12,13 +12,13 @@ public enum FileStatusEnum {
     private String desc;
 
     // 构造方法
-    private FileStatusEnum(Integer code, String desc) {
+    private UploadStatusEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }
 
-    public static FileStatusEnum getTypeName(Integer code) {
-        for (FileStatusEnum status: FileStatusEnum.values()) {
+    public static UploadStatusEnum getTypeName(Integer code) {
+        for (UploadStatusEnum status: UploadStatusEnum.values()) {
             if (Objects.equals(status.getCode(), code)) {
                 return status;
             }

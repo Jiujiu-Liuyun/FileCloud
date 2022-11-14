@@ -31,6 +31,14 @@ public abstract class Message implements Serializable {
      */
     private String token;
 
+    /**
+     * 设备号
+     */
+    private String deviceId;
+
+    /**
+     * 消息描述
+     */
     private String msgDesc;
     /**
      * 返回消息类型

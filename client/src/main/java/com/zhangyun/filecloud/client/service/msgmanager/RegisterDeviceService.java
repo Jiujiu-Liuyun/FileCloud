@@ -47,7 +47,6 @@ public class RegisterDeviceService {
         RegisterDeviceMessage registerDeviceMessage = new RegisterDeviceMessage();
         registerDeviceMessage.setUsername(username);
         registerDeviceMessage.setDeviceName(deviceName);
-        registerDeviceMessage.setToken(token);
         registerDeviceMessage.setRootPath(rootPath);
         channel.writeAndFlush(registerDeviceMessage);
         // 等待Server响应消息

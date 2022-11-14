@@ -1,15 +1,11 @@
 package com.zhangyun.filecloud.common.utils;
 
-import cn.hutool.core.util.ObjectUtil;
-import com.zhangyun.filecloud.common.annotation.TraceLog;
-import com.zhangyun.filecloud.common.enums.FileStatusEnum;
+import com.zhangyun.filecloud.common.enums.UploadStatusEnum;
 import com.zhangyun.filecloud.common.exception.InvalidArgumentsException;
 import com.zhangyun.filecloud.common.message.UploadMessage;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.util.Properties;
 
 /**
  * description:
@@ -33,7 +29,7 @@ public class FileUtil {
             long length = randomAccessFile.length();
             if (length - message.getStartPos() <= 0) {
                 log.info("file read finished");
-                message.setStatusEnum(FileStatusEnum.FINISHED);
+                message.setStatusEnum(UploadStatusEnum.FINISHED);
                 randomAccessFile.close();
                 return;
             }
@@ -44,9 +40,9 @@ public class FileUtil {
             message.setMessageBody(bytes);
             // 判断是否已经读完
             if (message.getStartPos() + readLength >= length) {
-                message.setStatusEnum(FileStatusEnum.FINISHED);
+                message.setStatusEnum(UploadStatusEnum.FINISHED);
             } else {
-                message.setStatusEnum(FileStatusEnum.UPLOADING);
+                message.setStatusEnum(UploadStatusEnum.UPLOADING);
             }
             randomAccessFile.close();
         } catch (IOException e) {
