@@ -18,25 +18,25 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 @Service
 public class SessionService {
-    private Map<Channel, String> channelUsernameMap = new ConcurrentHashMap<>();
-    private Map<String, Channel> usernameChannelMap = new ConcurrentHashMap<>();
+    private Map<Channel, String> channelToDeviceMap = new ConcurrentHashMap<>();
+    private Map<String, Channel> deviceToChannelMap = new ConcurrentHashMap<>();
 
     @TraceLog
-    public void bind(Channel channel, String username) {
-        channelUsernameMap.put(channel, username);
-        usernameChannelMap.put(username, channel);
+    public void bind(Channel channel, String deviceId) {
+        channelToDeviceMap.put(channel, deviceId);
+        deviceToChannelMap.put(deviceId, channel);
     }
 
     @TraceLog
     public void unbind(Channel channel) {
-        String username = channelUsernameMap.remove(channel);
-        if (username != null) {
-            usernameChannelMap.remove(username);
+        String deviceId = channelToDeviceMap.remove(channel);
+        if (deviceId != null) {
+            deviceToChannelMap.remove(deviceId);
         }
     }
 
     public Channel getChannel(String username) {
-        return usernameChannelMap.get(username);
+        return deviceToChannelMap.get(username);
     }
 
 }

@@ -10,6 +10,14 @@ spring:
         min-idle: 0
     lettuce:
       shutdown-timeout: 0
+  rabbitmq:
+    host: localhost  #mq服务器ip,默认为localhost
+    port: 5672          #mq服务器port,默认为5672
+    username: guest     #mq服务器username,默认为gust
+    password: guest     #mq服务器password,默认为guest
+
+server:
+  port: 5672
 
 
 logging:

@@ -60,7 +60,7 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
             } else {
                 responseMessage = new LoginResponseMessage(200, "登录成功！");
                 // 将连接加入会话管理器
-                sessionService.bind(ctx.channel(), msg.getUsername());
+                sessionService.bind(ctx.channel(), msg.getDeviceId());
             }
         }
 

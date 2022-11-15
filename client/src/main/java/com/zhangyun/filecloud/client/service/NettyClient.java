@@ -50,7 +50,7 @@ public class NettyClient implements ApplicationRunner {
     private RegisterDeviceResponseHandler registerDeviceResponseHandler;
 
     @Autowired
-    private AddTokenHandler ADD_TOKEN_HANDLER;
+    private OutBoundHandler ADD_TOKEN_HANDLER;
     private LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
     private MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
 

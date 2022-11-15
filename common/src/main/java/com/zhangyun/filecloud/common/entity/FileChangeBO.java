@@ -15,6 +15,5 @@ import lombok.Data;
 public class FileChangeBO {
     private String filePath;
     private ChangeModeEnum changeModeEnum;
-    private UploadStatusEnum uploadStatusEnum;
     private Long lastModified;
 }

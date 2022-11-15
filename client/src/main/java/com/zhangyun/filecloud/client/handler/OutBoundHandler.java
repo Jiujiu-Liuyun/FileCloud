@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * description:
- * 1. 给所有消息添加添加token
+ * 1. 给所有消息添加添加token username deviceId
  *
  * @author: zhangyun
  * @date: 2022/11/7 13:58
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class AddTokenHandler extends ChannelOutboundHandlerAdapter {
+public class OutBoundHandler extends ChannelOutboundHandlerAdapter {
     @Autowired
     private AppController appController;
 
@@ -32,6 +32,8 @@ public class AddTokenHandler extends ChannelOutboundHandlerAdapter {
         if (msg instanceof Message) {
             Message message = (Message) msg;
             message.setToken(appController.getUserInfo().getToken());
+            message.setUsername(appController.getUserInfo().getUsername());
+            message.setDeviceId(appController.getUserInfo().getDeviceId());
             log.info("{}", message);
         }
         super.write(ctx, msg, promise);
