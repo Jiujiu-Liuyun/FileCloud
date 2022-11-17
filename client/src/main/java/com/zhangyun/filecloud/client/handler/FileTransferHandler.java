@@ -3,8 +3,8 @@ package com.zhangyun.filecloud.client.handler;
 import com.zhangyun.filecloud.client.controller.app.AppController;
 import com.zhangyun.filecloud.common.enums.StatusEnum;
 import com.zhangyun.filecloud.common.enums.TransferModeEnum;
-import com.zhangyun.filecloud.common.message.FileTransferMessage;
-import com.zhangyun.filecloud.common.message.FileTransferResponseMessage;
+import com.zhangyun.filecloud.common.message.FileTrfMsg;
+import com.zhangyun.filecloud.common.message.FileTrfRespMsg;
 import com.zhangyun.filecloud.common.utils.FileUtil;
 import com.zhangyun.filecloud.common.utils.PathUtil;
 import io.netty.channel.ChannelHandler;
@@ -26,13 +26,13 @@ import java.nio.file.Path;
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class FileTransferHandler extends SimpleChannelInboundHandler<FileTransferMessage> {
+public class FileTransferHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
     @Autowired
     private AppController appController;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, FileTransferMessage msg) throws Exception {
-        FileTransferResponseMessage responseMessage = new FileTransferResponseMessage();
+    protected void channelRead0(ChannelHandlerContext ctx, FileTrfMsg msg) throws Exception {
+        FileTrfRespMsg responseMessage = new FileTrfRespMsg();
         String rootPath = appController.getUserInfo().getRootPath();
         Path absolutePath = PathUtil.getAbsolutePath(msg.getFileTransferBO().getRelativePath(), rootPath);
         if (msg.getFileTransferBO().getTransferModeEnum() == TransferModeEnum.DOWNLOAD) {

@@ -1,13 +1,12 @@
 package com.zhangyun.filecloud.server.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.*;
 
 /**
  * description:
@@ -17,6 +16,7 @@ import java.util.concurrent.ScheduledExecutorService;
  * @since: 1.0
  */
 @Configuration
+@Slf4j
 public class Config {
     @Value("${file.server.rootPath}")
     private String rootPath;
@@ -27,6 +27,8 @@ public class Config {
 
     public static Long MAX_READ_LENGTH;
 
+    public static Integer TIMEOUT = 5 * 1000;
+
     @PostConstruct
     private void initConfig() {
         ROOT_PATH = rootPath;
@@ -34,11 +36,18 @@ public class Config {
     }
 
     /**
-     * 线程池
+     * 线程池：执行定时任务
      * @return
      */
-    @Bean
+    @Bean("scheduledExecutorService")
     public ScheduledExecutorService getExecutorService() {
         return Executors.newScheduledThreadPool(2);
+    }
+
+    @Bean("threadPoolExecutor")
+    public ThreadPoolExecutor getCachedThreadPool() {
+        return new ThreadPoolExecutor(3, 8, 60, TimeUnit.SECONDS,
+                new LinkedBlockingDeque<>(10),
+                (r, executor) -> log.warn("任务过多，已拒绝新任务 {}", r));
     }
 }

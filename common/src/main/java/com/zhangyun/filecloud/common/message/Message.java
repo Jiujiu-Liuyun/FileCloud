@@ -79,8 +79,8 @@ public abstract class Message implements Serializable {
         MESSAGE_CLASSES.put(LOGOUT_MSG, LogoutMessage.class);
         MESSAGE_CLASSES.put(PING_MSG, PingMessage.class);
         MESSAGE_CLASSES.put(FILE_CHANGE_MSG, FileChangeMessage.class);
-        MESSAGE_CLASSES.put(FILE_TRANSFER_MSG, FileTransferMessage.class);
-        MESSAGE_CLASSES.put(FILE_TRANSFER_RESPONSE_MSG, FileTransferResponseMessage.class);
+        MESSAGE_CLASSES.put(FILE_TRANSFER_MSG, FileTrfMsg.class);
+        MESSAGE_CLASSES.put(FILE_TRANSFER_RESPONSE_MSG, FileTrfRespMsg.class);
     }
     /**
      * 根据消息类型字节，获得对应的消息 class

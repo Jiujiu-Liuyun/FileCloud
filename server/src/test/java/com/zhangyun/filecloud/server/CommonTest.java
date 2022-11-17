@@ -18,8 +18,9 @@ import java.util.stream.Collectors;
 public class CommonTest {
     @Test
     public void testNull() {
-        ConcurrentLinkedDeque<String> strings = new ConcurrentLinkedDeque<>();
-        System.out.println(strings.peekFirst());
+        Long a = null;
+        long b = a;
+        System.out.println(b);
     }
 
     @Test

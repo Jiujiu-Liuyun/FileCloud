@@ -1,7 +1,6 @@
 package com.zhangyun.filecloud.common.message;
 
 import com.zhangyun.filecloud.common.entity.FileTransferBO;
-import com.zhangyun.filecloud.common.enums.StatusEnum;
 import lombok.Data;
 
 /**
@@ -12,7 +11,7 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class FileTransferMessage extends Message{
+public class FileTrfMsg extends Message{
     private FileTransferBO fileTransferBO;
     @Override
     public int getMessageType() {
