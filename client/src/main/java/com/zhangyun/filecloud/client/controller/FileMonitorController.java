@@ -30,8 +30,8 @@ public class FileMonitorController {
 
     @GetMapping("startMonitor")
     public String startMonitor() throws Exception {
-        fileMonitorService.startMonitor();
-        log.info("File Monitor启动");
+//        fileMonitorService.startMonitor();
+//        log.info("File Monitor启动");
         return "stop";
     }
 }

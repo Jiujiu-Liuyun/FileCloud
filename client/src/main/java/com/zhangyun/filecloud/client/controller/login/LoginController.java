@@ -4,6 +4,7 @@ import com.zhangyun.filecloud.client.config.Config;
 import com.zhangyun.filecloud.client.controller.app.AppController;
 import com.zhangyun.filecloud.client.entity.UserInfo;
 import com.zhangyun.filecloud.client.service.ChangeViewService;
+import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.client.service.msgmanager.LoginService;
 import com.zhangyun.filecloud.client.utils.PropertyUtil;
 import com.zhangyun.filecloud.common.message.LoginResponseMessage;
@@ -48,6 +49,9 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField passwordField;
 
+    @Autowired
+    private FileMonitorService fileMonitorService;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         textField.setText("zhangyun");
@@ -87,6 +91,8 @@ public class LoginController implements Initializable {
              * 切换视图
              */
             if (responseMessage.getIsRegister()) {
+                // 启动文件监听器
+                fileMonitorService.startMonitor(userInfo.getRootPath(), 1000);
                 // 主页面
                 changeViewService.goAppView();
             } else {

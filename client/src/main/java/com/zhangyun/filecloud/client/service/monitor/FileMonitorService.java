@@ -22,23 +22,14 @@ import java.io.File;
 @Slf4j
 public class FileMonitorService {
     private FileAlterationMonitor monitor;
-    private FileAlterationObserver observer;
 
     @Autowired
     private FileAlterationListenerAdaptor listener;    // 事件处理类对象
 
-    // 客户端路径
-    @Value("${file.client.path}")
-    private String path;
-
-    // 扫描时间间隔
-    @Value("${file.client.interval}")
-    private Integer interval;
-
     /***
      * 创建文件监听器
      */
-    public void createMonitor(String rootPath, int interval) {
+    public FileAlterationMonitor createMonitor(String rootPath, int interval) {
         if (ObjectUtil.isEmpty(rootPath)) {
             throw new IllegalArgumentException("Listen path must not be blank");
         }
@@ -50,15 +41,17 @@ public class FileMonitorService {
         }
 
         // 设定观察者，监听文件
-        observer = new FileAlterationObserver(rootPath);
+        FileAlterationObserver observer = new FileAlterationObserver(rootPath);
 
         // 给观察者添加监听事件
         observer.addListener(listener);
 
         // 开启一个监视器，监听频率是interval
         // FileAlterationMonitor本身实现了 Runnable，是单独的一个线程，按照设定的时间间隔运行
-        monitor = new FileAlterationMonitor(interval);
+        FileAlterationMonitor monitor = new FileAlterationMonitor(interval);
         monitor.addObserver(observer);
+
+        return monitor;
     }
 
     public void closeMonitor() {
@@ -70,12 +63,14 @@ public class FileMonitorService {
         log.info("停止文件监听器 {}", monitor);
     }
 
-    public void startMonitor() {
+    public void startMonitor(String rootPath, int interval) {
+        // 创建monitor
+        monitor = createMonitor(rootPath, interval);
         try {
-            monitor.start();
+            this.monitor.start();
         } catch (Exception e) {
             log.warn("monitor启动失败 {}", e.getMessage());
         }
-        log.info("启动文件监听器 {}", monitor);
+        log.info("启动文件监听器 {}", this.monitor);
     }
 }

@@ -27,14 +27,12 @@ public class OutBoundHandler extends ChannelOutboundHandlerAdapter {
     private AppController appController;
 
     @Override
-    @TraceLog
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         if (msg instanceof Message) {
             Message message = (Message) msg;
             message.setToken(appController.getUserInfo().getToken());
             message.setUsername(appController.getUserInfo().getUsername());
             message.setDeviceId(appController.getUserInfo().getDeviceId());
-            log.info("{}", message);
         }
         super.write(ctx, msg, promise);
     }

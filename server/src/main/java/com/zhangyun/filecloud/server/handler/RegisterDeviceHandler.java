@@ -3,14 +3,13 @@ package com.zhangyun.filecloud.server.handler;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.RegisterDeviceMessage;
 import com.zhangyun.filecloud.common.message.RegisterDeviceResponseMessage;
-import com.zhangyun.filecloud.server.service.IDeviceService;
+import com.zhangyun.filecloud.server.database.service.DeviceService;
 import com.zhangyun.filecloud.server.service.RedisService;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import java.util.UUID;
 @Component
 public class RegisterDeviceHandler extends SimpleChannelInboundHandler<RegisterDeviceMessage> {
     @Autowired
-    private IDeviceService deviceService;
+    private DeviceService deviceService;
     @Autowired
     private RedisService redisService;
 

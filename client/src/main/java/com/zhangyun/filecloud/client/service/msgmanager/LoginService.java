@@ -43,8 +43,6 @@ public class LoginService {
 
     @TraceLog
     public LoginResponseMessage login(String username, String password, String deviceId, String rootPath, String deviceName) throws InterruptedException {
-        // 启动文件监听器
-        fileMonitorService.startMonitor();
         // 构建登录消息
         responseMessage = null;
         LoginMessage loginMessage = new LoginMessage();

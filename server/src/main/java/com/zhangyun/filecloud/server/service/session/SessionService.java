@@ -35,8 +35,11 @@ public class SessionService {
         }
     }
 
-    public Channel getChannel(String username) {
-        return deviceToChannelMap.get(username);
+    public Channel getChannel(String deviceId) {
+        return deviceToChannelMap.get(deviceId);
     }
 
+    public boolean isOnline(String deviceId) {
+        return deviceToChannelMap.containsKey(deviceId);
+    }
 }

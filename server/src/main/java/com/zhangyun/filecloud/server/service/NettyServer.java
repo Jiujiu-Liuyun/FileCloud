@@ -21,6 +21,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+
 /**
  * description:
  *
@@ -30,7 +32,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class NettyServer implements ApplicationRunner {
+public class NettyServer {
 
     @Value("${file.server.port}")
     private int serverPort;
@@ -46,6 +48,10 @@ public class NettyServer implements ApplicationRunner {
     @Autowired
     private CompareHandler compareHandler;
     @Autowired
+    private FileTransferResponseHandler fileTransferResponseHandler;
+
+
+    @Autowired
     private LoginHandler LOGIN_HANDLER;
     @Autowired
     private AuthTokenHandler AUTH_TOKEN_HANDLER;
@@ -58,14 +64,16 @@ public class NettyServer implements ApplicationRunner {
     @Autowired
     private QuitHandler QUIT_HANDLER;
 
+    @Autowired FileChangeHandler fileChangeHandler;
+
     private ServerBootstrap serverBootstrap = new ServerBootstrap();
     private NioEventLoopGroup boss = new NioEventLoopGroup();
     private NioEventLoopGroup worker = new NioEventLoopGroup();
     private LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
     private MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
 
-    @Override
-    public void run(ApplicationArguments args) {
+    @PostConstruct
+    public void startNetty() {
         log.info("netty server starting...");
         serverBootstrap = new ServerBootstrap()
                 .channel(NioServerSocketChannel.class)
@@ -78,7 +86,7 @@ public class NettyServer implements ApplicationRunner {
                         ch.pipeline().addLast(MESSAGE_CODEC);
 
                         // 5s 内如果没有收到 channel 的数据，会触发一个 IdleState#READER_IDLE 事件
-                        ch.pipeline().addLast(new IdleStateHandler(5, 0, 0));
+//                        ch.pipeline().addLast(new IdleStateHandler(5, 0, 0));
                         // ChannelDuplexHandler 可以同时作为入站和出站处理器
                         ch.pipeline().addLast(new ChannelDuplexHandler() {
                             // 用来触发特殊事件
@@ -106,6 +114,8 @@ public class NettyServer implements ApplicationRunner {
 
                         ch.pipeline().addLast(uploadHandler);
                         ch.pipeline().addLast(compareHandler);
+                        ch.pipeline().addLast(fileTransferResponseHandler);
+                        ch.pipeline().addLast(fileChangeHandler);
                         ch.pipeline().addLast(logoutHandler);                   // 登出
 
 

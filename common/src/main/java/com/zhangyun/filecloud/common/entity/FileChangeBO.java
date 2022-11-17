@@ -1,7 +1,7 @@
 package com.zhangyun.filecloud.common.entity;
 
-import com.zhangyun.filecloud.common.enums.ChangeModeEnum;
-import com.zhangyun.filecloud.common.enums.UploadStatusEnum;
+import com.zhangyun.filecloud.common.enums.FileTypeEnum;
+import com.zhangyun.filecloud.common.enums.OperationTypeEnum;
 import lombok.Data;
 
 /**
@@ -13,7 +13,7 @@ import lombok.Data;
  */
 @Data
 public class FileChangeBO {
-    private String filePath;
-    private ChangeModeEnum changeModeEnum;
-    private Long lastModified;
+    private String relativePath;
+    private FileTypeEnum fileTypeEnum;
+    private OperationTypeEnum operationTypeEnum;
 }

@@ -1,0 +1,347 @@
+2022-11-17 10:36:27.985 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 11179 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-17 10:36:27.988 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-17 10:36:29.000 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-17 10:36:29.007 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-17 10:36:29.008 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-17 10:36:29.055 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-17 10:36:29.055 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1003 ms
+2022-11-17 10:36:29.098 [ForkJoinPool.commonPool-worker-1] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMonitorController': Unsatisfied dependency expressed through field 'fileMonitorService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMonitorService': Unsatisfied dependency expressed through field 'listener'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'clientFileAlterationListenerAdaptor': Unsatisfied dependency expressed through field 'fileChangeService'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fileChangeService' defined in file [/Users/zhangyun/Documents/javaProject/FileCloud/client/target/classes/com/zhangyun/filecloud/client/service/monitor/FileChangeService.class]: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+2022-11-17 10:36:29.099 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2022-11-17 10:36:29.108 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-11-17 10:36:29.125 [ForkJoinPool.commonPool-worker-1] ERROR org.springframework.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMonitorController': Unsatisfied dependency expressed through field 'fileMonitorService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMonitorService': Unsatisfied dependency expressed through field 'listener'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'clientFileAlterationListenerAdaptor': Unsatisfied dependency expressed through field 'fileChangeService'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fileChangeService' defined in file [/Users/zhangyun/Documents/javaProject/FileCloud/client/target/classes/com/zhangyun/filecloud/client/service/monitor/FileChangeService.class]: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:659)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport.lambda$init$1(AbstractJavaFxApplicationSupport.java:124)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run$$$capture(CompletableFuture.java:1604)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1596)
+	at java.util.concurrent.ForkJoinTask.doExec$$$capture(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMonitorService': Unsatisfied dependency expressed through field 'listener'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'clientFileAlterationListenerAdaptor': Unsatisfied dependency expressed through field 'fileChangeService'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fileChangeService' defined in file [/Users/zhangyun/Documents/javaProject/FileCloud/client/target/classes/com/zhangyun/filecloud/client/service/monitor/FileChangeService.class]: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:659)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656)
+	... 28 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'clientFileAlterationListenerAdaptor': Unsatisfied dependency expressed through field 'fileChangeService'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fileChangeService' defined in file [/Users/zhangyun/Documents/javaProject/FileCloud/client/target/classes/com/zhangyun/filecloud/client/service/monitor/FileChangeService.class]: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:659)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656)
+	... 42 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fileChangeService' defined in file [/Users/zhangyun/Documents/javaProject/FileCloud/client/target/classes/com/zhangyun/filecloud/client/service/monitor/FileChangeService.class]: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:597)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656)
+	... 56 common frames omitted
+Caused by: java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.<init>(InitDestroyAnnotationBeanPostProcessor.java:372)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.lambda$buildLifecycleMetadata$0(InitDestroyAnnotationBeanPostProcessor.java:234)
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:324)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.buildLifecycleMetadata(InitDestroyAnnotationBeanPostProcessor.java:232)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.findLifecycleMetadata(InitDestroyAnnotationBeanPostProcessor.java:210)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessMergedBeanDefinition(InitDestroyAnnotationBeanPostProcessor.java:149)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessMergedBeanDefinition(CommonAnnotationBeanPostProcessor.java:305)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyMergedBeanDefinitionPostProcessors(AbstractAutowireCapableBeanFactory.java:1116)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
+	... 65 common frames omitted
+2022-11-17 10:36:29.125 [ForkJoinPool.commonPool-worker-1] ERROR d.f.jfxsupport.AbstractJavaFxApplicationSupport - Failed to load spring application context: 
+java.util.concurrent.CompletionException: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMonitorController': Unsatisfied dependency expressed through field 'fileMonitorService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMonitorService': Unsatisfied dependency expressed through field 'listener'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'clientFileAlterationListenerAdaptor': Unsatisfied dependency expressed through field 'fileChangeService'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fileChangeService' defined in file [/Users/zhangyun/Documents/javaProject/FileCloud/client/target/classes/com/zhangyun/filecloud/client/service/monitor/FileChangeService.class]: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:273)
+	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:280)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run$$$capture(CompletableFuture.java:1606)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1596)
+	at java.util.concurrent.ForkJoinTask.doExec$$$capture(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMonitorController': Unsatisfied dependency expressed through field 'fileMonitorService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMonitorService': Unsatisfied dependency expressed through field 'listener'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'clientFileAlterationListenerAdaptor': Unsatisfied dependency expressed through field 'fileChangeService'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fileChangeService' defined in file [/Users/zhangyun/Documents/javaProject/FileCloud/client/target/classes/com/zhangyun/filecloud/client/service/monitor/FileChangeService.class]: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:659)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport.lambda$init$1(AbstractJavaFxApplicationSupport.java:124)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run$$$capture(CompletableFuture.java:1604)
+	... 7 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'fileMonitorService': Unsatisfied dependency expressed through field 'listener'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'clientFileAlterationListenerAdaptor': Unsatisfied dependency expressed through field 'fileChangeService'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fileChangeService' defined in file [/Users/zhangyun/Documents/javaProject/FileCloud/client/target/classes/com/zhangyun/filecloud/client/service/monitor/FileChangeService.class]: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:659)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656)
+	... 28 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'clientFileAlterationListenerAdaptor': Unsatisfied dependency expressed through field 'fileChangeService'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fileChangeService' defined in file [/Users/zhangyun/Documents/javaProject/FileCloud/client/target/classes/com/zhangyun/filecloud/client/service/monitor/FileChangeService.class]: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:659)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656)
+	... 42 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fileChangeService' defined in file [/Users/zhangyun/Documents/javaProject/FileCloud/client/target/classes/com/zhangyun/filecloud/client/service/monitor/FileChangeService.class]: Post-processing of merged bean definition failed; nested exception is java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:597)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656)
+	... 56 common frames omitted
+Caused by: java.lang.IllegalStateException: Lifecycle method annotation requires a no-arg method: public void com.zhangyun.filecloud.client.service.monitor.FileChangeService.run(org.springframework.boot.ApplicationArguments) throws java.lang.Exception
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.<init>(InitDestroyAnnotationBeanPostProcessor.java:372)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.lambda$buildLifecycleMetadata$0(InitDestroyAnnotationBeanPostProcessor.java:234)
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:324)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.buildLifecycleMetadata(InitDestroyAnnotationBeanPostProcessor.java:232)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.findLifecycleMetadata(InitDestroyAnnotationBeanPostProcessor.java:210)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessMergedBeanDefinition(InitDestroyAnnotationBeanPostProcessor.java:149)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessMergedBeanDefinition(CommonAnnotationBeanPostProcessor.java:305)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyMergedBeanDefinitionPostProcessors(AbstractAutowireCapableBeanFactory.java:1116)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
+	... 65 common frames omitted
+2022-11-17 10:39:42.981 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 11850 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-17 10:39:42.984 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-17 10:39:43.819 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-17 10:39:43.824 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-17 10:39:43.824 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-17 10:39:43.862 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-17 10:39:43.862 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 852 ms
+2022-11-17 10:39:43.969 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-17 10:39:43.972 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-17 10:39:44.183 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-17 10:39:44.370 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-17 10:39:44.371 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-17 10:39:44.380 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-17 10:39:44.397 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-17 10:39:44.448 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 1.914 seconds (JVM running for 2.812)
+2022-11-17 10:46:21.835 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0x5ae21a18, L:/127.0.0.1:56350 - R:localhost/127.0.0.1:8090]
+2022-11-17 10:46:21.887 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","deviceName":"macbook air m1","messageType":5,"msgDesc":"LoginMessage","password":"1120","rootPath":"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath","username":"zhangyun"}
+2022-11-17 10:46:22.291 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"isRegister":true,"messageType":6,"msg":"登录成功！","msgDesc":"LoginResponseMessage","token":"85d844a1-0950-4ba1-9a65-c57f46e5fa76"}
+2022-11-17 10:46:22.292 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.login, 参数: username:"zhangyun"password:"1120"deviceId:"933883a0-e655-49c8-a126-24166d0a2432"rootPath:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath"deviceName:"macbook air m1" ====> LoginResponseMessage(code=200, msg=登录成功！, token=85d844a1-0950-4ba1-9a65-c57f46e5fa76, isRegister=true), 时间: 506ms
+2022-11-17 10:46:22.293 [JavaFX Application Thread] INFO  c.z.f.client.controller.login.LoginController - 登录成功
+2022-11-17 10:46:22.301 [JavaFX Application Thread] INFO  c.z.f.client.service.monitor.FileMonitorService - 启动文件监听器 org.apache.commons.io.monitor.FileAlterationMonitor@a167567
+2022-11-17 10:46:42.399 [Thread-17] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: ClientFileAlterationListenerAdaptor.onFileCreate, 参数: file:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath/f1" ====> null, 时间: 5ms
+2022-11-17 10:46:42.406 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileChangeBO":{"fileChangeModeEnum":"CREATE","lastModified":1668653202399,"relativePath":"f1"},"messageType":12,"msgDesc":"FileChangeMessage","token":"85d844a1-0950-4ba1-9a65-c57f46e5fa76","username":"zhangyun"}
+2022-11-17 10:51:12.398 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 14080 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-17 10:51:12.400 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-17 10:51:13.280 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-17 10:51:13.287 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-17 10:51:13.288 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-17 10:51:13.346 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-17 10:51:13.347 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 905 ms
+2022-11-17 10:51:13.500 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-17 10:51:13.504 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-17 10:51:13.786 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-17 10:51:14.051 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-17 10:51:14.052 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-17 10:51:14.062 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-17 10:51:14.082 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-17 10:51:14.164 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 2.672 seconds (JVM running for 3.415)
+2022-11-17 10:51:24.744 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0x58928825, L:/127.0.0.1:59968 - R:localhost/127.0.0.1:8090]
+2022-11-17 10:51:24.805 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","deviceName":"macbook air m1","messageType":5,"msgDesc":"LoginMessage","password":"1120","rootPath":"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath","username":"zhangyun"}
+2022-11-17 10:51:25.219 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"isRegister":true,"messageType":6,"msg":"登录成功！","msgDesc":"LoginResponseMessage","token":"42aa4435-6d35-452e-8cb6-2d2f464eb64e"}
+2022-11-17 10:51:25.220 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.login, 参数: username:"zhangyun"password:"1120"deviceId:"933883a0-e655-49c8-a126-24166d0a2432"rootPath:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath"deviceName:"macbook air m1" ====> LoginResponseMessage(code=200, msg=登录成功！, token=42aa4435-6d35-452e-8cb6-2d2f464eb64e, isRegister=true), 时间: 520ms
+2022-11-17 10:51:25.220 [JavaFX Application Thread] INFO  c.z.f.client.controller.login.LoginController - 登录成功
+2022-11-17 10:51:25.227 [JavaFX Application Thread] INFO  c.z.f.client.service.monitor.FileMonitorService - 启动文件监听器 org.apache.commons.io.monitor.FileAlterationMonitor@294585de
+2022-11-17 10:51:33.262 [Thread-17] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: ClientFileAlterationListenerAdaptor.onFileCreate, 参数: file:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath/f2" ====> null, 时间: 6ms
+2022-11-17 10:51:33.268 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileChangeBO":{"fileChangeModeEnum":"CREATE","lastModified":1668653493261,"relativePath":"f2"},"messageType":12,"msgDesc":"FileChangeMessage","token":"42aa4435-6d35-452e-8cb6-2d2f464eb64e","username":"zhangyun"}
+2022-11-17 10:51:33.327 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileTransferBO":{"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","relativePath":"f2","startPos":0,"transferModeEnum":"UPLOAD"},"messageType":13,"msgDesc":"FileTransferMessage"}
+2022-11-17 10:51:33.330 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"desc":"ok","deviceId":"933883a0-e655-49c8-a126-24166d0a2432","messageType":14,"msgDesc":"FileTransferResponseMessage","nextPos":0,"statusEnum":"FINISHED","token":"42aa4435-6d35-452e-8cb6-2d2f464eb64e","username":"zhangyun"}
+2022-11-17 10:53:58.041 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 14640 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-17 10:53:58.044 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-17 10:53:59.045 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-17 10:53:59.051 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-17 10:53:59.052 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-17 10:53:59.118 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-17 10:53:59.119 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1040 ms
+2022-11-17 10:53:59.275 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-17 10:53:59.281 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-17 10:53:59.561 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-17 10:53:59.752 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-17 10:53:59.753 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-17 10:53:59.761 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-17 10:53:59.777 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-17 10:53:59.826 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 2.66 seconds (JVM running for 3.537)
+2022-11-17 10:55:11.560 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0x462c4a0f, L:/127.0.0.1:62663 - R:localhost/127.0.0.1:8090]
+2022-11-17 10:55:11.610 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","deviceName":"macbook air m1","messageType":5,"msgDesc":"LoginMessage","password":"1120","rootPath":"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath","username":"zhangyun"}
+2022-11-17 10:55:11.972 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"isRegister":true,"messageType":6,"msg":"登录成功！","msgDesc":"LoginResponseMessage","token":"b222ec4f-847c-4d9d-af24-4277a8add5eb"}
+2022-11-17 10:55:11.973 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.login, 参数: username:"zhangyun"password:"1120"deviceId:"933883a0-e655-49c8-a126-24166d0a2432"rootPath:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath"deviceName:"macbook air m1" ====> LoginResponseMessage(code=200, msg=登录成功！, token=b222ec4f-847c-4d9d-af24-4277a8add5eb, isRegister=true), 时间: 469ms
+2022-11-17 10:55:11.973 [JavaFX Application Thread] INFO  c.z.f.client.controller.login.LoginController - 登录成功
+2022-11-17 10:55:11.982 [JavaFX Application Thread] INFO  c.z.f.client.service.monitor.FileMonitorService - 启动文件监听器 org.apache.commons.io.monitor.FileAlterationMonitor@3e06d328
+2022-11-17 10:57:26.564 [Thread-18] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: ClientFileAlterationListenerAdaptor.onFileCreate, 参数: file:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath/f3" ====> null, 时间: 10ms
+2022-11-17 10:57:26.572 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileChangeBO":{"fileChangeModeEnum":"CREATE","lastModified":1668653846563,"relativePath":"f3"},"messageType":12,"msgDesc":"FileChangeMessage","token":"b222ec4f-847c-4d9d-af24-4277a8add5eb","username":"zhangyun"}
+2022-11-17 11:03:39.130 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileTransferBO":{"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","relativePath":"f3","startPos":0,"transferModeEnum":"UPLOAD"},"messageType":13,"msgDesc":"FileTransferMessage"}
+2022-11-17 11:03:39.137 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"desc":"ok","deviceId":"933883a0-e655-49c8-a126-24166d0a2432","messageType":14,"msgDesc":"FileTransferResponseMessage","nextPos":0,"statusEnum":"FINISHED","token":"b222ec4f-847c-4d9d-af24-4277a8add5eb","username":"zhangyun"}
+2022-11-17 11:04:35.365 [Thread-18] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: ClientFileAlterationListenerAdaptor.onFileCreate, 参数: file:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath/f4" ====> null, 时间: 0ms
+2022-11-17 11:04:35.368 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileChangeBO":{"fileChangeModeEnum":"CREATE","lastModified":1668654275364,"relativePath":"f4"},"messageType":12,"msgDesc":"FileChangeMessage","token":"b222ec4f-847c-4d9d-af24-4277a8add5eb","username":"zhangyun"}
+2022-11-17 11:04:35.405 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileTransferBO":{"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","relativePath":"f4","startPos":0,"transferModeEnum":"UPLOAD"},"messageType":13,"msgDesc":"FileTransferMessage"}
+2022-11-17 11:04:35.405 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"desc":"ok","deviceId":"933883a0-e655-49c8-a126-24166d0a2432","messageType":14,"msgDesc":"FileTransferResponseMessage","nextPos":0,"statusEnum":"FINISHED","token":"b222ec4f-847c-4d9d-af24-4277a8add5eb","username":"zhangyun"}
+2022-11-17 11:05:35.614 [Thread-18] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: ClientFileAlterationListenerAdaptor.onFileCreate, 参数: file:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath/f5" ====> null, 时间: 0ms
+2022-11-17 11:05:35.614 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileChangeBO":{"fileChangeModeEnum":"CREATE","lastModified":1668654335614,"relativePath":"f5"},"messageType":12,"msgDesc":"FileChangeMessage","token":"b222ec4f-847c-4d9d-af24-4277a8add5eb","username":"zhangyun"}
+2022-11-17 11:05:35.673 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileTransferBO":{"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","relativePath":"f5","startPos":0,"transferModeEnum":"UPLOAD"},"messageType":13,"msgDesc":"FileTransferMessage"}
+2022-11-17 11:05:35.674 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"desc":"ok","deviceId":"933883a0-e655-49c8-a126-24166d0a2432","messageType":14,"msgDesc":"FileTransferResponseMessage","nextPos":0,"statusEnum":"FINISHED","token":"b222ec4f-847c-4d9d-af24-4277a8add5eb","username":"zhangyun"}
+2022-11-17 11:05:56.726 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 16993 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-17 11:05:56.728 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-17 11:05:57.935 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-17 11:05:57.943 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-17 11:05:57.943 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-17 11:05:58.006 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-17 11:05:58.006 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1246 ms
+2022-11-17 11:05:58.177 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-17 11:05:58.184 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-17 11:05:58.464 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-17 11:05:58.655 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-17 11:05:58.656 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-17 11:05:58.664 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-17 11:05:58.682 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-17 11:05:58.736 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 3.355 seconds (JVM running for 4.101)
+2022-11-17 11:07:25.167 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0x391fca1a, L:/127.0.0.1:54967 - R:localhost/127.0.0.1:8090]
+2022-11-17 11:07:25.241 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","deviceName":"macbook air m1","messageType":5,"msgDesc":"LoginMessage","password":"1120","rootPath":"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath","username":"zhangyun"}
+2022-11-17 11:07:25.716 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"isRegister":true,"messageType":6,"msg":"登录成功！","msgDesc":"LoginResponseMessage","token":"90c5a361-88b3-4fd5-80a6-849b97010067"}
+2022-11-17 11:07:25.717 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.login, 参数: username:"zhangyun"password:"1120"deviceId:"933883a0-e655-49c8-a126-24166d0a2432"rootPath:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath"deviceName:"macbook air m1" ====> LoginResponseMessage(code=200, msg=登录成功！, token=90c5a361-88b3-4fd5-80a6-849b97010067, isRegister=true), 时间: 743ms
+2022-11-17 11:07:25.717 [JavaFX Application Thread] INFO  c.z.f.client.controller.login.LoginController - 登录成功
+2022-11-17 11:07:25.725 [JavaFX Application Thread] INFO  c.z.f.client.service.monitor.FileMonitorService - 启动文件监听器 org.apache.commons.io.monitor.FileAlterationMonitor@39ac75ed
+2022-11-17 11:07:33.768 [Thread-19] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: ClientFileAlterationListenerAdaptor.onFileCreate, 参数: file:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath/f2" ====> null, 时间: 6ms
+2022-11-17 11:07:33.774 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileChangeBO":{"fileChangeModeEnum":"CREATE","lastModified":1668654453767,"relativePath":"f2"},"messageType":12,"msgDesc":"FileChangeMessage","token":"90c5a361-88b3-4fd5-80a6-849b97010067","username":"zhangyun"}
+2022-11-17 11:10:35.240 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 17929 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-17 11:10:35.242 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-17 11:10:37.060 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-17 11:10:37.069 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-17 11:10:37.069 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-17 11:10:37.134 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-17 11:10:37.134 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1836 ms
+2022-11-17 11:10:37.291 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-17 11:10:37.297 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-17 11:10:37.667 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-17 11:10:37.985 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-17 11:10:37.986 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-17 11:10:37.995 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-17 11:10:38.014 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-17 11:10:38.080 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 3.643 seconds (JVM running for 4.587)
+2022-11-17 11:11:02.893 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0x5cbb1668, L:/127.0.0.1:57569 - R:localhost/127.0.0.1:8090]
+2022-11-17 11:11:02.945 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","deviceName":"macbook air m1","messageType":5,"msgDesc":"LoginMessage","password":"1120","rootPath":"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath","username":"zhangyun"}
+2022-11-17 11:11:03.339 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"isRegister":true,"messageType":6,"msg":"登录成功！","msgDesc":"LoginResponseMessage","token":"ba1cd968-55ea-4515-803b-a8f0838a6289"}
+2022-11-17 11:11:03.340 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.login, 参数: username:"zhangyun"password:"1120"deviceId:"933883a0-e655-49c8-a126-24166d0a2432"rootPath:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath"deviceName:"macbook air m1" ====> LoginResponseMessage(code=200, msg=登录成功！, token=ba1cd968-55ea-4515-803b-a8f0838a6289, isRegister=true), 时间: 486ms
+2022-11-17 11:11:03.340 [JavaFX Application Thread] INFO  c.z.f.client.controller.login.LoginController - 登录成功
+2022-11-17 11:11:03.348 [JavaFX Application Thread] INFO  c.z.f.client.service.monitor.FileMonitorService - 启动文件监听器 org.apache.commons.io.monitor.FileAlterationMonitor@e012c34
+2022-11-17 11:11:28.976 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Starting application using Java 1.8.0_342 on zhangyundeMacBook-Air.local with PID 18111 (started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
+2022-11-17 11:11:28.981 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - The following profiles are active: dev
+2022-11-17 11:11:30.248 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2022-11-17 11:11:30.270 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-11-17 11:11:30.270 [ForkJoinPool.commonPool-worker-1] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-11-17 11:11:30.340 [ForkJoinPool.commonPool-worker-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-11-17 11:11:30.342 [ForkJoinPool.commonPool-worker-1] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1273 ms
+2022-11-17 11:11:30.504 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client starting...
+2022-11-17 11:11:30.508 [ForkJoinPool.commonPool-worker-1] INFO  com.zhangyun.filecloud.client.service.NettyClient - netty client start success
+2022-11-17 11:11:30.757 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-11-17 11:11:30.949 [ForkJoinPool.commonPool-worker-1] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2022-11-17 11:11:30.950 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-11-17 11:11:30.958 [ForkJoinPool.commonPool-worker-1] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-11-17 11:11:30.975 [ForkJoinPool.commonPool-worker-1] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-11-17 11:11:31.023 [ForkJoinPool.commonPool-worker-1] INFO  org.springframework.boot.SpringApplication - Started application in 2.688 seconds (JVM running for 3.364)
+2022-11-17 11:11:33.476 [JavaFX Application Thread] INFO  com.zhangyun.filecloud.client.service.NettyClient - 建立连接：[id: 0xa09dd56d, L:/127.0.0.1:57967 - R:localhost/127.0.0.1:8090]
+2022-11-17 11:11:33.519 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","deviceName":"macbook air m1","messageType":5,"msgDesc":"LoginMessage","password":"1120","rootPath":"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath","username":"zhangyun"}
+2022-11-17 11:11:33.923 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"code":200,"isRegister":true,"messageType":6,"msg":"登录成功！","msgDesc":"LoginResponseMessage","token":"551d357e-06ee-4a37-9866-28cdb5cd8999"}
+2022-11-17 11:11:33.925 [JavaFX Application Thread] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: LoginService.login, 参数: username:"zhangyun"password:"1120"deviceId:"933883a0-e655-49c8-a126-24166d0a2432"rootPath:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath"deviceName:"macbook air m1" ====> LoginResponseMessage(code=200, msg=登录成功！, token=551d357e-06ee-4a37-9866-28cdb5cd8999, isRegister=true), 时间: 487ms
+2022-11-17 11:11:33.925 [JavaFX Application Thread] INFO  c.z.f.client.controller.login.LoginController - 登录成功
+2022-11-17 11:11:33.935 [JavaFX Application Thread] INFO  c.z.f.client.service.monitor.FileMonitorService - 启动文件监听器 org.apache.commons.io.monitor.FileAlterationMonitor@42bc7fcd
+2022-11-17 11:11:52.012 [Thread-18] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: ClientFileAlterationListenerAdaptor.onFileCreate, 参数: file:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath/f3" ====> null, 时间: 5ms
+2022-11-17 11:11:52.015 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileChangeBO":{"fileChangeModeEnum":"CREATE","lastModified":1668654712012,"relativePath":"f3"},"messageType":12,"msgDesc":"FileChangeMessage","token":"551d357e-06ee-4a37-9866-28cdb5cd8999","username":"zhangyun"}
+2022-11-17 11:15:39.814 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileTransferBO":{"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","relativePath":"f3","startPos":0,"transferModeEnum":"UPLOAD"},"messageType":13,"msgDesc":"FileTransferMessage"}
+2022-11-17 11:15:39.818 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"desc":"ok","deviceId":"933883a0-e655-49c8-a126-24166d0a2432","messageType":14,"msgDesc":"FileTransferResponseMessage","nextPos":0,"statusEnum":"FINISHED","token":"551d357e-06ee-4a37-9866-28cdb5cd8999","username":"zhangyun"}
+2022-11-17 11:20:39.292 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileChangeBO":{"fileChangeModeEnum":"CREATE","lastModified":1668655239288,"relativePath":"f4"},"messageType":12,"msgDesc":"FileChangeMessage","token":"551d357e-06ee-4a37-9866-28cdb5cd8999","username":"zhangyun"}
+2022-11-17 11:20:39.288 [Thread-18] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: ClientFileAlterationListenerAdaptor.onFileCreate, 参数: file:"/Users/zhangyun/Documents/javaProject/FileCloud/rootPath/f4" ====> null, 时间: 1ms
+2022-11-17 11:24:21.153 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 接收消息: {"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","fileTransferBO":{"deviceId":"933883a0-e655-49c8-a126-24166d0a2432","relativePath":"f4","startPos":0,"transferModeEnum":"UPLOAD"},"messageType":13,"msgDesc":"FileTransferMessage"}
+2022-11-17 11:24:21.156 [nioEventLoopGroup-2-1] INFO  c.z.filecloud.common.protocol.MessageCodecSharable - 发送消息: {"code":200,"desc":"ok","deviceId":"933883a0-e655-49c8-a126-24166d0a2432","messageType":14,"msgDesc":"FileTransferResponseMessage","nextPos":0,"statusEnum":"FINISHED","token":"551d357e-06ee-4a37-9866-28cdb5cd8999","username":"zhangyun"}

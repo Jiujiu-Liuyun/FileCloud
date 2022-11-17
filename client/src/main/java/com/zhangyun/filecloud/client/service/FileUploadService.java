@@ -5,9 +5,9 @@ import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Semaphore;
 
@@ -20,7 +20,7 @@ import java.util.concurrent.Semaphore;
  */
 @Component
 @Slf4j
-public class FileUploadService implements ApplicationRunner {
+public class FileUploadService {
     public static ConcurrentLinkedDeque<UploadMessage> FILE_UPLOAD_MESSAGE_LIST
             = new ConcurrentLinkedDeque<>();
     public static Semaphore SEMAPHORE = new Semaphore(0);
@@ -28,8 +28,8 @@ public class FileUploadService implements ApplicationRunner {
     @Autowired
     private NettyClient nettyClient;
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
+    @PostConstruct
+    public void start() throws Exception {
 //        clientExecutor.execute(() -> {
 //            while (true) {
 //                try {

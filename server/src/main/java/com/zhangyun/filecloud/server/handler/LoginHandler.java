@@ -5,12 +5,11 @@ import cn.hutool.crypto.digest.DigestUtil;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.LoginMessage;
 import com.zhangyun.filecloud.common.message.LoginResponseMessage;
-import com.zhangyun.filecloud.server.entity.Device;
-import com.zhangyun.filecloud.server.entity.User;
-import com.zhangyun.filecloud.server.service.IDeviceService;
+import com.zhangyun.filecloud.server.database.entity.Device;
+import com.zhangyun.filecloud.server.database.entity.User;
+import com.zhangyun.filecloud.server.database.service.DeviceService;
 import com.zhangyun.filecloud.server.service.RedisService;
-import com.zhangyun.filecloud.server.service.impl.DeviceServiceImpl;
-import com.zhangyun.filecloud.server.service.impl.UserServiceImpl;
+import com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl;
 import com.zhangyun.filecloud.server.service.session.SessionService;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -18,8 +17,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 /**
  * description:
@@ -37,7 +34,7 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
     @Autowired
     private RedisService redisService;
     @Autowired
-    private IDeviceService deviceService;
+    private DeviceService deviceService;
     @Autowired
     private SessionService sessionService;
 

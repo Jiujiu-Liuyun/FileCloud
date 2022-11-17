@@ -2,7 +2,7 @@ package com.zhangyun.filecloud.server.handler;
 
 import com.zhangyun.filecloud.common.message.AuthFailResponseMessage;
 import com.zhangyun.filecloud.common.message.Message;
-import com.zhangyun.filecloud.server.service.IDeviceService;
+import com.zhangyun.filecloud.server.database.service.DeviceService;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthDeviceHandler extends SimpleChannelInboundHandler<Message> {
     @Autowired
-    private IDeviceService deviceService;
+    private DeviceService deviceService;
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception {

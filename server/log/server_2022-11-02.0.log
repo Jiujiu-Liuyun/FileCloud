@@ -66,8 +66,8 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 2022-11-02 18:12:07.270 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 722 ms
 2022-11-02 18:12:07.364 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 18:12:07.436 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 18:12:07.599 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.entity.Device.
-2022-11-02 18:12:07.600 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 18:12:07.599 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.database.entity.Device.
+2022-11-02 18:12:07.600 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 18:12:07.778 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 18:12:07.931 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 18:12:07.932 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -86,11 +86,11 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 	at org.apache.ibatis.binding.MapperProxy.cachedMapperMethod(MapperProxy.java:65)
 	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:58)
 	at com.sun.proxy.$Proxy73.getUserByName(Unknown Source)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$ad5537f1.getUserByName(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$ad5537f1.getUserByName(<generated>)
 	at com.zhangyun.filecloud.server.controller.UserController.getUserByName(UserController.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -153,8 +153,8 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 2022-11-02 19:23:19.912 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 702 ms
 2022-11-02 19:23:20.016 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 19:23:20.108 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 19:23:20.242 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.entity.Device.
-2022-11-02 19:23:20.242 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 19:23:20.242 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.database.entity.Device.
+2022-11-02 19:23:20.242 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 19:23:20.437 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 19:23:20.625 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 19:23:20.625 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -173,11 +173,11 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 	at org.apache.ibatis.binding.MapperProxy.cachedMapperMethod(MapperProxy.java:65)
 	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:58)
 	at com.sun.proxy.$Proxy73.getUserByName(Unknown Source)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$a66b97dc.getUserByName(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$a66b97dc.getUserByName(<generated>)
 	at com.zhangyun.filecloud.server.controller.UserController.getUserByName(UserController.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -240,8 +240,8 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 2022-11-02 19:25:00.955 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 777 ms
 2022-11-02 19:25:01.063 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 19:25:01.160 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 19:25:01.286 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.entity.Device.
-2022-11-02 19:25:01.287 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 19:25:01.286 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.database.entity.Device.
+2022-11-02 19:25:01.287 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 19:25:01.471 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 19:25:01.651 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 19:25:01.652 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -260,11 +260,11 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 	at org.apache.ibatis.binding.MapperProxy.cachedMapperMethod(MapperProxy.java:65)
 	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:58)
 	at com.sun.proxy.$Proxy73.getUserByName(Unknown Source)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$ad5537f1.getUserByName(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$ad5537f1.getUserByName(<generated>)
 	at com.zhangyun.filecloud.server.controller.UserController.getUserByName(UserController.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -327,8 +327,8 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 2022-11-02 19:49:56.214 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 709 ms
 2022-11-02 19:49:56.320 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 19:49:56.415 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 19:49:56.532 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.entity.Device.
-2022-11-02 19:49:56.533 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 19:49:56.532 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.database.entity.Device.
+2022-11-02 19:49:56.533 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 19:49:56.713 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 19:49:56.872 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 19:49:56.873 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -347,11 +347,11 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 	at org.apache.ibatis.binding.MapperProxy.cachedMapperMethod(MapperProxy.java:65)
 	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:58)
 	at com.sun.proxy.$Proxy73.getUserByName(Unknown Source)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$a66b97dc.getUserByName(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$a66b97dc.getUserByName(<generated>)
 	at com.zhangyun.filecloud.server.controller.UserController.getUserByName(UserController.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -414,8 +414,8 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 2022-11-02 19:56:35.041 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 649 ms
 2022-11-02 19:56:35.138 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 19:56:35.240 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 19:56:35.362 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.entity.Device.
-2022-11-02 19:56:35.362 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 19:56:35.362 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.database.entity.Device.
+2022-11-02 19:56:35.362 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 19:56:35.544 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 19:56:35.704 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 19:56:35.704 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -434,11 +434,11 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 	at org.apache.ibatis.binding.MapperProxy.cachedMapperMethod(MapperProxy.java:65)
 	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:58)
 	at com.sun.proxy.$Proxy73.getUserByName(Unknown Source)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$ad5537f1.getUserByName(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$ad5537f1.getUserByName(<generated>)
 	at com.zhangyun.filecloud.server.controller.UserController.getUserByName(UserController.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -501,8 +501,8 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 2022-11-02 20:20:20.837 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 841 ms
 2022-11-02 20:20:20.946 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 20:20:21.040 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 20:20:21.162 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.entity.Device.
-2022-11-02 20:20:21.162 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 20:20:21.162 [main] WARN  com.baomidou.mybatisplus.toolkit.TableInfoHelper - Warn: Could not find @TableId in Class: com.zhangyun.filecloud.server.database.entity.Device.
+2022-11-02 20:20:21.162 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 20:20:21.345 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 20:20:21.503 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 20:20:21.504 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -521,11 +521,11 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 	at org.apache.ibatis.binding.MapperProxy.cachedMapperMethod(MapperProxy.java:65)
 	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:58)
 	at com.sun.proxy.$Proxy73.getUserByName(Unknown Source)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$ad5537f1.getUserByName(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$ad5537f1.getUserByName(<generated>)
 	at com.zhangyun.filecloud.server.controller.UserController.getUserByName(UserController.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -588,7 +588,7 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 2022-11-02 20:25:54.462 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 691 ms
 2022-11-02 20:25:54.555 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 20:25:54.614 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 20:25:54.698 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 20:25:54.698 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 20:25:54.963 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 20:25:55.116 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 20:25:55.117 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -641,11 +641,11 @@ java.sql.SQLSyntaxErrorException: Unknown column 'name' in 'where clause'
 	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:83)
 	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)
 	at com.sun.proxy.$Proxy73.getUserByName(Unknown Source)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl.getUserByName(UserServiceImpl.java:25)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$4b1192a7.getUserByName(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$4b1192a7.getUserByName(<generated>)
 	at com.zhangyun.filecloud.server.controller.UserController.getUserByName(UserController.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -708,7 +708,7 @@ java.sql.SQLSyntaxErrorException: Unknown column 'name' in 'where clause'
 2022-11-02 20:29:26.549 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 668 ms
 2022-11-02 20:29:26.646 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 20:29:26.752 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 20:29:26.803 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 20:29:26.803 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 20:29:27.083 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 20:29:27.240 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 20:29:27.240 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -731,7 +731,7 @@ java.sql.SQLSyntaxErrorException: Unknown column 'name' in 'where clause'
 2022-11-02 20:31:56.546 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 739 ms
 2022-11-02 20:31:56.668 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 20:31:56.760 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 20:31:56.809 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 20:31:56.809 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 20:31:57.092 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 20:31:57.266 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 20:31:57.267 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -756,7 +756,7 @@ java.sql.SQLSyntaxErrorException: Unknown column 'name' in 'where clause'
 2022-11-02 20:34:37.660 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 842 ms
 2022-11-02 20:34:37.751 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 20:34:37.815 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 20:34:37.894 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 20:34:37.894 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 20:34:38.150 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 20:34:38.314 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 20:34:38.315 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -780,7 +780,7 @@ java.sql.SQLSyntaxErrorException: Unknown column 'name' in 'where clause'
 2022-11-02 20:36:08.522 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 844 ms
 2022-11-02 20:36:08.615 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 20:36:08.708 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 20:36:08.761 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 20:36:08.761 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 20:36:09.021 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 20:36:09.182 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 20:36:09.183 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -792,7 +792,7 @@ java.sql.SQLSyntaxErrorException: Unknown column 'name' in 'where clause'
 2022-11-02 20:36:10.723 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2022-11-02 20:36:10.723 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2022-11-02 20:36:10.725 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-2022-11-02 20:36:10.796 [http-nio-8080-exec-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: com.zhangyun.filecloud.server.service.impl.UserServiceImpl.selectUserByName, 参数: name:"zhangyun" ====> User{user_id=1, username=zhangyun, password=1120, create_time=null, modified_time=null}, 时间: 30ms
+2022-11-02 20:36:10.796 [http-nio-8080-exec-1] INFO  c.zhangyun.filecloud.common.aspect.TraceLogAspect - 执行方法: com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl.selectUserByName, 参数: name:"zhangyun" ====> User{user_id=1, username=zhangyun, password=1120, create_time=null, modified_time=null}, 时间: 30ms
 2022-11-02 20:38:06.127 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2022-11-02 20:38:06.131 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
 2022-11-02 20:38:11.716 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 1.8.0_342 on zhangyundeAir.lan with PID 52697 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
@@ -804,7 +804,7 @@ java.sql.SQLSyntaxErrorException: Unknown column 'name' in 'where clause'
 2022-11-02 20:38:12.466 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 695 ms
 2022-11-02 20:38:12.559 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
 2022-11-02 20:38:12.649 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-11-02 20:38:12.693 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-11-02 20:38:12.693 [main] WARN  com.baomidou.mybatisplus.mapper.AutoSqlInjector - class com.zhangyun.filecloud.server.database.entity.Device ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
 2022-11-02 20:38:12.949 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
 2022-11-02 20:38:13.102 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
 2022-11-02 20:38:13.103 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
@@ -846,8 +846,8 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 	at org.apache.ibatis.binding.MapperProxy.cachedMapperMethod(MapperProxy.java:65)
 	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:58)
 	at com.sun.proxy.$Proxy76.selectUserByName(Unknown Source)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl.selectUserByName(UserServiceImpl.java:27)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl.selectUserByName(UserServiceImpl.java:27)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$a4b00170.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
@@ -867,7 +867,7 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
-	at com.zhangyun.filecloud.server.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$d5efc769.selectUserByName(<generated>)
+	at com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$d5efc769.selectUserByName(<generated>)
 	at com.zhangyun.filecloud.server.controller.UserController.selectUserByName(UserController.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -1004,7 +1004,7 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 2022-11-02 21:51:05.109 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2022-11-02 21:51:05.109 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2022-11-02 21:51:05.110 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-2022-11-02 21:55:38.165 [http-nio-8080-exec-5] WARN  o.s.w.s.m.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentConversionNotSupportedException: Failed to convert value of type 'java.lang.String' to required type 'com.zhangyun.filecloud.server.entity.User'; nested exception is java.lang.IllegalStateException: Cannot convert value of type 'java.lang.String' to required type 'com.zhangyun.filecloud.server.entity.User': no matching editors or conversion strategy found]
+2022-11-02 21:55:38.165 [http-nio-8080-exec-5] WARN  o.s.w.s.m.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentConversionNotSupportedException: Failed to convert value of type 'java.lang.String' to required type 'com.zhangyun.filecloud.server.database.entity.User'; nested exception is java.lang.IllegalStateException: Cannot convert value of type 'java.lang.String' to required type 'com.zhangyun.filecloud.server.database.entity.User': no matching editors or conversion strategy found]
 2022-11-02 22:00:27.227 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - Starting ServerApplication using Java 1.8.0_342 on zhangyundeAir.lan with PID 69800 (/Users/zhangyun/Documents/javaProject/FileCloud/server/target/classes started by zhangyun in /Users/zhangyun/Documents/javaProject/FileCloud)
 2022-11-02 22:00:27.228 [main] INFO  com.zhangyun.filecloud.server.ServerApplication - The following profiles are active: dev
 2022-11-02 22:00:27.891 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)

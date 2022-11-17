@@ -1,7 +1,7 @@
 file:
   server:
     host: localhost
-    path: /Users/zhangyun/test/target
+    rootPath: /Users/zhangyun/Documents/javaProject/FileCloud/serverRootPath
   client:
     path: /Users/zhangyun/test/source
     maxsize: 10

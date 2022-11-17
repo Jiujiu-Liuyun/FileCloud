@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.zhangyun.filecloud"})
-@MapperScan("com.zhangyun.filecloud.server.mapper")
+@MapperScan("com.zhangyun.filecloud.server.database.mapper")
 public class ServerApplication {
 
     public static void main(String[] args) {

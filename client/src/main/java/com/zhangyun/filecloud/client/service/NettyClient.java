@@ -21,8 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 
 /**
  * description:
@@ -33,7 +34,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class NettyClient implements ApplicationRunner {
+public class NettyClient {
     @Value("${file.server.port}")
     private int serverPort;
 
@@ -48,9 +49,11 @@ public class NettyClient implements ApplicationRunner {
     private LoginResponseHandler loginResponseHandler;
     @Autowired
     private RegisterDeviceResponseHandler registerDeviceResponseHandler;
+    @Autowired
+    private FileTransferHandler fileTransferHandler;
 
     @Autowired
-    private OutBoundHandler ADD_TOKEN_HANDLER;
+    private OutBoundHandler OUT_BOUND_HANDLER;
     private LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
     private MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
 
@@ -58,8 +61,8 @@ public class NettyClient implements ApplicationRunner {
     private NioEventLoopGroup group = new NioEventLoopGroup();
     private Channel channel = null;
 
-    @Override
-    public void run(ApplicationArguments args) {
+    @PostConstruct
+    public void startNetty() {
         log.info("netty client starting...");
         bootstrap = new Bootstrap()
                 .channel(NioSocketChannel.class)
@@ -71,8 +74,15 @@ public class NettyClient implements ApplicationRunner {
                         ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(MESSAGE_CODEC);
 
+                        /**
+                         * 出站处理器
+                         * 1. 添加token username deviceId
+                         */
+                        ch.pipeline().addLast(OUT_BOUND_HANDLER);
+
+
                         // 写空闲，会触发一个 IdleState#WRITER_IDLE 事件
-                        ch.pipeline().addLast(new IdleStateHandler(0, 3, 0));
+//                        ch.pipeline().addLast(new IdleStateHandler(0, 3, 0));
                         ch.pipeline().addLast(new ChannelDuplexHandler() {
                             // 用来触发特殊事件
                             @Override
@@ -86,11 +96,12 @@ public class NettyClient implements ApplicationRunner {
                             }
                         });
 
-                        ch.pipeline().addLast(ADD_TOKEN_HANDLER);
                         ch.pipeline().addLast(uploadResponseHandler);
                         ch.pipeline().addLast(compareResponseHandler);
                         ch.pipeline().addLast(loginResponseHandler);
                         ch.pipeline().addLast(registerDeviceResponseHandler);
+                        ch.pipeline().addLast(fileTransferHandler);
+
                     }
                 });
         log.info("netty client start success");

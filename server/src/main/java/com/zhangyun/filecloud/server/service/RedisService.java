@@ -21,6 +21,8 @@ public class RedisService {
     public static final String TOKEN_PREFIX = "token:";
     public static final Long TOKEN_EXPIRE_DAY = 1L;
 
+    public static final String LOCK_FILE_TRANSFER_PREFIX = "lock-file-transfer:";
+
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
@@ -67,4 +69,39 @@ public class RedisService {
         return token;
     }
 
+    public boolean lockFileTransferList(String username) {
+        String key = LOCK_FILE_TRANSFER_PREFIX + username;
+        return Boolean.TRUE.equals(redisTemplate.opsForValue().setIfAbsent(key, "1", 10, TimeUnit.SECONDS));
+    }
+
+    /**
+     * 尝试获取锁
+     * @param username
+     * @return
+     */
+    public boolean tryLockFileTransferList(String username) {
+        boolean lock;
+        boolean flag = true;
+        long begin = System.currentTimeMillis();
+
+        do {
+            lock = this.lockFileTransferList(username);
+            if (!lock) {
+                try {
+                    //休眠0.1秒后重试，直到重试超时getTimeOut
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                long endTime = System.currentTimeMillis();
+                if (endTime - begin > (3 * 1000)) {
+                    log.warn("获取锁超时，锁标识：" + username);
+                    flag = false;//退出循环
+                }
+            } else {
+                flag = false;//退出循环
+            }
+        } while (flag);
+        return lock;
+    }
 }

@@ -8,9 +8,9 @@ import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Semaphore;
 
@@ -23,7 +23,7 @@ import java.util.concurrent.Semaphore;
  */
 @Slf4j
 @Service
-public class FileChangeService implements ApplicationRunner {
+public class FileChangeService {
     @Autowired
     private ThreadPoolService threadPoolService;
     @Autowired
@@ -40,6 +40,7 @@ public class FileChangeService implements ApplicationRunner {
 
     /**
      * 发送FileChangeMessage到服务器
+     *
      * @param fileChangeBO
      */
     private void sendFileChangeMessage(FileChangeBO fileChangeBO) {
@@ -52,8 +53,8 @@ public class FileChangeService implements ApplicationRunner {
         channel.writeAndFlush(fileChangeMessage);
     }
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
+    @PostConstruct
+    public void start() {
         threadPoolService.executor.submit(() -> {
             while (true) {
                 try {
