@@ -8,19 +8,21 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author zhangyun
  * @since 2022-11-02
  */
 @Data
-public class File extends Model<File> {
+@EqualsAndHashCode(callSuper = false)
+public class File implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -70,22 +72,4 @@ public class File extends Model<File> {
      */
     @TableField(value = "modified_time", fill = FieldFill.INSERT_UPDATE)
     private Date modifiedTime;
-
-    @Override
-    protected Serializable pkVal() {
-        return this.fileId;
-    }
-
-    @Override
-    public String toString() {
-        return "File{" +
-        "fileid=" + fileId +
-        ", userid=" + userId +
-        ", filepath=" + filePath +
-        ", isFile=" + isFile +
-        ", md5=" + md5 +
-        ", createTime=" + createTime +
-        ", modifiedTime=" + modifiedTime +
-        "}";
-    }
 }

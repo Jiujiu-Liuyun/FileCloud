@@ -29,13 +29,11 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device> impleme
     private UserService userService;
 
     @Override
-    public boolean createDevice(String deviceId, String username, String deviceName, String rootPath) {
+    public boolean createDevice(String deviceId, String username) {
         Integer userId = userService.getIdByUsername(username);
         Device device = new Device();
         device.setDeviceId(deviceId);
-        device.setDeviceName(deviceName);
         device.setUserId(userId);
-        device.setRootPath(rootPath);
         int insert = deviceMapper.insert(device);
         return insert > 0;
     }

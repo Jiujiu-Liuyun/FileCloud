@@ -1,9 +1,11 @@
 package com.zhangyun.filecloud.server.handler;
 
 import com.zhangyun.filecloud.common.annotation.TraceLog;
+import com.zhangyun.filecloud.common.enums.RespEnum;
 import com.zhangyun.filecloud.common.message.RegisterDeviceMessage;
-import com.zhangyun.filecloud.common.message.RegisterDeviceResponseMessage;
+import com.zhangyun.filecloud.common.message.RegisterDeviceRespMsg;
 import com.zhangyun.filecloud.server.database.service.DeviceService;
+import com.zhangyun.filecloud.server.database.service.UserService;
 import com.zhangyun.filecloud.server.service.RedisService;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -29,22 +31,32 @@ public class RegisterDeviceHandler extends SimpleChannelInboundHandler<RegisterD
     private DeviceService deviceService;
     @Autowired
     private RedisService redisService;
+    @Autowired
+    private UserService userService;
 
     @Override
     @TraceLog
     protected void channelRead0(ChannelHandlerContext ctx, RegisterDeviceMessage msg) throws Exception {
-        RegisterDeviceResponseMessage responseMessage = new RegisterDeviceResponseMessage();
+        // 1. 验证username password
+        RespEnum respEnum = userService.authUsernameAndPassword(msg.getUsername(), msg.getPassword());
+        RegisterDeviceRespMsg respMsg = new RegisterDeviceRespMsg();
+        respMsg.setRespEnum(respEnum);
+        if (respEnum != RespEnum.OK) {
+            ctx.writeAndFlush(respMsg);
+            return;
+        }
+        // todo: 限制设备个数
         // 生成设备UUID
         String deviceId = UUID.randomUUID().toString();
-        boolean isInsert = deviceService.createDevice(deviceId, msg.getUsername(), msg.getDeviceName(), msg.getRootPath());
-        responseMessage.setDeviceId(deviceId);
+        boolean isInsert = deviceService.createDevice(deviceId, msg.getUsername());
         if (isInsert) {
+            respMsg.setDeviceId(deviceId);
             // 生成token
             String token = redisService.genToken(msg.getUsername(), deviceId);
-            responseMessage.setToken(token);
-            ctx.writeAndFlush(responseMessage);
+            respMsg.setToken(token);
+            ctx.writeAndFlush(respMsg);
         } else {
-            log.info("设备创建失败创建失败");
+            log.warn("设备创建失败");
         }
     }
 }

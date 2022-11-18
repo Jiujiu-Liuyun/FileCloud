@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
@@ -19,7 +20,8 @@ import java.io.Serializable;
  * @since 2022-11-02
  */
 @Data
-public class Device extends Model<Device> {
+@EqualsAndHashCode(callSuper = false)
+public class Device implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -59,19 +61,4 @@ public class Device extends Model<Device> {
     @TableField(value = "modified_time", fill = FieldFill.INSERT_UPDATE)
     private Date modifiedTime;
 
-    @Override
-    protected Serializable pkVal() {
-        return this.deviceId;
-    }
-
-    @Override
-    public String toString() {
-        return "Device{" +
-        "deviceId=" + deviceId +
-        ", userId=" + userId +
-        ", deviceName=" + deviceName +
-        ", createTime=" + createTime +
-        ", modifiedTime=" + modifiedTime +
-        "}";
-    }
 }

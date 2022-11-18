@@ -3,11 +3,14 @@ package com.zhangyun.filecloud.server.handler;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
-import com.zhangyun.filecloud.common.message.LoginMessage;
-import com.zhangyun.filecloud.common.message.LoginResponseMessage;
+import com.zhangyun.filecloud.common.enums.RespEnum;
+import com.zhangyun.filecloud.common.message.LoginMsg;
+import com.zhangyun.filecloud.common.message.LoginRespMsg;
 import com.zhangyun.filecloud.server.database.entity.Device;
+import com.zhangyun.filecloud.server.database.entity.FileChangeRecord;
 import com.zhangyun.filecloud.server.database.entity.User;
 import com.zhangyun.filecloud.server.database.service.DeviceService;
+import com.zhangyun.filecloud.server.database.service.FileChangeRecordService;
 import com.zhangyun.filecloud.server.service.RedisService;
 import com.zhangyun.filecloud.server.database.service.impl.UserServiceImpl;
 import com.zhangyun.filecloud.server.service.session.SessionService;
@@ -17,6 +20,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * description:
@@ -28,7 +33,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @ChannelHandler.Sharable
 @Component
-public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
+public class LoginHandler extends SimpleChannelInboundHandler<LoginMsg> {
     @Autowired
     private UserServiceImpl userService;
     @Autowired
@@ -37,45 +42,37 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMessage> {
     private DeviceService deviceService;
     @Autowired
     private SessionService sessionService;
+    @Autowired
+    private FileChangeRecordService fileChangeRecordService;
 
     @Override
     @TraceLog
-    protected void channelRead0(ChannelHandlerContext ctx, LoginMessage msg) throws Exception {
-        if (msg == null || msg.getUsername() == null || msg.getPassword() == null) {
-            log.info("接收消息错误: {}", msg);
-            return;
-        }
-        User user = userService.selectUserByName(msg.getUsername());
-        LoginResponseMessage responseMessage;
-        if (user == null) {
-            responseMessage = new LoginResponseMessage(301, "该账户不存在！");
-        } else {
-            String loginPassword = DigestUtil.md5Hex(msg.getPassword());
-            // 判断密码是否相同
-            if (ObjectUtil.notEqual(loginPassword, user.getPassword())) {
-                responseMessage = new LoginResponseMessage(302, "密码错误");
-            } else {
-                responseMessage = new LoginResponseMessage(200, "登录成功！");
-                // 将连接加入会话管理器
-                sessionService.bind(ctx.channel(), msg.getDeviceId());
+    protected void channelRead0(ChannelHandlerContext ctx, LoginMsg msg) throws Exception {
+        LoginRespMsg loginRespMsg = authLoginMsg(msg);
+        if (loginRespMsg.getRespBO() == RespEnum.OK) {
+            // 将连接加入会话管理器
+            sessionService.bind(ctx.channel(), msg.getDeviceId());
+            // 当设备有效时生成token，否则在注册设备时生成token
+            if (loginRespMsg.getIsRegister()) {
+                // 生成token
+                String token = redisService.genToken(msg.getUsername(), msg.getDeviceId());
+                loginRespMsg.setToken(token);
             }
         }
+        ctx.writeAndFlush(loginRespMsg);
+    }
 
-        // 设备是否注册
-        if (msg.getDeviceId() == null || msg.getDeviceName() == null || msg.getRootPath() == null) {
-            responseMessage.setIsRegister(false);
+    private LoginRespMsg authLoginMsg(LoginMsg msg) {
+        RespEnum respEnum = userService.authUsernameAndPassword(msg.getUsername(), msg.getPassword());
+        LoginRespMsg loginRespMsg = new LoginRespMsg(respEnum);
+        // auth device
+        if (msg.getDeviceId() == null) {
+            loginRespMsg.setIsRegister(false);
         } else {
             Device device = deviceService.selectDeviceByDeviceId(msg.getDeviceId());
-            responseMessage.setIsRegister(device != null && msg.getDeviceName().equals(device.getDeviceName()) && msg.getRootPath().equals(device.getRootPath()));
+            loginRespMsg.setIsRegister(device != null);
         }
-
-        // 当设备有效时生成token，否则在注册设备时生成token
-        if (responseMessage.getIsRegister()) {
-            // 生成token
-            String token = redisService.genToken(msg.getUsername(), msg.getDeviceId());
-            responseMessage.setToken(token);
-        }
-
-        ctx.writeAndFlush(responseMessage);
+        return loginRespMsg;
     }
+
 }

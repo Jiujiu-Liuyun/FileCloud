@@ -2,7 +2,7 @@ package com.zhangyun.filecloud.client.service.msgmanager;
 
 import com.zhangyun.filecloud.client.service.NettyClient;
 import com.zhangyun.filecloud.common.message.RegisterDeviceMessage;
-import com.zhangyun.filecloud.common.message.RegisterDeviceResponseMessage;
+import com.zhangyun.filecloud.common.message.RegisterDeviceRespMsg;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class RegisterDeviceService {
     private NettyClient nettyClient;
 
     private Semaphore initDeviceSemaphore = new Semaphore(0);
-    private RegisterDeviceResponseMessage registerDeviceResponseMessage;
+    private RegisterDeviceRespMsg registerDeviceRespMsg;
 
     public Semaphore getInitDeviceSemaphore() {
         return initDeviceSemaphore;
@@ -34,15 +34,15 @@ public class RegisterDeviceService {
         this.initDeviceSemaphore = initDeviceSemaphore;
     }
 
-    public RegisterDeviceResponseMessage getRegisterDeviceResponseMessage() {
-        return registerDeviceResponseMessage;
+    public RegisterDeviceRespMsg getRegisterDeviceResponseMessage() {
+        return registerDeviceRespMsg;
     }
 
-    public void setRegisterDeviceResponseMessage(RegisterDeviceResponseMessage registerDeviceResponseMessage) {
-        this.registerDeviceResponseMessage = registerDeviceResponseMessage;
+    public void setRegisterDeviceResponseMessage(RegisterDeviceRespMsg registerDeviceRespMsg) {
+        this.registerDeviceRespMsg = registerDeviceRespMsg;
     }
 
-    public RegisterDeviceResponseMessage registerDevice(String username, String deviceName, String token, String rootPath) throws InterruptedException {
+    public RegisterDeviceRespMsg registerDevice(String username, String deviceName, String token, String rootPath) throws InterruptedException {
         Channel channel = nettyClient.getChannel();
         RegisterDeviceMessage registerDeviceMessage = new RegisterDeviceMessage();
         registerDeviceMessage.setUsername(username);
@@ -51,6 +51,6 @@ public class RegisterDeviceService {
         channel.writeAndFlush(registerDeviceMessage);
         // 等待Server响应消息
         initDeviceSemaphore.acquire();
-        return registerDeviceResponseMessage;
+        return registerDeviceRespMsg;
     }
 }

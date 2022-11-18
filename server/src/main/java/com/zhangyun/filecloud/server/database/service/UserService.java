@@ -1,6 +1,7 @@
 package com.zhangyun.filecloud.server.database.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zhangyun.filecloud.common.enums.RespEnum;
 import com.zhangyun.filecloud.server.database.entity.User;
 
 /**
@@ -23,4 +24,6 @@ public interface UserService extends IService<User> {
     Integer getIdByUsername(String username);
 
     String getUserRootPath(String username);
+
+    RespEnum authUsernameAndPassword(String username, String password);
 }

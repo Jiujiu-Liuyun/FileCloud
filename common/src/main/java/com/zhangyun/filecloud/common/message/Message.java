@@ -71,11 +71,11 @@ public abstract class Message implements Serializable {
         MESSAGE_CLASSES.put(FILE_UPLOAD_RESPONSE_MSG, UploadResponseMessage.class);
         MESSAGE_CLASSES.put(FILE_COMPARE_MSG, CompareMessage.class);
         MESSAGE_CLASSES.put(FILE_COMPARE_RESPONSE_MSG, CompareResponseMessage.class);
-        MESSAGE_CLASSES.put(LOGIN_MSG, LoginMessage.class);
-        MESSAGE_CLASSES.put(LOGIN_RESPONSE_MSG, LoginResponseMessage.class);
+        MESSAGE_CLASSES.put(LOGIN_MSG, LoginMsg.class);
+        MESSAGE_CLASSES.put(LOGIN_RESPONSE_MSG, LoginRespMsg.class);
         MESSAGE_CLASSES.put(AUTH_FAIL_MSG, AuthFailResponseMessage.class);
         MESSAGE_CLASSES.put(INIT_DEVICE_MSG, RegisterDeviceMessage.class);
-        MESSAGE_CLASSES.put(INIT_DEVICE_RESPONSE_MSG, RegisterDeviceResponseMessage.class);
+        MESSAGE_CLASSES.put(INIT_DEVICE_RESPONSE_MSG, RegisterDeviceRespMsg.class);
         MESSAGE_CLASSES.put(LOGOUT_MSG, LogoutMessage.class);
         MESSAGE_CLASSES.put(PING_MSG, PingMessage.class);
         MESSAGE_CLASSES.put(FILE_CHANGE_MSG, FileChangeMessage.class);

@@ -6,7 +6,7 @@ import com.zhangyun.filecloud.client.service.ChangeViewService;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.client.service.msgmanager.RegisterDeviceService;
 import com.zhangyun.filecloud.client.utils.PropertyUtil;
-import com.zhangyun.filecloud.common.message.RegisterDeviceResponseMessage;
+import com.zhangyun.filecloud.common.message.RegisterDeviceRespMsg;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -71,13 +71,13 @@ public class ConfirmController implements Initializable {
         userInfo.setRootPath(selectRootPathController.getRootPath());
         userInfo.setDeviceName(deviceNameController.getDeviceName());
         // 发送设备注册消息，获取响应消息
-        RegisterDeviceResponseMessage registerDeviceResponseMessage = registerDeviceService.registerDevice(
+        RegisterDeviceRespMsg registerDeviceRespMsg = registerDeviceService.registerDevice(
                 userInfo.getUsername(), userInfo.getDeviceName(), userInfo.getToken(), userInfo.getRootPath());
         // 记录token
-        userInfo.setToken(registerDeviceResponseMessage.getToken());
+        userInfo.setToken(registerDeviceRespMsg.getToken());
 
         // 写入配置文件
-        userInfo.setDeviceId(registerDeviceResponseMessage.getDeviceId());
+        userInfo.setDeviceId(registerDeviceRespMsg.getDeviceId());
         PropertyUtil.setProperty(userInfo.getUsername(), "deviceId", userInfo.getDeviceId());
         PropertyUtil.setProperty(userInfo.getUsername(), "rootPath", userInfo.getRootPath());
         PropertyUtil.setProperty(userInfo.getUsername(), "deviceName", userInfo.getDeviceName());

@@ -3,8 +3,8 @@ package com.zhangyun.filecloud.client.service.msgmanager;
 import com.zhangyun.filecloud.client.service.NettyClient;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
-import com.zhangyun.filecloud.common.message.LoginMessage;
-import com.zhangyun.filecloud.common.message.LoginResponseMessage;
+import com.zhangyun.filecloud.common.message.LoginMsg;
+import com.zhangyun.filecloud.common.message.LoginRespMsg;
 import com.zhangyun.filecloud.common.message.LogoutMessage;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
@@ -36,24 +36,24 @@ public class LoginService {
         return loginSemaphore;
     }
 
-    private LoginResponseMessage responseMessage;
-    public void setResponseMessage(LoginResponseMessage responseMessage) {
+    private LoginRespMsg responseMessage;
+    public void setResponseMessage(LoginRespMsg responseMessage) {
         this.responseMessage = responseMessage;
     }
 
     @TraceLog
-    public LoginResponseMessage login(String username, String password, String deviceId, String rootPath, String deviceName) throws InterruptedException {
+    public LoginRespMsg login(String username, String password, String deviceId, String rootPath, String deviceName) throws InterruptedException {
         // 构建登录消息
         responseMessage = null;
-        LoginMessage loginMessage = new LoginMessage();
-        loginMessage.setUsername(username);
-        loginMessage.setPassword(password);
-        loginMessage.setDeviceId(deviceId);
-        loginMessage.setRootPath(rootPath);
-        loginMessage.setDeviceName(deviceName);
+        LoginMsg loginMsg = new LoginMsg();
+        loginMsg.setUsername(username);
+        loginMsg.setPassword(password);
+        loginMsg.setDeviceId(deviceId);
+        loginMsg.setRootPath(rootPath);
+        loginMsg.setDeviceName(deviceName);
         // 建立连接 发送消息
         Channel channel = nettyClient.getChannel();
-        channel.writeAndFlush(loginMessage);
+        channel.writeAndFlush(loginMsg);
         // 等待响应
         loginSemaphore.acquire();
         // 传回服务器响应消息

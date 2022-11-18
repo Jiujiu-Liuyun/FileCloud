@@ -2,7 +2,7 @@ package com.zhangyun.filecloud.server.handler;
 
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.AuthFailResponseMessage;
-import com.zhangyun.filecloud.common.message.LoginMessage;
+import com.zhangyun.filecloud.common.message.LoginMsg;
 import com.zhangyun.filecloud.common.message.Message;
 import com.zhangyun.filecloud.common.message.PingMessage;
 import com.zhangyun.filecloud.server.service.RedisService;
@@ -29,7 +29,7 @@ import java.util.List;
 public class AuthTokenHandler extends SimpleChannelInboundHandler<Message> {
     private static final List<Class<? extends Message>> IGNORE_CLASS_LIST = new ArrayList<>();
     static {
-        IGNORE_CLASS_LIST.add(LoginMessage.class);
+        IGNORE_CLASS_LIST.add(LoginMsg.class);
         IGNORE_CLASS_LIST.add(PingMessage.class);
     }
 

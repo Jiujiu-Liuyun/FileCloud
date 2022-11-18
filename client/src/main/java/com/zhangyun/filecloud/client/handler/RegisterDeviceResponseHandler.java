@@ -2,7 +2,7 @@ package com.zhangyun.filecloud.client.handler;
 
 import com.zhangyun.filecloud.client.service.msgmanager.RegisterDeviceService;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
-import com.zhangyun.filecloud.common.message.RegisterDeviceResponseMessage;
+import com.zhangyun.filecloud.common.message.RegisterDeviceRespMsg;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -20,13 +20,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @ChannelHandler.Sharable
 @Component
-public class RegisterDeviceResponseHandler extends SimpleChannelInboundHandler<RegisterDeviceResponseMessage> {
+public class RegisterDeviceResponseHandler extends SimpleChannelInboundHandler<RegisterDeviceRespMsg> {
     @Autowired
     private RegisterDeviceService registerDeviceService;
 
     @Override
     @TraceLog
-    protected void channelRead0(ChannelHandlerContext ctx, RegisterDeviceResponseMessage msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, RegisterDeviceRespMsg msg) throws Exception {
         registerDeviceService.setRegisterDeviceResponseMessage(msg);
         registerDeviceService.getInitDeviceSemaphore().release();
     }

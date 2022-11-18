@@ -1,5 +1,6 @@
 package com.zhangyun.filecloud.common.message;
 
+import com.zhangyun.filecloud.common.enums.RespEnum;
 import lombok.Data;
 
 /**
@@ -10,13 +11,12 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class LoginMessage extends Message {
-    private String password;
-    private String rootPath;
-    private String deviceName;
+public class RegisterDeviceRespMsg extends Message {
+    private RespEnum respEnum;
+    private String deviceId;
 
     @Override
     public int getMessageType() {
-        return LOGIN_MSG;
+        return INIT_DEVICE_RESPONSE_MSG;
     }
 }

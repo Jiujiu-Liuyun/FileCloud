@@ -7,7 +7,7 @@ import com.zhangyun.filecloud.client.service.ChangeViewService;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.client.service.msgmanager.LoginService;
 import com.zhangyun.filecloud.client.utils.PropertyUtil;
-import com.zhangyun.filecloud.common.message.LoginResponseMessage;
+import com.zhangyun.filecloud.common.message.LoginRespMsg;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
         userInfo.setUsername(username);
         getProperties(username, userInfo);
         // 发送登录信息，获取Server端的响应信息
-        LoginResponseMessage responseMessage = loginService.login(username, password,
+        LoginRespMsg responseMessage = loginService.login(username, password,
                 userInfo.getDeviceId(), userInfo.getRootPath(), userInfo.getDeviceName());
 
         /**

@@ -1,9 +1,11 @@
 package com.zhangyun.filecloud.server.database.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
+import com.zhangyun.filecloud.common.enums.RespEnum;
 import com.zhangyun.filecloud.server.config.Config;
 import com.zhangyun.filecloud.server.database.entity.User;
 import com.zhangyun.filecloud.server.database.mapper.UserMapper;
@@ -75,5 +77,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public String getUserRootPath(String username) {
         return Paths.get(Config.ROOT_PATH, username).toString();
+    }
+
+    @Override
+    public RespEnum authUsernameAndPassword(String username, String password) {
+        if (username == null || password == null) {
+            return RespEnum.MSG_FORMAT_ERROR;
+        }
+        // auth username and password
+        User user = selectUserByName(username);
+        if (user == null) {
+            return RespEnum.USERNAME_NOT_EXIST;
+        } else {
+            String loginPassword = DigestUtil.md5Hex(password);
+            // 判断密码是否相同
+            if (ObjectUtil.notEqual(loginPassword, user.getPassword())) {
+                return RespEnum.PASSWORD_NOT_MATCH;
+            } else {
+                // 密码正确
+                return RespEnum.OK;
+            }
+        }
     }
 }
