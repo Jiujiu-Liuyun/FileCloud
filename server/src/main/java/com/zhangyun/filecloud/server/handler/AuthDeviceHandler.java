@@ -1,7 +1,9 @@
 package com.zhangyun.filecloud.server.handler;
 
-import com.zhangyun.filecloud.common.message.AuthFailResponseMessage;
+import com.zhangyun.filecloud.common.annotation.TraceLog;
+import com.zhangyun.filecloud.common.enums.RespEnum;
 import com.zhangyun.filecloud.common.message.Message;
+import com.zhangyun.filecloud.common.message.RespMsg;
 import com.zhangyun.filecloud.server.database.service.DeviceService;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -25,13 +27,24 @@ public class AuthDeviceHandler extends SimpleChannelInboundHandler<Message> {
     private DeviceService deviceService;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception {
-        boolean authDevice = deviceService.authDevice(msg.getDeviceId(), msg.getUsername());
-        if (authDevice) {
+    protected void channelRead0(ChannelHandlerContext ctx, Message msg) {
+        RespEnum respEnum = authDevice(msg);
+
+        if (respEnum == RespEnum.OK) {
             // 认证成功
             ctx.fireChannelRead(msg);
         } else {
-            ctx.writeAndFlush(new AuthFailResponseMessage(302, "设备号认证失败"));
+            ctx.writeAndFlush(new RespMsg(respEnum));
         }
+    }
+
+    @TraceLog
+    private RespEnum authDevice(Message msg) {
+        if (msg.getUsername() ==null || msg.getDeviceId() == null) {
+            return RespEnum.MSG_FORMAT_ERROR;
+        }
+        // 认证token
+        boolean authDevice = deviceService.authDevice(msg.getDeviceId(), msg.getUsername());
+        return authDevice ? RespEnum.OK : RespEnum.AUTH_DEVICE_FAIL;
     }
 }

@@ -54,9 +54,10 @@ public class RegisterDeviceHandler extends SimpleChannelInboundHandler<RegisterD
             // 生成token
             String token = redisService.genToken(msg.getUsername(), deviceId);
             respMsg.setToken(token);
-            ctx.writeAndFlush(respMsg);
         } else {
+            respMsg.setRespEnum(RespEnum.REGISTER_DEVICE_FAIL);
             log.warn("设备创建失败");
         }
+        ctx.writeAndFlush(respMsg);
     }
 }

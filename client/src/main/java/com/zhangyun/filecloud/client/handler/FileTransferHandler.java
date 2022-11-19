@@ -34,22 +34,22 @@ public class FileTransferHandler extends SimpleChannelInboundHandler<FileTrfMsg>
     protected void channelRead0(ChannelHandlerContext ctx, FileTrfMsg msg) throws Exception {
         FileTrfRespMsg responseMessage = new FileTrfRespMsg();
         String rootPath = appController.getUserInfo().getRootPath();
-        Path absolutePath = PathUtil.getAbsolutePath(msg.getFileTransferBO().getRelativePath(), rootPath);
-        if (msg.getFileTransferBO().getTransferModeEnum() == TransferModeEnum.DOWNLOAD) {
+        Path absolutePath = PathUtil.getAbsolutePath(msg.getFileTrfBO().getRelativePath(), rootPath);
+        if (msg.getFileTrfBO().getTransferModeEnum() == TransferModeEnum.DOWNLOAD) {
             // 写入文件
-            FileUtil.writeFile(absolutePath.toString(), msg.getFileTransferBO().getStartPos(), msg.getMessageBody());
+            FileUtil.writeFile(absolutePath.toString(), msg.getFileTrfBO().getStartPos(), msg.getMessageBody());
             //
             responseMessage.setCode(200);
             responseMessage.setDesc("ok");
-            responseMessage.setNextPos(msg.getFileTransferBO().getStartPos() + msg.getMessageBody().length);
+            responseMessage.setNextPos(msg.getFileTrfBO().getStartPos() + msg.getMessageBody().length);
             responseMessage.setStatusEnum(msg.getStatusEnum());
         } else {
             // 读文件
-            byte[] bytes = FileUtil.readFile(absolutePath.toString(), msg.getFileTransferBO().getStartPos(), 1024);
+            byte[] bytes = FileUtil.readFile(absolutePath.toString(), msg.getFileTrfBO().getStartPos(), 1024);
             //
             responseMessage.setCode(200);
             responseMessage.setDesc("ok");
-            responseMessage.setNextPos(msg.getFileTransferBO().getStartPos() + bytes.length);
+            responseMessage.setNextPos(msg.getFileTrfBO().getStartPos() + bytes.length);
             responseMessage.setMessageBody(bytes);
             if (bytes.length > 0) {
                 responseMessage.setStatusEnum(StatusEnum.GOING);

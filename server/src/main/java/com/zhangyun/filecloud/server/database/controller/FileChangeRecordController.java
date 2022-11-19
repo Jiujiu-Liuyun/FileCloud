@@ -22,12 +22,13 @@ public class FileChangeRecordController {
 
     @PostMapping("/insert")
     public boolean insert(@RequestBody FileChangeRecord fileChangeRecord) {
-        return fileChangeRecordService.insertOne(fileChangeRecord);
+        return fileChangeRecordService.deleteSameAndInsertOne(fileChangeRecord);
     }
 
     @GetMapping("/delete")
     public boolean delete(@RequestParam Integer id) {
         return fileChangeRecordService.deleteById(id);
     }
+
 }
 

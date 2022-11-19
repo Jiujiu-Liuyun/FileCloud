@@ -1,6 +1,6 @@
 package com.zhangyun.filecloud.server.service;
 
-import com.zhangyun.filecloud.common.entity.FileTransferBO;
+import com.zhangyun.filecloud.common.entity.FileTrfBO;
 import com.zhangyun.filecloud.common.enums.FileTypeEnum;
 import com.zhangyun.filecloud.common.enums.OperationTypeEnum;
 import com.zhangyun.filecloud.common.enums.StatusEnum;
@@ -45,7 +45,7 @@ public class FileTransferService {
     /**
      * 存储每个用户的传输对象
      */
-    private ConcurrentHashMap<String, ConcurrentLinkedDeque<FileTransferBO>> FILE_TRANSFER_BO_MAP = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, ConcurrentLinkedDeque<FileTrfBO>> FILE_TRANSFER_BO_MAP = new ConcurrentHashMap<>();
     /**
      * 表示每个用户的FileTransfer数据是否处理完毕，可以发送新的FileTransfer数据
      */
@@ -59,16 +59,16 @@ public class FileTransferService {
      * 添加 文件传输对象 到列表末尾
      *
      * @param username
-     * @param fileTransferBO
+     * @param fileTrfBO
      */
-    public void addLastByUsername(String username, FileTransferBO fileTransferBO) {
+    public void addLastByUsername(String username, FileTrfBO fileTrfBO) {
         if (!IS_READY_MAP.containsKey(username)) {
             FileTrfRespData fileTrfRespData = new FileTrfRespData();
             IS_READY_MAP.put(username, fileTrfRespData);
         }
-        ConcurrentLinkedDeque<FileTransferBO> fileTransferBOS = FILE_TRANSFER_BO_MAP.getOrDefault(username, new ConcurrentLinkedDeque<>());
-        fileTransferBOS.addLast(fileTransferBO);
-        FILE_TRANSFER_BO_MAP.put(username, fileTransferBOS);
+        ConcurrentLinkedDeque<FileTrfBO> fileTrfBOS = FILE_TRANSFER_BO_MAP.getOrDefault(username, new ConcurrentLinkedDeque<>());
+        fileTrfBOS.addLast(fileTrfBO);
+        FILE_TRANSFER_BO_MAP.put(username, fileTrfBOS);
     }
 
     /**
@@ -78,11 +78,11 @@ public class FileTransferService {
      * @param startPos
      */
     public void setStartPosOnFirstByUsername(String username, Long startPos) {
-        ConcurrentLinkedDeque<FileTransferBO> fileTransferBOS = FILE_TRANSFER_BO_MAP.getOrDefault(username, new ConcurrentLinkedDeque<>());
+        ConcurrentLinkedDeque<FileTrfBO> fileTrfBOS = FILE_TRANSFER_BO_MAP.getOrDefault(username, new ConcurrentLinkedDeque<>());
         // 移除第一个
-        FileTransferBO fileTransferBO = fileTransferBOS.peekFirst();
-        if (fileTransferBO != null) {
-            fileTransferBO.setStartPos(startPos);
+        FileTrfBO fileTrfBO = fileTrfBOS.peekFirst();
+        if (fileTrfBO != null) {
+            fileTrfBO.setStartPos(startPos);
         }
     }
 
@@ -92,10 +92,10 @@ public class FileTransferService {
      * @param username
      * @return
      */
-    public FileTransferBO getFirstByUsername(String username) {
-        ConcurrentLinkedDeque<FileTransferBO> fileTransferBOS = FILE_TRANSFER_BO_MAP.getOrDefault(username, new ConcurrentLinkedDeque<>());
-        if (!fileTransferBOS.isEmpty()) {
-            return fileTransferBOS.getFirst();
+    public FileTrfBO getFirstByUsername(String username) {
+        ConcurrentLinkedDeque<FileTrfBO> fileTrfBOS = FILE_TRANSFER_BO_MAP.getOrDefault(username, new ConcurrentLinkedDeque<>());
+        if (!fileTrfBOS.isEmpty()) {
+            return fileTrfBOS.getFirst();
         }
         return null;
     }
@@ -107,31 +107,31 @@ public class FileTransferService {
      * @return
      */
     public void removeFirstByUsername(String username) {
-        ConcurrentLinkedDeque<FileTransferBO> fileTransferBOS = FILE_TRANSFER_BO_MAP.getOrDefault(username, new ConcurrentLinkedDeque<>());
-        if (!fileTransferBOS.isEmpty()) {
-            fileTransferBOS.removeFirst();
+        ConcurrentLinkedDeque<FileTrfBO> fileTrfBOS = FILE_TRANSFER_BO_MAP.getOrDefault(username, new ConcurrentLinkedDeque<>());
+        if (!fileTrfBOS.isEmpty()) {
+            fileTrfBOS.removeFirst();
         }
     }
 
-    public FileTrfMsg constructFileTrfMsg(FileTransferBO fileTransferBO) throws IOException {
+    public FileTrfMsg constructFileTrfMsg(FileTrfBO fileTrfBO) throws IOException {
         FileTrfMsg fileTrfMsg = new FileTrfMsg();
-        fileTrfMsg.setFileTransferBO(fileTransferBO);
-        fileTrfMsg.setDeviceId(fileTransferBO.getDeviceId());
+        fileTrfMsg.setFileTrfBO(fileTrfBO);
+        fileTrfMsg.setDeviceId(fileTrfBO.getDeviceId());
         // 读文件：StatusEnum MessageBody
-        if (fileTransferBO.getTransferModeEnum() == TransferModeEnum.DOWNLOAD) {
+        if (fileTrfBO.getTransferModeEnum() == TransferModeEnum.DOWNLOAD) {
             // 如果为 CREATE_FILE CHANGE_FILE，则需要读取文件内容
-            if (fileTransferBO.getFileTypeEnum() == FileTypeEnum.FILE && fileTransferBO.getOperationTypeEnum() != OperationTypeEnum.DELETE) {
-                Path absolutePath = PathUtil.getAbsolutePath(fileTransferBO.getRelativePath(), Config.ROOT_PATH);
-                byte[] bytes = FileUtil.readFile(absolutePath.toString(), fileTransferBO.getStartPos(), fileTransferBO.getMaxReadLength());
-                if (bytes.length == 0 || bytes.length < fileTransferBO.getMaxReadLength()) {
+            if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.FILE && fileTrfBO.getOperationTypeEnum() != OperationTypeEnum.DELETE) {
+                Path absolutePath = PathUtil.getAbsolutePath(fileTrfBO.getRelativePath(), Config.ROOT_PATH);
+                byte[] bytes = FileUtil.readFile(absolutePath.toString(), fileTrfBO.getStartPos(), fileTrfBO.getMaxReadLength());
+                if (bytes.length == 0 || bytes.length < fileTrfBO.getMaxReadLength()) {
                     // 文件读取完毕
-                    fileTransferBO.setStatusEnum(StatusEnum.FINISHED);
+                    fileTrfBO.setStatusEnum(StatusEnum.FINISHED);
                 } else {
-                    fileTransferBO.setStatusEnum(StatusEnum.GOING);
+                    fileTrfBO.setStatusEnum(StatusEnum.GOING);
                 }
                 fileTrfMsg.setMessageBody(bytes);
             } else {
-                fileTransferBO.setStatusEnum(StatusEnum.FINISHED);
+                fileTrfBO.setStatusEnum(StatusEnum.FINISHED);
             }
         }
         return fileTrfMsg;
@@ -169,20 +169,20 @@ public class FileTransferService {
      * @param username
      */
     private void sendFileTrfMsg(String username) {
-        ConcurrentLinkedDeque<FileTransferBO> fileTransferBOS = FILE_TRANSFER_BO_MAP.get(username);
-        if (fileTransferBOS.isEmpty()) {
+        ConcurrentLinkedDeque<FileTrfBO> fileTrfBOS = FILE_TRANSFER_BO_MAP.get(username);
+        if (fileTrfBOS.isEmpty()) {
             return;
         }
         // 下一个数据
-        FileTransferBO fileTransferBO = fileTransferBOS.peekFirst();
+        FileTrfBO fileTrfBO = fileTrfBOS.peekFirst();
         FileTrfMsg fileTrfMsg = null;
         try {
-            fileTrfMsg = constructFileTrfMsg(fileTransferBO);
+            fileTrfMsg = constructFileTrfMsg(fileTrfBO);
         } catch (IOException e) {
             e.printStackTrace();
         }
         // 通道
-        Channel channel = sessionService.getChannel(fileTransferBO.getDeviceId());
+        Channel channel = sessionService.getChannel(fileTrfBO.getDeviceId());
         channel.writeAndFlush(fileTrfMsg);
     }
 
@@ -216,17 +216,17 @@ public class FileTransferService {
                 log.info("FileTrfRespMsg is null!");
                 return;
             }
-            if (msg.getCode() != 200) {
-                // 不处理此消息
-                log.warn("FileTrfRespMsg error! {}", msg);
-                return;
-            }
+//            if (msg.getCode() != 200) {
+//                // 不处理此消息
+//                log.warn("FileTrfRespMsg error! {}", msg);
+//                return;
+//            }
             // 获取列表第一个 文件传输对象
-            FileTransferBO fileTransferBO = msg.getFileTransferBO();
+            FileTrfBO fileTrfBO = msg.getFileTrfBO();
             // 是上传消息，写入文件
-            if (fileTransferBO.getTransferModeEnum() == TransferModeEnum.UPLOAD) {
+            if (fileTrfBO.getTransferModeEnum() == TransferModeEnum.UPLOAD) {
                 try {
-                    FileTransferBO transferBO = msg.getFileTransferBO();
+                    FileTrfBO transferBO = msg.getFileTrfBO();
                     if (transferBO.getTransferModeEnum() != TransferModeEnum.UPLOAD) {
                         return;
                     }
@@ -239,7 +239,7 @@ public class FileTransferService {
                     return;
                 }
             }
-            if (fileTransferBO.getStatusEnum() == StatusEnum.FINISHED) {
+            if (fileTrfBO.getStatusEnum() == StatusEnum.FINISHED) {
                 // 上传完毕，移除第一个
                 removeFirstByUsername(msg.getUsername());
             } else {

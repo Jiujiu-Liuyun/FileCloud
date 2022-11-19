@@ -1,10 +1,8 @@
 package com.zhangyun.filecloud.server.handler;
 
 import com.zhangyun.filecloud.common.annotation.TraceLog;
-import com.zhangyun.filecloud.common.message.AuthFailResponseMessage;
-import com.zhangyun.filecloud.common.message.LoginMsg;
-import com.zhangyun.filecloud.common.message.Message;
-import com.zhangyun.filecloud.common.message.PingMessage;
+import com.zhangyun.filecloud.common.enums.RespEnum;
+import com.zhangyun.filecloud.common.message.*;
 import com.zhangyun.filecloud.server.service.RedisService;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -27,11 +25,6 @@ import java.util.List;
 @ChannelHandler.Sharable
 @Component
 public class AuthTokenHandler extends SimpleChannelInboundHandler<Message> {
-    private static final List<Class<? extends Message>> IGNORE_CLASS_LIST = new ArrayList<>();
-    static {
-        IGNORE_CLASS_LIST.add(LoginMsg.class);
-        IGNORE_CLASS_LIST.add(PingMessage.class);
-    }
 
     @Autowired
     private RedisService redisService;
@@ -39,21 +32,23 @@ public class AuthTokenHandler extends SimpleChannelInboundHandler<Message> {
     @Override
     @TraceLog
     protected void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception {
-        boolean authToken = authToken(msg);
-        if (authToken) {
-            // 认证成功
+        RespEnum respEnum = authToken(msg);
+        if (respEnum == RespEnum.OK) {
+            // 认证成功，向后传递消息
             ctx.fireChannelRead(msg);
         } else {
-            ctx.writeAndFlush(new AuthFailResponseMessage(301, "token 认证失败"));
+            // 通知客户端
+            ctx.writeAndFlush(new RespMsg(respEnum));
         }
     }
 
     @TraceLog
-    private boolean authToken(Message msg) {
+    private RespEnum authToken(Message msg) {
         if (msg.getUsername() ==null || msg.getToken() == null) {
-            return false;
+            return RespEnum.MSG_FORMAT_ERROR;
         }
         // 认证token
-        return redisService.authTokenAndUpdateExpireTime(msg.getToken(), msg.getUsername(), msg.getDeviceId());
+        boolean authToken = redisService.authTokenAndUpdateExpireTime(msg.getToken(), msg.getUsername(), msg.getDeviceId());
+        return authToken ? RespEnum.OK : RespEnum.AUTH_TOKEN_FAIL;
     }
 }

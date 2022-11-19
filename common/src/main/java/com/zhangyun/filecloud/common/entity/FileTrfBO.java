@@ -11,16 +11,19 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class FileTransferBO {
+public class FileTrfBO {
     private String relativePath;
     private FileTypeEnum fileTypeEnum;
     private OperationTypeEnum operationTypeEnum;
     private String deviceId;
     private TransferModeEnum transferModeEnum;
-    private Long startPos;
-    private StatusEnum statusEnum;
     /**
-     * max read length	消息体最大长度
+     * 传输起始位置（传输时需要改变）
      */
+    private Long startPos;
+    /**
+     * 传输状态（传输时需要改变）
+     */
+    private StatusEnum statusEnum;
     private Long maxReadLength;
 }

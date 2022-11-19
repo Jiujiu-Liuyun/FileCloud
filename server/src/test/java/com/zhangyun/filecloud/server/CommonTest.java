@@ -1,11 +1,9 @@
 package com.zhangyun.filecloud.server;
 
-import com.zhangyun.filecloud.common.entity.FileTransferBO;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.stream.Collectors;
 
 /**
