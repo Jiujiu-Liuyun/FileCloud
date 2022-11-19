@@ -17,7 +17,7 @@ import java.util.concurrent.*;
  */
 @Configuration
 @Slf4j
-public class Config {
+public class ServerConfig {
     @Value("${file.server.rootPath}")
     private String rootPath;
     @Value("${file.server.maxReadLength}")

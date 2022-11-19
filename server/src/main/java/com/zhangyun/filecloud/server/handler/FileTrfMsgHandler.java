@@ -1,15 +1,14 @@
 package com.zhangyun.filecloud.server.handler;
 
 import com.zhangyun.filecloud.common.entity.FileTrfBO;
-import com.zhangyun.filecloud.common.enums.RespEnum;
-import com.zhangyun.filecloud.common.enums.StatusEnum;
-import com.zhangyun.filecloud.common.enums.TransferModeEnum;
+import com.zhangyun.filecloud.common.enums.*;
 import com.zhangyun.filecloud.common.message.FileTrfMsg;
 import com.zhangyun.filecloud.common.message.FileTrfRespMsg;
 import com.zhangyun.filecloud.common.utils.FileUtil;
 import com.zhangyun.filecloud.common.utils.PathUtil;
-import com.zhangyun.filecloud.server.config.Config;
+import com.zhangyun.filecloud.server.config.ServerConfig;
 import com.zhangyun.filecloud.server.database.entity.FileChangeRecord;
+import com.zhangyun.filecloud.server.database.service.DeviceService;
 import com.zhangyun.filecloud.server.database.service.FileChangeRecordService;
 import com.zhangyun.filecloud.server.service.RedisService;
 import io.netty.channel.ChannelHandler;
@@ -20,9 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
+import java.nio.file.*;
 
 /**
  * description:
@@ -39,6 +38,8 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
     private FileChangeRecordService fileChangeRecordService;
     @Autowired
     private RedisService redisService;
+    @Autowired
+    private DeviceService deviceService;
 
     @Override
     @Transactional
@@ -56,8 +57,9 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
             return;
         }
         // 3. 查询msg对应的记录
-        List<Integer> ids = fileChangeRecordService.selectIdsByPathAndDeviceId(msg.getFileTrfBO().getRelativePath(), msg.getDeviceId());
-        if (ids == null || ids.isEmpty()) {
+        FileChangeRecord fileChangeRecord = fileChangeRecordService.selectFCRByRelativePathAndDeviceId(msg.getFileTrfBO().getRelativePath(), msg.getDeviceId(),
+                msg.getFileTrfBO().getFileTypeEnum().getCode());
+        if (fileChangeRecord == null) {
             ctx.writeAndFlush(new FileTrfRespMsg(RespEnum.FCR_IS_EMPTY));
             // 释放锁
             redisService.unlockForDevice(msg.getDeviceId());
@@ -68,48 +70,73 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
         // 4. 更新数据库
         if (fileTrfRespMsg.getFileTrfBO().getStatusEnum() == StatusEnum.FINISHED) {
             // 删除FCR
-            fileChangeRecordService.deleteBatchIds(ids);
+            fileChangeRecordService.deleteById(fileChangeRecord.getId());
         } else if (fileTrfRespMsg.getFileTrfBO().getStatusEnum() == StatusEnum.GOING) {
-            if (ids.size() > 1) {
-                // 说明数据错误，删掉后重新写入
-                FileChangeRecord fileChangeRecord = fileChangeRecordService.convertFTBOtoFileChangeRecord(fileTrfRespMsg.getFileTrfBO());
-                fileChangeRecordService.deleteSameAndInsertOne(fileChangeRecord);
-                log.warn("FCR数据错误，存在多条一样记录： {}", ids);
-            } else {
-                // 更新startPos
-                fileChangeRecordService.updateStartPosById(fileTrfRespMsg.getNextPos(), ids.get(0));
-            }
+            // 更新startPos
+            fileChangeRecordService.updateStartPosById(fileTrfRespMsg.getNextPos(), fileTrfRespMsg.getFileTrfBO().getRelativePath(),
+                    fileTrfRespMsg.getFileTrfBO().getDeviceId(), fileTrfRespMsg.getFileTrfBO().getFileTypeEnum().getCode());
         }
+        // 5. 查询新的FTBO
+        FileChangeRecord newFCR = fileChangeRecordService.selectNextFCR(msg.getDeviceId());
+        FileTrfBO fileTrfBO = fileChangeRecordService.convertFileChangeRecordToFTBO(newFCR);
+        fileTrfRespMsg.setFileTrfBO(fileTrfBO);
         // 5. 响应客户端
         ctx.writeAndFlush(fileTrfRespMsg);
         // 6. 释放锁
         redisService.unlockForDevice(msg.getDeviceId());
     }
 
+    /**
+     * 处理FTM消息，文件读写
+     * @param msg
+     * @return
+     * @throws IOException
+     */
     private FileTrfRespMsg handleFileTrfMsg(FileTrfMsg msg) throws IOException {
         FileTrfBO fileTrfBO = msg.getFileTrfBO();
         FileTrfRespMsg fileTrfRespMsg = new FileTrfRespMsg();
         fileTrfRespMsg.setFileTrfBO(fileTrfBO);
         // 1. 文件绝对路径
-        Path absolutePath = PathUtil.getAbsolutePath(fileTrfBO.getRelativePath(), Config.ROOT_PATH);
+        Path absolutePath = PathUtil.getAbsolutePath(fileTrfBO.getRelativePath(), ServerConfig.ROOT_PATH);
         if (fileTrfBO.getTransferModeEnum() == TransferModeEnum.UPLOAD) {
-            // 2.1 写入文件
-            FileUtil.writeFile(absolutePath.toString(), fileTrfBO.getStartPos(), msg.getMessageBody());
-            // nextPos (status由客户端更新)
-            fileTrfRespMsg.setNextPos(fileTrfBO.getStartPos() + msg.getMessageBody().length);
-        } else if (fileTrfBO.getTransferModeEnum() == TransferModeEnum.DOWNLOAD) {
-            // 2.2 读出文件，传给客户端
-            byte[] bytes = FileUtil.readFile(absolutePath.toString(), fileTrfBO.getStartPos(), fileTrfBO.getMaxReadLength());
-            fileTrfRespMsg.setMessageBody(bytes);
-            if (bytes.length < fileTrfBO.getMaxReadLength()) {
-                fileTrfBO.setStatusEnum(StatusEnum.FINISHED);
+            // 2.1 写
+            if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.DIRECTORY && fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CREATE) {
+                FileUtil.createDir(absolutePath);
+            } else if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.DIRECTORY && fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CHANGE) {
+                FileUtil.changeDir(absolutePath);
+            } else if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.DIRECTORY && fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.DELETE) {
+                FileUtil.deleteDir(absolutePath);
+            } else if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.FILE &&
+                    (fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CREATE || fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CHANGE)) {
+                FileUtil.writeFile(absolutePath.toString(), fileTrfBO.getStartPos(), msg.getMessageBody());
+                // nextPos (status由客户端更新)
+                fileTrfRespMsg.setNextPos(fileTrfBO.getStartPos() + msg.getMessageBody().length);
+            } else if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.FILE && fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.DELETE) {
+                if (new File(absolutePath.toString()).isFile()) {
+                    Files.delete(absolutePath);
+                }
             }
-            fileTrfRespMsg.setNextPos(fileTrfBO.getStartPos() + bytes.length);
+        } else if (fileTrfBO.getTransferModeEnum() == TransferModeEnum.DOWNLOAD) {
+            if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.FILE &&
+                    (fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CREATE || fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CHANGE)) {
+                // 2.2 读出文件，传给客户端
+                byte[] bytes = FileUtil.readFile(absolutePath.toString(), fileTrfBO.getStartPos(), fileTrfBO.getMaxReadLength());
+                fileTrfRespMsg.setMessageBody(bytes);
+                if (bytes.length < fileTrfBO.getMaxReadLength()) {
+                    fileTrfBO.setStatusEnum(StatusEnum.FINISHED);
+                }
+                fileTrfRespMsg.setNextPos(fileTrfBO.getStartPos() + bytes.length);
+            }
         }
         fileTrfRespMsg.setRespEnum(RespEnum.OK);
         return fileTrfRespMsg;
     }
 
+    /**
+     * FTM消息参数校验
+     * @param fileTrfMsg
+     * @return
+     */
     private boolean authFileTrfBO(FileTrfMsg fileTrfMsg) {
         FileTrfBO fileTrfBO = fileTrfMsg.getFileTrfBO();
         if (fileTrfBO == null) {

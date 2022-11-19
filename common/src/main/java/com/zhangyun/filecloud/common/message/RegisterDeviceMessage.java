@@ -12,6 +12,8 @@ import lombok.Data;
 @Data
 public class RegisterDeviceMessage extends Message {
     private String password;
+    private String deviceName;
+    private String rootPath;
 
     @Override
     public int getMessageType() {

@@ -9,7 +9,7 @@ import com.zhangyun.filecloud.common.message.FileTrfMsg;
 import com.zhangyun.filecloud.common.message.FileTrfRespMsg;
 import com.zhangyun.filecloud.common.utils.FileUtil;
 import com.zhangyun.filecloud.common.utils.PathUtil;
-import com.zhangyun.filecloud.server.config.Config;
+import com.zhangyun.filecloud.server.config.ServerConfig;
 import com.zhangyun.filecloud.server.handler.data.FileTrfRespData;
 import com.zhangyun.filecloud.server.service.session.SessionService;
 import io.netty.channel.Channel;
@@ -121,7 +121,7 @@ public class FileTransferService {
         if (fileTrfBO.getTransferModeEnum() == TransferModeEnum.DOWNLOAD) {
             // 如果为 CREATE_FILE CHANGE_FILE，则需要读取文件内容
             if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.FILE && fileTrfBO.getOperationTypeEnum() != OperationTypeEnum.DELETE) {
-                Path absolutePath = PathUtil.getAbsolutePath(fileTrfBO.getRelativePath(), Config.ROOT_PATH);
+                Path absolutePath = PathUtil.getAbsolutePath(fileTrfBO.getRelativePath(), ServerConfig.ROOT_PATH);
                 byte[] bytes = FileUtil.readFile(absolutePath.toString(), fileTrfBO.getStartPos(), fileTrfBO.getMaxReadLength());
                 if (bytes.length == 0 || bytes.length < fileTrfBO.getMaxReadLength()) {
                     // 文件读取完毕
@@ -195,7 +195,7 @@ public class FileTransferService {
             for (String username : IS_READY_MAP.keySet()) {
                 FileTrfRespData fileTrfRespData = IS_READY_MAP.get(username);
                 long costTime = System.currentTimeMillis() - fileTrfRespData.getBeginTime();
-                if (costTime > Config.TIMEOUT) {
+                if (costTime > ServerConfig.TIMEOUT) {
                     // 获取数据超时
                     if (fileTrfRespData.getIsReady().compareAndSet(false, true)) {
                         fileTrfRespData.setFileTrfRespMsg(null);
@@ -231,7 +231,7 @@ public class FileTransferService {
                         return;
                     }
                     // 1. 文件绝对路径
-                    Path absolutePath = PathUtil.getAbsolutePath(transferBO.getRelativePath(), Config.ROOT_PATH);
+                    Path absolutePath = PathUtil.getAbsolutePath(transferBO.getRelativePath(), ServerConfig.ROOT_PATH);
                     // 2. 写入文件
                     FileUtil.writeFile(absolutePath.toString(), transferBO.getStartPos(), msg.getMessageBody());
                 } catch (IOException e) {

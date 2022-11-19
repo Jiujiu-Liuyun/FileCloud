@@ -13,12 +13,9 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
-import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -33,38 +30,30 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Service
 public class NettyServer {
-
     @Value("${file.server.port}")
     private int serverPort;
-
-    @Value("${file.server.host}")
-    private String serverHost;
 
     @Autowired
     private SessionService sessionService;
 
     @Autowired
-    private UploadHandler uploadHandler;
-    @Autowired
-    private CompareHandler compareHandler;
-    @Autowired
-    private FileTransferResponseHandler fileTransferResponseHandler;
-
-
-    @Autowired
     private LoginHandler LOGIN_HANDLER;
+    @Autowired
+    private RegisterDeviceHandler REGISTER_DEVICE_HANDLER;
     @Autowired
     private AuthTokenHandler AUTH_TOKEN_HANDLER;
     @Autowired
     private AuthDeviceHandler AUTH_DEVICE_HANDLER;
     @Autowired
-    private RegisterDeviceHandler REGISTER_DEVICE_HANDLER;
+    private FileChangeHandler FILE_CHANGE_HANDLER;
     @Autowired
-    private LogoutHandler logoutHandler;
+    private FileTrfMsgHandler FILE_TRF_MSG_HANDLER;
     @Autowired
-    private QuitHandler QUIT_HANDLER;
-
-    @Autowired FileChangeHandler fileChangeHandler;
+    private ReqFTBOHandler REQ_FTBO_HANDLER;
+    @Autowired
+    private LogoutHandler LOGOUT_HANDLER;
+    @Autowired
+    private GlobalExceptionHandler GLOBAL_EXCEPTION_HANDLER;
 
     private ServerBootstrap serverBootstrap = new ServerBootstrap();
     private NioEventLoopGroup boss = new NioEventLoopGroup();
@@ -106,20 +95,17 @@ public class NettyServer {
                         ch.pipeline().addLast(LOGIN_HANDLER);
                         // 2. 注册设备
                         ch.pipeline().addLast(REGISTER_DEVICE_HANDLER);
-
-                        // 2. token认证
+                        // 3. token认证
                         ch.pipeline().addLast(AUTH_TOKEN_HANDLER);
-                        // 3. 设备号认证
+                        // 4. 设备号认证
                         ch.pipeline().addLast(AUTH_DEVICE_HANDLER);
 
-                        ch.pipeline().addLast(uploadHandler);
-                        ch.pipeline().addLast(compareHandler);
-                        ch.pipeline().addLast(fileTransferResponseHandler);
-                        ch.pipeline().addLast(fileChangeHandler);
-                        ch.pipeline().addLast(logoutHandler);                   // 登出
+                        ch.pipeline().addLast(FILE_CHANGE_HANDLER);
+                        ch.pipeline().addLast(FILE_TRF_MSG_HANDLER);
+                        ch.pipeline().addLast(REQ_FTBO_HANDLER);
 
-
-                        ch.pipeline().addLast(QUIT_HANDLER);        // 连接断开处理
+                        ch.pipeline().addLast(LOGOUT_HANDLER);                   // 登出
+                        ch.pipeline().addLast(GLOBAL_EXCEPTION_HANDLER);        // 连接断开处理
                     }
                 });
         log.info("netty server start success");

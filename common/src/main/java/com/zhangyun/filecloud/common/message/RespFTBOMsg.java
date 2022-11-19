@@ -1,7 +1,9 @@
 package com.zhangyun.filecloud.common.message;
 
 import com.zhangyun.filecloud.common.entity.FileTrfBO;
+import com.zhangyun.filecloud.common.enums.RespEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -13,14 +15,17 @@ import java.util.List;
  * @since: 1.0
  */
 @Data
-public class RespFileTrfBOListMsg extends Message{
+@EqualsAndHashCode(callSuper = true)
+public class RespFTBOMsg extends Message{
+    private RespEnum respEnum;
     /**
-     * 待处理的 文件传输对象 列表
+     * 待处理的 FTBO
      */
-    private List<FileTrfBO> fileTrfBOS;
+    private FileTrfBO fileTrfBOS;
 
     @Override
     public int getMessageType() {
         return REQ_FTBO_LIST_MSG;
     }
 }
+

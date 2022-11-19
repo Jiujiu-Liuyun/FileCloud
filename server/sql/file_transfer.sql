@@ -15,4 +15,8 @@ CREATE TABLE `file_change_record` (
    `create_time` datetime COMMENT '创建时间',
    `modified_time` datetime COMMENT '修改时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create index device_file_index 
+on `file_change_record`(device_id, relative_path(255));
+
 select * from `file_change_record`;

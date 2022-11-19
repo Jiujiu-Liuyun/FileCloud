@@ -1,5 +1,6 @@
-package com.zhangyun.filecloud.client.service.msgmanager;
+package com.zhangyun.filecloud.client.service.nettyservice;
 
+import com.zhangyun.filecloud.client.config.ClientConfig;
 import com.zhangyun.filecloud.client.service.NettyClient;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 /**
  * description:
@@ -42,20 +44,26 @@ public class LoginService {
     }
 
     @TraceLog
-    public LoginRespMsg login(String username, String password, String deviceId, String rootPath, String deviceName) throws InterruptedException {
+    public LoginRespMsg login(String username, String password, String deviceId) {
         // 构建登录消息
         responseMessage = null;
         LoginMsg loginMsg = new LoginMsg();
         loginMsg.setUsername(username);
         loginMsg.setPassword(password);
         loginMsg.setDeviceId(deviceId);
-        loginMsg.setRootPath(rootPath);
-        loginMsg.setDeviceName(deviceName);
         // 建立连接 发送消息
         Channel channel = nettyClient.getChannel();
         channel.writeAndFlush(loginMsg);
         // 等待响应
-        loginSemaphore.acquire();
+        try {
+            boolean acquire = loginSemaphore.tryAcquire(ClientConfig.NETTY_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+            if (!acquire) {
+                responseMessage = null;
+            }
+        } catch (InterruptedException e) {
+            responseMessage = null;
+            log.info("netty 等待超时");
+        }
         // 传回服务器响应消息
         return responseMessage;
     }

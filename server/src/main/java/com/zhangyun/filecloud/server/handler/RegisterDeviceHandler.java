@@ -48,7 +48,7 @@ public class RegisterDeviceHandler extends SimpleChannelInboundHandler<RegisterD
         // todo: 限制设备个数
         // 生成设备UUID
         String deviceId = UUID.randomUUID().toString();
-        boolean isInsert = deviceService.createDevice(deviceId, msg.getUsername());
+        boolean isInsert = deviceService.createDevice(deviceId, msg.getUsername(), msg.getDeviceName(), msg.getRootPath());
         if (isInsert) {
             respMsg.setDeviceId(deviceId);
             // 生成token

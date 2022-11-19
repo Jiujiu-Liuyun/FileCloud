@@ -4,7 +4,7 @@ import com.zhangyun.filecloud.client.controller.app.AppController;
 import com.zhangyun.filecloud.client.entity.UserInfo;
 import com.zhangyun.filecloud.client.service.ChangeViewService;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
-import com.zhangyun.filecloud.client.service.msgmanager.RegisterDeviceService;
+import com.zhangyun.filecloud.client.service.nettyservice.RegisterDeviceService;
 import com.zhangyun.filecloud.client.utils.PropertyUtil;
 import com.zhangyun.filecloud.common.message.RegisterDeviceRespMsg;
 import de.felixroske.jfxsupport.FXMLController;

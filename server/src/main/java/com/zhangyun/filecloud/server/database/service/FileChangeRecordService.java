@@ -15,9 +15,9 @@ import java.util.List;
  * @since 2022-11-17
  */
 public interface FileChangeRecordService extends IService<FileChangeRecord> {
-    boolean deleteSameAndInsertOne(FileChangeRecord fileChangeRecord);
+    boolean insertOne(FileChangeRecord fileChangeRecord);
 
-    void updateStartPosById(Long startPos, Integer id);
+    void updateStartPosById(Long startPos, String relativePath, String deviceId, Integer fileType);
 
     void insertBatch(List<FileChangeRecord> fileChangeRecords);
 
@@ -25,9 +25,11 @@ public interface FileChangeRecordService extends IService<FileChangeRecord> {
 
     void deleteBatchIds(List<Integer> ids);
 
-    List<Integer> selectIdsByPathAndDeviceId(String relativePath, String deviceId);
+    FileChangeRecord selectNextFCR(String deviceId);
 
-    List<FileChangeRecord> selectByDeviceId(String deviceId, Integer limit);
+    FileChangeRecord selectFCRByRelativePathAndDeviceId(String relativePath, String deviceId, Integer fileType);
 
     FileChangeRecord convertFTBOtoFileChangeRecord(FileTrfBO fileTrfBO);
+
+    FileTrfBO convertFileChangeRecordToFTBO(FileChangeRecord fileChangeRecord);
 }

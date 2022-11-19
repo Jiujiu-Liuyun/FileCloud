@@ -89,8 +89,8 @@ public abstract class Message implements Serializable {
         MESSAGE_CLASSES.put(FILE_TRANSFER_MSG, FileTrfMsg.class);
         MESSAGE_CLASSES.put(FILE_TRANSFER_RESPONSE_MSG, FileTrfRespMsg.class);
         MESSAGE_CLASSES.put(RESP_MSG, RespMsg.class);
-        MESSAGE_CLASSES.put(REQ_FTBO_LIST_MSG, ReqFileTrfBOListMsg.class);
-        MESSAGE_CLASSES.put(RESP_FTBO_LIST_MSG, RespFileTrfBOListMsg.class);
+        MESSAGE_CLASSES.put(REQ_FTBO_LIST_MSG, ReqFTBOMsg.class);
+        MESSAGE_CLASSES.put(RESP_FTBO_LIST_MSG, RespFTBOMsg.class);
         MESSAGE_CLASSES.put(NOTIFY_CHANGE_MSG, NotifyChangeMsg.class);
     }
 

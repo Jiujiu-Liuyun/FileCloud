@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class QuitHandler extends ChannelInboundHandlerAdapter {
+public class GlobalExceptionHandler extends ChannelInboundHandlerAdapter {
     @Autowired
     private SessionService sessionService;
 

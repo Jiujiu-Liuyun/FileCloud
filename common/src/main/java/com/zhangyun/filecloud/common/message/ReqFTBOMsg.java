@@ -10,7 +10,7 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class ReqFileTrfBOListMsg extends Message{
+public class ReqFTBOMsg extends Message{
 
 
     @Override

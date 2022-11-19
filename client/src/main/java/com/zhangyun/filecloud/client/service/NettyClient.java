@@ -16,11 +16,9 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
-import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -46,7 +44,7 @@ public class NettyClient {
     @Autowired
     private CompareResponseHandler compareResponseHandler;
     @Autowired
-    private LoginResponseHandler loginResponseHandler;
+    private LoginRespHandler loginRespHandler;
     @Autowired
     private RegisterDeviceResponseHandler registerDeviceResponseHandler;
     @Autowired
@@ -98,7 +96,7 @@ public class NettyClient {
 
                         ch.pipeline().addLast(uploadResponseHandler);
                         ch.pipeline().addLast(compareResponseHandler);
-                        ch.pipeline().addLast(loginResponseHandler);
+                        ch.pipeline().addLast(loginRespHandler);
                         ch.pipeline().addLast(registerDeviceResponseHandler);
                         ch.pipeline().addLast(fileTransferHandler);
 

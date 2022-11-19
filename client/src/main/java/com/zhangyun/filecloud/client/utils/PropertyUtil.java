@@ -1,6 +1,6 @@
 package com.zhangyun.filecloud.client.utils;
 
-import com.zhangyun.filecloud.client.config.Config;
+import com.zhangyun.filecloud.client.config.ClientConfig;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +19,7 @@ import java.util.Properties;
 @Slf4j
 public class PropertyUtil {
     public static Path getPropertyPath(String username) {
-        Path dirPath = Config.SETTING_PATH;
+        Path dirPath = ClientConfig.SETTING_PATH;
         return Paths.get(dirPath.toString(), username);
     }
 

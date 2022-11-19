@@ -1,4 +1,4 @@
-package com.zhangyun.filecloud.client.service.msgmanager;
+package com.zhangyun.filecloud.client.service.nettyservice;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

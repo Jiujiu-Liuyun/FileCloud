@@ -14,9 +14,11 @@ import java.util.List;
  * @since 2022-11-02
  */
 public interface DeviceService extends IService<Device> {
-    boolean createDevice(String deviceId, String username);
+    boolean createDevice(String deviceId, String username, String deviceName, String rootPath);
     Device selectDeviceByDeviceId(String deviceId);
     boolean authDevice(String deviceId, String username);
     List<Device> selectDevicesByUsername(String username);
     List<String> selectDeviceIdsByUsername(String username);
+
+    String getDeviceNameByDeviceId(String deviceId);
 }

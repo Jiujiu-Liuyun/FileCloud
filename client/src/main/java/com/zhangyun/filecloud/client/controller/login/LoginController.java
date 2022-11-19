@@ -1,12 +1,13 @@
 package com.zhangyun.filecloud.client.controller.login;
 
-import com.zhangyun.filecloud.client.config.Config;
+import com.zhangyun.filecloud.client.config.ClientConfig;
 import com.zhangyun.filecloud.client.controller.app.AppController;
 import com.zhangyun.filecloud.client.entity.UserInfo;
 import com.zhangyun.filecloud.client.service.ChangeViewService;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
-import com.zhangyun.filecloud.client.service.msgmanager.LoginService;
+import com.zhangyun.filecloud.client.service.nettyservice.LoginService;
 import com.zhangyun.filecloud.client.utils.PropertyUtil;
+import com.zhangyun.filecloud.common.enums.RespEnum;
 import com.zhangyun.filecloud.common.message.LoginRespMsg;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
@@ -59,31 +60,28 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    public void login() throws InterruptedException, IOException {
+    public void login() throws IOException {
         String username = textField.getText();
         String password = passwordField.getText();
         // 读取用户配置
-        UserInfo userInfo = appController.getUserInfo();
+        UserInfo userInfo = getProperties(username);
         userInfo.setUsername(username);
-        getProperties(username, userInfo);
+        appController.setUserInfo(userInfo);
         // 发送登录信息，获取Server端的响应信息
-        LoginRespMsg responseMessage = loginService.login(username, password,
-                userInfo.getDeviceId(), userInfo.getRootPath(), userInfo.getDeviceName());
+        LoginRespMsg responseMessage = loginService.login(username, password, userInfo.getDeviceId());
 
-        /**
-         * 登录失败
-         */
+        // 登录失败
         if (responseMessage == null) {
-            log.error("响应消息为null");
+            Alert alert = new Alert(Alert.AlertType.WARNING, "服务器连接超时，请检查网络，或稍后重试");
+            alert.showAndWait();
             return;
         }
-        if (responseMessage.getCode() != 200) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, responseMessage.getMsg());
+        // 验证失败
+        if (responseMessage.getRespBO() != RespEnum.OK) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, responseMessage.getRespBO().getDesc());
             alert.showAndWait();
         } else {
-            /**
-             * 登录成功
-             */
+            // 登录成功
             log.info("登录成功");
             // 设置token
             userInfo.setToken(responseMessage.getToken());
@@ -103,9 +101,10 @@ public class LoginController implements Initializable {
         }
     }
 
-    private void getProperties(String username, UserInfo userInfo) throws IOException {
+    private UserInfo getProperties(String username) throws IOException {
+        UserInfo userInfo = new UserInfo();
         // 配置文件路径
-        Path etcDirPath = Config.SETTING_PATH;
+        Path etcDirPath = ClientConfig.SETTING_PATH;
         Path etcFilePath = Paths.get(etcDirPath.toString(), username);
         //读取配置：文件路径和设备id
         if (Files.exists(etcFilePath)) {
@@ -116,7 +115,7 @@ public class LoginController implements Initializable {
             // 创建配置文件
             if (!Files.exists(etcDirPath)) {
                 // 不存在配置文件路径，创建配置文件夹
-                Files.createDirectory(etcDirPath);
+                Files.createDirectories(etcDirPath);
             }
             // 创建用户配置文件
             if (!Files.exists(etcFilePath)) {
@@ -127,5 +126,6 @@ public class LoginController implements Initializable {
             userInfo.setRootPath(null);
             userInfo.setDeviceName(null);
         }
+        return userInfo;
     }
 }

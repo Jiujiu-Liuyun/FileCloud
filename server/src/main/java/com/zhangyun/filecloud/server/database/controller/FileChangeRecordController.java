@@ -22,7 +22,7 @@ public class FileChangeRecordController {
 
     @PostMapping("/insert")
     public boolean insert(@RequestBody FileChangeRecord fileChangeRecord) {
-        return fileChangeRecordService.deleteSameAndInsertOne(fileChangeRecord);
+        return fileChangeRecordService.insertOne(fileChangeRecord);
     }
 
     @GetMapping("/delete")

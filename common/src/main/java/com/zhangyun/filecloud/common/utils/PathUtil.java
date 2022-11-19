@@ -1,5 +1,6 @@
 package com.zhangyun.filecloud.common.utils;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -17,5 +18,9 @@ public class PathUtil {
 
     public static Path getRelativePath(String absolutePath, String rootPath) {
         return Paths.get(rootPath).relativize(Paths.get(absolutePath));
+    }
+
+    public static Path changePathName(String newName, Path path) {
+        return path.getParent().resolve(newName);
     }
 }

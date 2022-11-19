@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.enums.RespEnum;
-import com.zhangyun.filecloud.server.config.Config;
+import com.zhangyun.filecloud.server.config.ServerConfig;
 import com.zhangyun.filecloud.server.database.entity.User;
 import com.zhangyun.filecloud.server.database.mapper.UserMapper;
 import com.zhangyun.filecloud.server.database.service.UserService;
@@ -76,7 +76,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public String getUserRootPath(String username) {
-        return Paths.get(Config.ROOT_PATH, username).toString();
+        return Paths.get(ServerConfig.ROOT_PATH, username).toString();
     }
 
     @Override

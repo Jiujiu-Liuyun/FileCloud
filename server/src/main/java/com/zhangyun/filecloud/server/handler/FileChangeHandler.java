@@ -5,7 +5,7 @@ import com.zhangyun.filecloud.common.enums.StatusEnum;
 import com.zhangyun.filecloud.common.enums.TransferModeEnum;
 import com.zhangyun.filecloud.common.message.FileChangeMessage;
 import com.zhangyun.filecloud.common.message.NotifyChangeMsg;
-import com.zhangyun.filecloud.server.config.Config;
+import com.zhangyun.filecloud.server.config.ServerConfig;
 import com.zhangyun.filecloud.server.database.entity.FileChangeRecord;
 import com.zhangyun.filecloud.server.database.service.DeviceService;
 import com.zhangyun.filecloud.server.service.FileTransferService;
@@ -64,7 +64,7 @@ public class FileChangeHandler extends SimpleChannelInboundHandler<FileChangeMes
         fileChangeRecord.setTransferMode(TransferModeEnum.UPLOAD.getCode());
         fileChangeRecord.setStatus(StatusEnum.GOING.getCode());
         fileChangeRecord.setStartPos(0L);
-        fileChangeRecord.setMaxReadLength(Config.MAX_READ_LENGTH);
+        fileChangeRecord.setMaxReadLength(ServerConfig.MAX_READ_LENGTH);
         fileChangeRecords.add(fileChangeRecord);
         // 2. s ==> others
         // 获取username对应的其他设备
@@ -81,7 +81,7 @@ public class FileChangeHandler extends SimpleChannelInboundHandler<FileChangeMes
             fileChangeRecordForOthers.setTransferMode(TransferModeEnum.DOWNLOAD.getCode());
             fileChangeRecordForOthers.setStatus(StatusEnum.GOING.getCode());
             fileChangeRecordForOthers.setStartPos(0L);
-            fileChangeRecordForOthers.setMaxReadLength(Config.MAX_READ_LENGTH);
+            fileChangeRecordForOthers.setMaxReadLength(ServerConfig.MAX_READ_LENGTH);
             // 记录数据库
             fileChangeRecords.add(fileChangeRecordForOthers);
         }

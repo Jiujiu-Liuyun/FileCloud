@@ -4,6 +4,8 @@ import com.zhangyun.filecloud.common.exception.InvalidArgumentsException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 
 /**
  * description:
@@ -14,58 +16,6 @@ import java.io.*;
  */
 @Slf4j
 public class FileUtil {
-    public static final int MAX_READ_LENGTH = 1000000;
-
-//    public static void readFile(UploadMessage message) {
-//        if (message.getRelativePath() == null || message.getStartPos() == null) {
-//            throw new InvalidArgumentsException("message has no file path");
-//        }
-//
-//        // 读文件
-//        try {
-//            RandomAccessFile randomAccessFile = new RandomAccessFile(message.getRelativePath(), "r");
-//            long length = randomAccessFile.length();
-//            if (length - message.getStartPos() <= 0) {
-//                log.info("file read finished");
-//                message.setStatusEnum(StatusEnum.FINISHED);
-//                randomAccessFile.close();
-//                return;
-//            }
-//            int readLength = (int) Math.min(MAX_READ_LENGTH, length - message.getStartPos());
-//            byte[] bytes = new byte[readLength];
-//            randomAccessFile.seek(message.getStartPos());
-//            randomAccessFile.read(bytes);
-//            message.setMessageBody(bytes);
-//            // 判断是否已经读完
-//            if (message.getStartPos() + readLength >= length) {
-//                message.setStatusEnum(StatusEnum.FINISHED);
-//            } else {
-//                message.setStatusEnum(StatusEnum.LOADINF);
-//            }
-//            randomAccessFile.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public static void writeFile(UploadMessage message, String destPath) {
-//        if (message.getRelativePath() == null || message.getStartPos() == null) {
-//            throw new InvalidArgumentsException("message has no file path");
-//        }
-//
-//        // 写文件
-//        try {
-//            RandomAccessFile randomAccessFile = new RandomAccessFile(destPath, "rw");
-//            if (message.getMessageBody() != null && message.getMessageBody().length > 0) {
-//                randomAccessFile.seek(message.getStartPos());
-//                randomAccessFile.write(message.getMessageBody());
-//            }
-//            randomAccessFile.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public static File sourceMapToTarget(File sourceFile, String sourcePath, String targetPath) {
         String targetFile = sourceFile.getPath().replace(sourcePath, targetPath);
         log.info("{} =====> {}", sourceFile, targetFile);
@@ -81,6 +31,9 @@ public class FileUtil {
      * @return
      */
     public static byte[] readFile(String absolutePath, long startPos, long maxReadLength) throws IOException {
+        if (absolutePath == null || startPos < 0 || maxReadLength < 0) {
+            return new byte[0];
+        }
         // 读文件
         RandomAccessFile randomAccessFile = new RandomAccessFile(absolutePath, "r");
         long length = randomAccessFile.length();
@@ -101,12 +54,61 @@ public class FileUtil {
 
     public static void writeFile(String absolutePath, Long startPos, byte[] bytes) throws IOException {
         if (absolutePath == null || startPos == null || bytes == null) {
-            throw new InvalidArgumentsException("写文件，非法参数");
+            log.warn("写文件，非法参数");
+            return;
         }
         // 写文件
         RandomAccessFile randomAccessFile = new RandomAccessFile(absolutePath, "rw");
         randomAccessFile.seek(startPos);
         randomAccessFile.write(bytes);
         randomAccessFile.close();
+    }
+
+    public static void deleteDir(Path absolutePath) throws IOException {
+        if (!Files.exists(absolutePath) || new File(absolutePath.toString()).isFile()) {
+            return;
+        }
+        Files.walkFileTree(absolutePath, new FileVisitor<Path>() {
+            @Override
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                Files.delete(file);
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                Files.delete(dir);
+                return FileVisitResult.CONTINUE;
+            }
+        });
+    }
+
+    public static void changeDir(Path absolutePath) throws IOException {
+        if (!Files.exists(absolutePath)) {
+            log.info("dir not exists {}", absolutePath);
+            Files.createDirectories(absolutePath);
+        }
+    }
+
+    public static void createDir(Path absolutePath) throws IOException {
+        try {
+            Files.createDirectories(absolutePath);
+        } catch (FileAlreadyExistsException e) {
+            log.info("file {} already exists", absolutePath);
+            // 删除文件
+            Files.deleteIfExists(absolutePath);
+            // 创建目录
+            Files.createDirectories(absolutePath);
+        }
     }
 }

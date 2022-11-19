@@ -17,7 +17,7 @@ class FileChangeRecordServiceTest {
 
     @Test
     void testSelectByDeviceId() {
-        List<FileChangeRecord> device = fileChangeRecordService.selectByDeviceId("device", 1);
+        List<FileChangeRecord> device = fileChangeRecordService.selectByDeviceId("device");
         device.forEach(System.out::println);
     }
 
