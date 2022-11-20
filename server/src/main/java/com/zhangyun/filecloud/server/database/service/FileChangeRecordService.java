@@ -17,7 +17,7 @@ import java.util.List;
 public interface FileChangeRecordService extends IService<FileChangeRecord> {
     boolean insertOne(FileChangeRecord fileChangeRecord);
 
-    void updateStartPosById(Long startPos, String relativePath, String deviceId, Integer fileType);
+    void updateStartPosById(Long startPos, Integer id);
 
     void insertBatch(List<FileChangeRecord> fileChangeRecords);
 

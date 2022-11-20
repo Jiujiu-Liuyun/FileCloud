@@ -46,7 +46,7 @@ public class ClientApplication extends AbstractJavaFxApplicationSupport {
         if (monitor == null) {
             throw new RuntimeException("monitor获取bean失败");
         }
-        monitor.closeMonitor();
+        monitor.stopMonitor();
         log.info("=========程序退出=========");
     }
 }

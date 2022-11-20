@@ -1,4 +1,4 @@
-package com.zhangyun.filecloud.client.controller.app;
+package com.zhangyun.filecloud.client.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;

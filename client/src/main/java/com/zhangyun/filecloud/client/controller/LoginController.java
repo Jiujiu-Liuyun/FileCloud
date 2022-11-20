@@ -1,11 +1,12 @@
-package com.zhangyun.filecloud.client.controller.login;
+package com.zhangyun.filecloud.client.controller;
 
 import com.zhangyun.filecloud.client.config.ClientConfig;
-import com.zhangyun.filecloud.client.controller.app.AppController;
 import com.zhangyun.filecloud.client.entity.UserInfo;
 import com.zhangyun.filecloud.client.service.ChangeViewService;
+import com.zhangyun.filecloud.client.service.nettyservice.FileChangeService;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.client.service.nettyservice.LoginService;
+import com.zhangyun.filecloud.client.service.nettyservice.RegisterDeviceService;
 import com.zhangyun.filecloud.client.utils.PropertyUtil;
 import com.zhangyun.filecloud.common.enums.RespEnum;
 import com.zhangyun.filecloud.common.message.LoginRespMsg;
@@ -13,6 +14,7 @@ import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +26,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -42,9 +45,11 @@ public class LoginController implements Initializable {
     private AppController appController;
     @Autowired
     private ChangeViewService changeViewService;
+    @Autowired
+    private FileChangeService fileChangeService;
+    @Autowired
+    private RegisterDeviceService registerDeviceService;
 
-    @FXML
-    private AnchorPane anchorPane;
     @FXML
     private TextField textField;
     @FXML
@@ -83,24 +88,36 @@ public class LoginController implements Initializable {
         } else {
             // 登录成功
             log.info("登录成功");
+        }
+
+        // 设备已注册
+        if (responseMessage.getIsRegister()) {
             // 设置token
             userInfo.setToken(responseMessage.getToken());
-            /**
-             * 切换视图
-             */
-            if (responseMessage.getIsRegister()) {
-                // 启动文件监听器
-                fileMonitorService.startMonitor(userInfo.getRootPath(), 1000);
-                // 主页面
-                changeViewService.goAppView();
-            } else {
-                // 设备没有注册
+            // 1. 启动文件监听器
+            fileMonitorService.startMonitor(appController.getUserInfo().getRootPath(), 1000);
+            // 2. 跳转主页面
+            changeViewService.goAppView();
+        } else {
+            // 注册提示框
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("该设备尚未注册，是否将此设备注册到服务器？");
+            Optional<ButtonType> buttonType = alert.showAndWait();
+            if (buttonType.get() == ButtonType.OK) {
+                // 跳转注册
                 // 设备初始化引导界面
-                changeViewService.goInitDeviceView();
+                changeViewService.goRegisterDeviceView();
             }
         }
     }
 
+    /**
+     * 读取用户配置
+     *
+     * @param username
+     * @return
+     * @throws IOException
+     */
     private UserInfo getProperties(String username) throws IOException {
         UserInfo userInfo = new UserInfo();
         // 配置文件路径
@@ -128,4 +145,5 @@ public class LoginController implements Initializable {
         }
         return userInfo;
     }
+
 }

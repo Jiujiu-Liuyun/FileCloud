@@ -60,11 +60,9 @@ public class FileChangeRecordServiceImpl extends ServiceImpl<FileChangeRecordMap
      * @param deviceId
      */
     @Override
-    public void updateStartPosById(Long startPos, String relativePath, String deviceId, Integer fileType) {
-        FileChangeRecord fileChangeRecord = selectFCRByRelativePathAndDeviceId(relativePath, deviceId, fileType);
-        if (fileChangeRecord == null) {
-            return;
-        }
+    public void updateStartPosById(Long startPos, Integer id) {
+        FileChangeRecord fileChangeRecord =  new FileChangeRecord();
+        fileChangeRecord.setId(id);
         fileChangeRecord.setStartPos(startPos);
         fileChangeRecordMapper.updateById(fileChangeRecord);
     }
@@ -165,6 +163,7 @@ public class FileChangeRecordServiceImpl extends ServiceImpl<FileChangeRecordMap
         fileChangeRecord.setStartPos(fileTrfBO.getStartPos());
         fileChangeRecord.setStatus(fileTrfBO.getStatusEnum().getCode());
         fileChangeRecord.setMaxReadLength(fileTrfBO.getMaxReadLength());
+        fileChangeRecord.setId(fileTrfBO.getId());
         return fileChangeRecord;
     }
 
@@ -184,6 +183,7 @@ public class FileChangeRecordServiceImpl extends ServiceImpl<FileChangeRecordMap
         fileTrfBO.setStartPos(fileChangeRecord.getStartPos());
         fileTrfBO.setStatusEnum(StatusEnum.getTypeName(fileChangeRecord.getStatus()));
         fileTrfBO.setMaxReadLength(fileChangeRecord.getMaxReadLength());
+        fileTrfBO.setId(fileChangeRecord.getId());
         return fileTrfBO;
     }
 }

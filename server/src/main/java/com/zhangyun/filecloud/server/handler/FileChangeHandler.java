@@ -35,8 +35,6 @@ import java.util.stream.Collectors;
 @Component
 public class FileChangeHandler extends SimpleChannelInboundHandler<FileChangeMessage> {
     @Autowired
-    private FileTransferService fileTransferService;
-    @Autowired
     private DeviceService deviceService;
     @Autowired
     private SessionService sessionService;

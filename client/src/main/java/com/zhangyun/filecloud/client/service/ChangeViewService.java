@@ -1,15 +1,9 @@
 package com.zhangyun.filecloud.client.service;
 
 import com.zhangyun.filecloud.client.ClientApplication;
-import com.zhangyun.filecloud.client.controller.registerdevice.ConfirmController;
-import com.zhangyun.filecloud.client.controller.registerdevice.DeviceNameController;
-import com.zhangyun.filecloud.client.controller.registerdevice.SelectRootPathController;
 import com.zhangyun.filecloud.client.view.AppView;
 import com.zhangyun.filecloud.client.view.LoginView;
-import com.zhangyun.filecloud.client.view.registerdevice.ConfirmView;
-import com.zhangyun.filecloud.client.view.registerdevice.DeviceNameView;
-import com.zhangyun.filecloud.client.view.registerdevice.RegisterDeviceView;
-import com.zhangyun.filecloud.client.view.registerdevice.SelectRootPathView;
+import com.zhangyun.filecloud.client.view.RegisterDeviceView;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +19,15 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class ChangeViewService {
-    @Autowired
-    private SelectRootPathController selectRootPathController;
-    @Autowired
-    private DeviceNameController deviceNameController;
-    @Autowired
-    private ConfirmController confirmController;
 
     private final Stage stage = ClientApplication.getStage();
 
-    public void goInitDeviceView() {
+    public void goRegisterDeviceView() {
         // 设备初始化引导界面
         stage.setTitle("设备初始化引导程序");
         stage.setResizable(false);
-        stage.setHeight(200);
-        stage.setWidth(300);
+        stage.setWidth(450);
+        stage.setHeight(250);
         ClientApplication.showView(RegisterDeviceView.class);
     }
 
@@ -59,35 +47,5 @@ public class ChangeViewService {
         stage.setHeight(400);
         stage.setWidth(600);
         ClientApplication.showView(LoginView.class);
-    }
-
-    public void goSelectFolderPathView() {
-        // 同步文件夹选择界面
-        stage.setHeight(200);
-        stage.setWidth(300);
-        stage.setTitle("设备初始化引导程序");
-        stage.setResizable(false);
-        ClientApplication.showView(SelectRootPathView.class);
-    }
-
-    public void goDeviceNameView() {
-        // 设备名称设置界面
-        stage.setHeight(200);
-        stage.setWidth(300);
-        stage.setTitle("设备初始化引导程序");
-        stage.setResizable(false);
-        ClientApplication.showView(DeviceNameView.class);
-    }
-
-    public void goConfirmView() {
-        // 设备初始化确认界面
-        stage.setHeight(200);
-        stage.setWidth(300);
-        stage.setTitle("设备初始化引导程序");
-        stage.setResizable(false);
-        ClientApplication.showView(ConfirmView.class);
-        // 设置基本信息
-        confirmController.getRootPathTextField().setText(selectRootPathController.getRootPath());
-        confirmController.getDeviceNameTextField().setText(deviceNameController.getDeviceName());
     }
 }

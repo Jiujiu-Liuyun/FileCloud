@@ -1,7 +1,6 @@
 package com.zhangyun.filecloud.client.handler;
 
-import com.zhangyun.filecloud.client.controller.app.AppController;
-import com.zhangyun.filecloud.common.annotation.TraceLog;
+import com.zhangyun.filecloud.client.controller.AppController;
 import com.zhangyun.filecloud.common.message.Message;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;

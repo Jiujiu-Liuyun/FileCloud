@@ -1,4 +1,4 @@
-package com.zhangyun.filecloud.client.view.registerdevice;
+package com.zhangyun.filecloud.client.view;
 
 import de.felixroske.jfxsupport.AbstractFxmlView;
 import de.felixroske.jfxsupport.FXMLView;
@@ -7,9 +7,9 @@ import de.felixroske.jfxsupport.FXMLView;
  * description:
  *
  * @author: zhangyun
- * @date: 2022/11/5 21:33
+ * @date: 2022/11/20 00:52
  * @since: 1.0
  */
-@FXMLView("/fxml/init_device/RegisterDevice.fxml")
+@FXMLView("/fxml/RegisterDevice.fxml")
 public class RegisterDeviceView extends AbstractFxmlView {
 }

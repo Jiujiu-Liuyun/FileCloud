@@ -1,12 +1,12 @@
 package com.zhangyun.filecloud.client.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.*;
 
 /**
  * description: 设置配置文件路径
@@ -16,6 +16,7 @@ import java.util.concurrent.ScheduledExecutorService;
  * @since: 1.0
  */
 @Configuration
+@Slf4j
 public class ClientConfig {
     public static Path SETTING_PATH;
     static {
@@ -32,4 +33,10 @@ public class ClientConfig {
         return Executors.newScheduledThreadPool(2);
     }
 
+    @Bean("threadPoolExecutor")
+    public ThreadPoolExecutor getThreadPoolExecutor() {
+        return new ThreadPoolExecutor(3, 8, 60, TimeUnit.SECONDS,
+                new LinkedBlockingDeque<>(10),
+                (r, executor) -> log.warn("任务过多，已拒绝新任务 {}", r));
+    }
 }

@@ -18,20 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/fileMonitor")
 @Slf4j
 public class FileMonitorController {
-    @Autowired
-    private FileMonitorService fileMonitorService;
-
-    @GetMapping("stopMonitor")
-    public String stopMonitor() throws Exception {
-        fileMonitorService.closeMonitor();
-        log.info("File Monitor停止");
-        return "stop";
-    }
-
-    @GetMapping("startMonitor")
-    public String startMonitor() throws Exception {
+//    @Autowired
+//    private FileMonitorService fileMonitorService;
+//
+//    @GetMapping("stopMonitor")
+//    public String stopMonitor() throws Exception {
+//        fileMonitorService.stopMonitor();
+//        log.info("File Monitor停止");
+//        return "stop";
+//    }
+//
+//    @GetMapping("startMonitor")
+//    public String startMonitor() throws Exception {
 //        fileMonitorService.startMonitor();
 //        log.info("File Monitor启动");
-        return "stop";
-    }
+//        return "stop";
+//    }
 }

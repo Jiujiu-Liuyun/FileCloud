@@ -6,7 +6,6 @@ import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -54,7 +53,7 @@ public class FileMonitorService {
         return monitor;
     }
 
-    public void closeMonitor() {
+    public void stopMonitor() {
         try {
             monitor.stop();
         } catch (Exception e) {

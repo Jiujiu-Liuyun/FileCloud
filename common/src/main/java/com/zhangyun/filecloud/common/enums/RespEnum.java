@@ -18,7 +18,7 @@ public enum RespEnum {
     AUTH_TOKEN_FAIL(6, "auth token fail"),
     AUTH_DEVICE_FAIL(7, "auth device fail"),
     LOCK_DEVICE_FAIL(8, "lock device fail"),
-    FCR_IS_EMPTY(9, "file change record is empty"),
+    FCR_NOT_EXIST(9, "file change record is empty"),
     NO_MORE_FTBO(10, "no more file transfer BO"),
     ;
 

@@ -1,6 +1,7 @@
 package com.zhangyun.filecloud.client.service.monitor;
 
-import com.zhangyun.filecloud.client.controller.app.AppController;
+import com.zhangyun.filecloud.client.controller.AppController;
+import com.zhangyun.filecloud.client.service.nettyservice.FileChangeService;
 import com.zhangyun.filecloud.common.annotation.FileFilter;
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.entity.FileChangeBO;
@@ -41,7 +42,7 @@ public class ClientFileAlterationListenerAdaptor extends FileAlterationListenerA
         fileChangeBO.setRelativePath(relativePath.toString());
         fileChangeBO.setOperationTypeEnum(OperationTypeEnum.CREATE);
         fileChangeBO.setFileTypeEnum(FileTypeEnum.FILE);
-        fileChangeService.addFileChangeBO(fileChangeBO);
+        fileChangeService.sendFileChangeMessage(fileChangeBO);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class ClientFileAlterationListenerAdaptor extends FileAlterationListenerA
         fileChangeBO.setRelativePath(relativePath.toString());
         fileChangeBO.setOperationTypeEnum(OperationTypeEnum.CHANGE);
         fileChangeBO.setFileTypeEnum(FileTypeEnum.FILE);
-        fileChangeService.addFileChangeBO(fileChangeBO);
+        fileChangeService.sendFileChangeMessage(fileChangeBO);
     }
 
     @Override
@@ -69,7 +70,7 @@ public class ClientFileAlterationListenerAdaptor extends FileAlterationListenerA
         fileChangeBO.setRelativePath(relativePath.toString());
         fileChangeBO.setOperationTypeEnum(OperationTypeEnum.DELETE);
         fileChangeBO.setFileTypeEnum(FileTypeEnum.FILE);
-        fileChangeService.addFileChangeBO(fileChangeBO);
+        fileChangeService.sendFileChangeMessage(fileChangeBO);
     }
 
     @Override
@@ -83,7 +84,7 @@ public class ClientFileAlterationListenerAdaptor extends FileAlterationListenerA
         fileChangeBO.setRelativePath(relativePath.toString());
         fileChangeBO.setOperationTypeEnum(OperationTypeEnum.CREATE);
         fileChangeBO.setFileTypeEnum(FileTypeEnum.DIRECTORY);
-        fileChangeService.addFileChangeBO(fileChangeBO);
+        fileChangeService.sendFileChangeMessage(fileChangeBO);
     }
 
     @Override
@@ -97,6 +98,6 @@ public class ClientFileAlterationListenerAdaptor extends FileAlterationListenerA
         fileChangeBO.setRelativePath(relativePath.toString());
         fileChangeBO.setOperationTypeEnum(OperationTypeEnum.DELETE);
         fileChangeBO.setFileTypeEnum(FileTypeEnum.DIRECTORY);
-        fileChangeService.addFileChangeBO(fileChangeBO);
+        fileChangeService.sendFileChangeMessage(fileChangeBO);
     }
 }

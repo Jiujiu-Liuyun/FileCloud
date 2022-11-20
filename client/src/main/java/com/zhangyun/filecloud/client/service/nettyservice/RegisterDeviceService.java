@@ -19,38 +19,18 @@ import java.util.concurrent.Semaphore;
  */
 @Service
 @Slf4j
-public class RegisterDeviceService {
+public class RegisterDeviceService extends AbstractNettyService<RegisterDeviceRespMsg>{
     @Autowired
     private NettyClient nettyClient;
 
-    private Semaphore initDeviceSemaphore = new Semaphore(0);
-    private RegisterDeviceRespMsg registerDeviceRespMsg;
-
-    public Semaphore getInitDeviceSemaphore() {
-        return initDeviceSemaphore;
-    }
-
-    public void setInitDeviceSemaphore(Semaphore initDeviceSemaphore) {
-        this.initDeviceSemaphore = initDeviceSemaphore;
-    }
-
-    public RegisterDeviceRespMsg getRegisterDeviceResponseMessage() {
-        return registerDeviceRespMsg;
-    }
-
-    public void setRegisterDeviceResponseMessage(RegisterDeviceRespMsg registerDeviceRespMsg) {
-        this.registerDeviceRespMsg = registerDeviceRespMsg;
-    }
-
-    public RegisterDeviceRespMsg registerDevice(String username, String deviceName, String token, String rootPath) throws InterruptedException {
+    public RegisterDeviceRespMsg registerDevice(String username, String deviceName, String rootPath) throws InterruptedException {
         Channel channel = nettyClient.getChannel();
         RegisterDeviceMessage registerDeviceMessage = new RegisterDeviceMessage();
         registerDeviceMessage.setUsername(username);
         registerDeviceMessage.setDeviceName(deviceName);
         registerDeviceMessage.setRootPath(rootPath);
         channel.writeAndFlush(registerDeviceMessage);
-        // 等待Server响应消息
-        initDeviceSemaphore.acquire();
-        return registerDeviceRespMsg;
+        // 等待响应
+        return super.waitForData();
     }
 }

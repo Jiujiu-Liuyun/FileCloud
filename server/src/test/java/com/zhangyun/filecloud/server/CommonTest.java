@@ -16,9 +16,6 @@ import java.util.stream.Collectors;
 public class CommonTest {
     @Test
     public void testNull() {
-        Long a = null;
-        long b = a;
-        System.out.println(b);
     }
 
     @Test

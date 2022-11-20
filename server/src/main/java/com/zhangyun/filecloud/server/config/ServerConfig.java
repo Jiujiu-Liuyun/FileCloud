@@ -45,7 +45,7 @@ public class ServerConfig {
     }
 
     @Bean("threadPoolExecutor")
-    public ThreadPoolExecutor getCachedThreadPool() {
+    public ThreadPoolExecutor getThreadPoolExecutor() {
         return new ThreadPoolExecutor(3, 8, 60, TimeUnit.SECONDS,
                 new LinkedBlockingDeque<>(10),
                 (r, executor) -> log.warn("任务过多，已拒绝新任务 {}", r));

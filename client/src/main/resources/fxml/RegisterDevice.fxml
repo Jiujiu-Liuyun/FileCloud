@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.zhangyun.filecloud.client.controller.RegisterDeviceController">
+   <children>
+      <TextField fx:id="deviceNameField" layoutX="150.0" layoutY="20.0" prefHeight="50.0" prefWidth="200.0" />
+      <Label alignment="CENTER" layoutX="10.0" layoutY="20.0" prefHeight="50.0" prefWidth="120.0" text="请输入设备名称" />
+      <Button layoutX="377.0" layoutY="92.0" mnemonicParsing="false" onAction="#selectPath" text="Browse" />
+      <Label alignment="CENTER" layoutX="10.0" layoutY="80.0" prefHeight="50.0" prefWidth="120.0" text="请选择同步文件夹" />
+      <Label fx:id="pathShowLabel" alignment="CENTER" layoutX="150.0" layoutY="80.0" prefHeight="50.0" prefWidth="200.0" />
+      <Button layoutX="100.0" layoutY="160.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="60.0" text="取消" />
+      <Button layoutX="290.0" layoutY="160.0" mnemonicParsing="false" onAction="#confirm" prefHeight="25.0" prefWidth="60.0" text="确定" />
+   </children>
+</AnchorPane>

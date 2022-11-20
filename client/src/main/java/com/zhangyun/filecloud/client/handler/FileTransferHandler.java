@@ -1,6 +1,6 @@
 package com.zhangyun.filecloud.client.handler;
 
-import com.zhangyun.filecloud.client.controller.app.AppController;
+import com.zhangyun.filecloud.client.controller.AppController;
 import com.zhangyun.filecloud.common.enums.StatusEnum;
 import com.zhangyun.filecloud.common.enums.TransferModeEnum;
 import com.zhangyun.filecloud.common.message.FileTrfMsg;

@@ -59,8 +59,8 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
         // 3. 查询msg对应的记录
         FileChangeRecord fileChangeRecord = fileChangeRecordService.selectFCRByRelativePathAndDeviceId(msg.getFileTrfBO().getRelativePath(), msg.getDeviceId(),
                 msg.getFileTrfBO().getFileTypeEnum().getCode());
-        if (fileChangeRecord == null) {
-            ctx.writeAndFlush(new FileTrfRespMsg(RespEnum.FCR_IS_EMPTY));
+        if (fileChangeRecord == null || !fileChangeRecord.getId().equals(msg.getFileTrfBO().getId())) {
+            ctx.writeAndFlush(new FileTrfRespMsg(RespEnum.FCR_NOT_EXIST));
             // 释放锁
             redisService.unlockForDevice(msg.getDeviceId());
             return;
@@ -73,8 +73,7 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
             fileChangeRecordService.deleteById(fileChangeRecord.getId());
         } else if (fileTrfRespMsg.getFileTrfBO().getStatusEnum() == StatusEnum.GOING) {
             // 更新startPos
-            fileChangeRecordService.updateStartPosById(fileTrfRespMsg.getNextPos(), fileTrfRespMsg.getFileTrfBO().getRelativePath(),
-                    fileTrfRespMsg.getFileTrfBO().getDeviceId(), fileTrfRespMsg.getFileTrfBO().getFileTypeEnum().getCode());
+            fileChangeRecordService.updateStartPosById(fileTrfRespMsg.getNextPos(), fileChangeRecord.getId());
         }
         // 5. 查询新的FTBO
         FileChangeRecord newFCR = fileChangeRecordService.selectNextFCR(msg.getDeviceId());

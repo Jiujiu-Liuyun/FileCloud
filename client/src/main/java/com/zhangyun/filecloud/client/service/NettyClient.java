@@ -60,7 +60,7 @@ public class NettyClient {
     private Channel channel = null;
 
     @PostConstruct
-    public void startNetty() {
+    public void initNetty() {
         log.info("netty client starting...");
         bootstrap = new Bootstrap()
                 .channel(NioSocketChannel.class)

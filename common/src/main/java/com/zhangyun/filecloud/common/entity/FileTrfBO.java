@@ -12,6 +12,7 @@ import lombok.Data;
  */
 @Data
 public class FileTrfBO {
+    private Integer id;
     private String relativePath;
     private FileTypeEnum fileTypeEnum;
     private OperationTypeEnum operationTypeEnum;

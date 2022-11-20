@@ -27,11 +27,7 @@ public class LoginRespHandler extends SimpleChannelInboundHandler<LoginRespMsg> 
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRespMsg msg) throws Exception {
-        loginService.setResponseMessage(msg);
-        Semaphore loginSemaphore = loginService.getLoginSemaphore();
-        int availablePermits = loginSemaphore.availablePermits();
-        if (availablePermits == 0) {
-            loginSemaphore.release();
-        }
+        loginService.setData(msg);
+        loginService.dataIsReady();
     }
 }
