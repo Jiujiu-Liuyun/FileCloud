@@ -77,8 +77,8 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
         }
         // 5. 查询新的FTBO
         FileChangeRecord newFCR = fileChangeRecordService.selectNextFCR(msg.getDeviceId());
-        FileTrfBO fileTrfBO = fileChangeRecordService.convertFileChangeRecordToFTBO(newFCR);
-        fileTrfRespMsg.setFileTrfBO(fileTrfBO);
+        FileTrfBO nextFileTrfBO = fileChangeRecordService.convertFileChangeRecordToFTBO(newFCR);
+        fileTrfRespMsg.setNextFileTrfBO(nextFileTrfBO);
         // 5. 响应客户端
         ctx.writeAndFlush(fileTrfRespMsg);
         // 6. 释放锁

@@ -19,6 +19,7 @@ import lombok.EqualsAndHashCode;
 public class FileTrfRespMsg extends Message{
     private RespEnum respEnum;
     private FileTrfBO fileTrfBO;
+    private FileTrfBO nextFileTrfBO;
     private Long nextPos;
     @Override
     public int getMessageType() {

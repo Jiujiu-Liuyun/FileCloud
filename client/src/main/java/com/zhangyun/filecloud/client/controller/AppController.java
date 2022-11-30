@@ -1,6 +1,7 @@
 package com.zhangyun.filecloud.client.controller;
 
 import com.zhangyun.filecloud.client.entity.UserInfo;
+import com.zhangyun.filecloud.client.handler.RespFTBOHandler;
 import com.zhangyun.filecloud.client.service.ChangeViewService;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.client.service.nettyservice.LoginService;
@@ -37,11 +38,15 @@ public class AppController implements Initializable {
     private FileMonitorService fileMonitorService;
     @Autowired
     private RegisterDeviceService registerDeviceService;
+    @Autowired
+    private RespFTBOHandler respFTBOHandler;
 
     private UserInfo userInfo = new UserInfo();
+
     public UserInfo getUserInfo() {
         return userInfo;
     }
+
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
     }
@@ -60,12 +65,13 @@ public class AppController implements Initializable {
         // 1. 发送登出消息
         loginService.logout(userInfo.getUsername());
         // 清空用户信息
-        userInfo = new UserInfo();
+        userInfo = null;
         // 3. 关闭文件监听器
         fileMonitorService.stopMonitor();
         // refresh service
         loginService.serviceRefresh();
         registerDeviceService.serviceRefresh();
+        respFTBOHandler.handlerRefresh();
         // 4.切换视图
         changeViewService.goLoginView();
     }

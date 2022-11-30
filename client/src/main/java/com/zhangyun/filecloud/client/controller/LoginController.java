@@ -3,6 +3,7 @@ package com.zhangyun.filecloud.client.controller;
 import com.zhangyun.filecloud.client.config.ClientConfig;
 import com.zhangyun.filecloud.client.entity.UserInfo;
 import com.zhangyun.filecloud.client.service.ChangeViewService;
+import com.zhangyun.filecloud.client.service.NettyClient;
 import com.zhangyun.filecloud.client.service.nettyservice.FileChangeService;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.client.service.nettyservice.LoginService;
@@ -10,7 +11,9 @@ import com.zhangyun.filecloud.client.service.nettyservice.RegisterDeviceService;
 import com.zhangyun.filecloud.client.utils.PropertyUtil;
 import com.zhangyun.filecloud.common.enums.RespEnum;
 import com.zhangyun.filecloud.common.message.LoginRespMsg;
+import com.zhangyun.filecloud.common.message.ReqFTBOMsg;
 import de.felixroske.jfxsupport.FXMLController;
+import io.netty.channel.Channel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -49,6 +52,8 @@ public class LoginController implements Initializable {
     private FileChangeService fileChangeService;
     @Autowired
     private RegisterDeviceService registerDeviceService;
+    @Autowired
+    private NettyClient nettyClient;
 
     @FXML
     private TextField textField;
@@ -98,6 +103,9 @@ public class LoginController implements Initializable {
             fileMonitorService.startMonitor(appController.getUserInfo().getRootPath(), 1000);
             // 2. 跳转主页面
             changeViewService.goAppView();
+            // 3. 请求文件变化
+            Channel channel = nettyClient.getChannel();
+            channel.writeAndFlush(new ReqFTBOMsg());
         } else {
             // 注册提示框
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @ChannelHandler.Sharable
 @Component
-public class RegisterDeviceResponseHandler extends SimpleChannelInboundHandler<RegisterDeviceRespMsg> {
+public class RegisterDeviceRespHandler extends SimpleChannelInboundHandler<RegisterDeviceRespMsg> {
     @Autowired
     private RegisterDeviceService registerDeviceService;
 
