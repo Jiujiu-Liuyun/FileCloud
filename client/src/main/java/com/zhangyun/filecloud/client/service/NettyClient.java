@@ -1,7 +1,9 @@
 package com.zhangyun.filecloud.client.service;
 
+import com.zhangyun.filecloud.client.config.ClientConfig;
 import com.zhangyun.filecloud.client.handler.*;
 import com.zhangyun.filecloud.common.message.PingMessage;
+import com.zhangyun.filecloud.common.message.ReqFTBOMsg;
 import com.zhangyun.filecloud.common.protocol.FrameDecoder;
 import com.zhangyun.filecloud.common.protocol.MessageCodecSharable;
 import io.netty.bootstrap.Bootstrap;
@@ -16,6 +18,7 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,21 +38,17 @@ import javax.annotation.PostConstruct;
 public class NettyClient {
     @Value("${file.server.port}")
     private int serverPort;
-
     @Value("${file.server.host}")
     private String serverHost;
 
     @Autowired
-    private UploadResponseHandler uploadResponseHandler;
-    @Autowired
-    private CompareResponseHandler compareResponseHandler;
-    @Autowired
     private LoginRespHandler loginRespHandler;
     @Autowired
-    private RegisterDeviceResponseHandler registerDeviceResponseHandler;
+    private RegisterDeviceRespHandler registerDeviceRespHandler;
     @Autowired
-    private FileTransferHandler fileTransferHandler;
-
+    private FileTrfRespMsgHandler fileTrfRespMsgHandler;
+    @Autowired
+    private RespFTBOHandler respFTBOHandler;
     @Autowired
     private OutBoundHandler OUT_BOUND_HANDLER;
     private LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
@@ -72,34 +71,28 @@ public class NettyClient {
                         ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(MESSAGE_CODEC);
 
-                        /**
-                         * 出站处理器
-                         * 1. 添加token username deviceId
-                         */
+                        // 出站处理器 添加token username deviceId
                         ch.pipeline().addLast(OUT_BOUND_HANDLER);
 
-
-                        // 写空闲，会触发一个 IdleState#WRITER_IDLE 事件
-//                        ch.pipeline().addLast(new IdleStateHandler(0, 3, 0));
+                        // 读空闲，会触发一个 IdleState#WRITER_IDLE 事件
+                        ch.pipeline().addLast(new IdleStateHandler(5, 0, 0));
                         ch.pipeline().addLast(new ChannelDuplexHandler() {
                             // 用来触发特殊事件
                             @Override
                             public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception{
                                 IdleStateEvent event = (IdleStateEvent) evt;
-                                // 触发了写空闲事件
-                                if (event.state() == IdleState.WRITER_IDLE) {
-//                                log.debug("3s 没有写数据了，发送一个心跳包");
-                                    ctx.writeAndFlush(new PingMessage());
+                                // 触发了读空闲事件
+                                if (event.state() == IdleState.READER_IDLE) {
+                                    // 读空闲，向服务端请求FTBO
+                                    ctx.writeAndFlush(new ReqFTBOMsg());
                                 }
                             }
                         });
 
-                        ch.pipeline().addLast(uploadResponseHandler);
-                        ch.pipeline().addLast(compareResponseHandler);
                         ch.pipeline().addLast(loginRespHandler);
-                        ch.pipeline().addLast(registerDeviceResponseHandler);
-                        ch.pipeline().addLast(fileTransferHandler);
-
+                        ch.pipeline().addLast(registerDeviceRespHandler);
+                        ch.pipeline().addLast(fileTrfRespMsgHandler);
+                        ch.pipeline().addLast(respFTBOHandler);
                     }
                 });
         log.info("netty client start success");
