@@ -1,6 +1,6 @@
 package com.zhangyun.filecloud.client.controller;
 
-import com.zhangyun.filecloud.client.monitor.ClientFileMonitor;
+import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,20 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/fileMonitor")
 @Slf4j
 public class FileMonitorController {
-    @Autowired
-    private ClientFileMonitor clientFileMonitor;
-
-    @GetMapping("stopMonitor")
-    public String stopMonitor() throws Exception {
-        clientFileMonitor.getMonitor().stop();
-        log.info("File Monitor停止");
-        return "stop";
-    }
-
-    @GetMapping("startMonitor")
-    public String startMonitor() throws Exception {
-        clientFileMonitor.getMonitor().start();
-        log.info("File Monitor启动");
-        return "stop";
-    }
+//    @Autowired
+//    private FileMonitorService fileMonitorService;
+//
+//    @GetMapping("stopMonitor")
+//    public String stopMonitor() throws Exception {
+//        fileMonitorService.stopMonitor();
+//        log.info("File Monitor停止");
+//        return "stop";
+//    }
+//
+//    @GetMapping("startMonitor")
+//    public String startMonitor() throws Exception {
+//        fileMonitorService.startMonitor();
+//        log.info("File Monitor启动");
+//        return "stop";
+//    }
 }

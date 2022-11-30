@@ -23,7 +23,7 @@ import java.io.File;
 @Component
 @ChannelHandler.Sharable
 public class CompareHandler extends SimpleChannelInboundHandler<CompareMessage> {
-    @Value("${file.server.path}")
+    @Value("${file.server.rootPath}")
     private String serverPath;
 
     @Value("${file.client.path}")

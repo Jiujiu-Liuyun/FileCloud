@@ -4,7 +4,7 @@
     <property resource="application.yml"/>
     <!--定义-日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
     <springProperty name="LOG_HOME" scope="context" source="logging.path"
-                    defaultValue="C:\Users\Administrator\Desktop\java project\FileCloud\server\log"/>
+                    defaultValue="/Users/zhangyun/Documents/javaProject/FileCloud/server/log"/>
 
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

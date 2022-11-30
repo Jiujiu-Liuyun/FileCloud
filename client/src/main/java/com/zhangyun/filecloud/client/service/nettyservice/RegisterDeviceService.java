@@ -1,9 +1,8 @@
 package com.zhangyun.filecloud.client.service.nettyservice;
 
-import com.zhangyun.filecloud.client.entity.UserInfo;
 import com.zhangyun.filecloud.client.service.NettyClient;
 import com.zhangyun.filecloud.common.message.RegisterDeviceMessage;
-import com.zhangyun.filecloud.common.message.RegisterDeviceResponseMessage;
+import com.zhangyun.filecloud.common.message.RegisterDeviceRespMsg;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,39 +19,18 @@ import java.util.concurrent.Semaphore;
  */
 @Service
 @Slf4j
-public class RegisterDeviceService {
+public class RegisterDeviceService extends AbstractNettyService<RegisterDeviceRespMsg>{
     @Autowired
     private NettyClient nettyClient;
 
-    private Semaphore initDeviceSemaphore = new Semaphore(0);
-    private RegisterDeviceResponseMessage registerDeviceResponseMessage;
-
-    public Semaphore getInitDeviceSemaphore() {
-        return initDeviceSemaphore;
-    }
-
-    public void setInitDeviceSemaphore(Semaphore initDeviceSemaphore) {
-        this.initDeviceSemaphore = initDeviceSemaphore;
-    }
-
-    public RegisterDeviceResponseMessage getRegisterDeviceResponseMessage() {
-        return registerDeviceResponseMessage;
-    }
-
-    public void setRegisterDeviceResponseMessage(RegisterDeviceResponseMessage registerDeviceResponseMessage) {
-        this.registerDeviceResponseMessage = registerDeviceResponseMessage;
-    }
-
-    public RegisterDeviceResponseMessage registerDevice(String username, String deviceName, String token, String rootPath) throws InterruptedException {
+    public RegisterDeviceRespMsg registerDevice(String username, String deviceName, String rootPath) throws InterruptedException {
         Channel channel = nettyClient.getChannel();
         RegisterDeviceMessage registerDeviceMessage = new RegisterDeviceMessage();
         registerDeviceMessage.setUsername(username);
         registerDeviceMessage.setDeviceName(deviceName);
-        registerDeviceMessage.setToken(token);
         registerDeviceMessage.setRootPath(rootPath);
         channel.writeAndFlush(registerDeviceMessage);
-        // 等待Server响应消息
-        initDeviceSemaphore.acquire();
-        return registerDeviceResponseMessage;
+        // 等待响应
+        return super.waitForData();
     }
 }

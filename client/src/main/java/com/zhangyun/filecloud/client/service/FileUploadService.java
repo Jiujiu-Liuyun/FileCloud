@@ -1,14 +1,13 @@
 package com.zhangyun.filecloud.client.service;
 
-import com.zhangyun.filecloud.client.monitor.ClientExecutor;
 import com.zhangyun.filecloud.common.message.UploadMessage;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Semaphore;
 
@@ -21,32 +20,29 @@ import java.util.concurrent.Semaphore;
  */
 @Component
 @Slf4j
-public class FileUploadService implements ApplicationRunner {
+public class FileUploadService {
     public static ConcurrentLinkedDeque<UploadMessage> FILE_UPLOAD_MESSAGE_LIST
             = new ConcurrentLinkedDeque<>();
     public static Semaphore SEMAPHORE = new Semaphore(0);
 
     @Autowired
-    private ClientExecutor clientExecutor;
-
-    @Autowired
     private NettyClient nettyClient;
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        clientExecutor.execute(() -> {
-            while (true) {
-                try {
-                    if (!FILE_UPLOAD_MESSAGE_LIST.isEmpty()) {
-                        fileUpload();
-                    }
-                    // 休眠3s
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+    @PostConstruct
+    public void start() throws Exception {
+//        clientExecutor.execute(() -> {
+//            while (true) {
+//                try {
+//                    if (!FILE_UPLOAD_MESSAGE_LIST.isEmpty()) {
+//                        fileUpload();
+//                    }
+//                    // 休眠3s
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
     public void fileUpload() throws InterruptedException {

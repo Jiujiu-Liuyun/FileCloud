@@ -1,7 +1,7 @@
 package com.zhangyun.filecloud.client.handler;
 
 import com.zhangyun.filecloud.client.service.FileUploadService;
-import com.zhangyun.filecloud.common.enums.FileStatusEnum;
+import com.zhangyun.filecloud.common.enums.UploadStatusEnum;
 import com.zhangyun.filecloud.common.message.UploadMessage;
 import com.zhangyun.filecloud.common.message.UploadResponseMessage;
 import com.zhangyun.filecloud.common.utils.FileUtil;
@@ -24,20 +24,20 @@ import java.io.File;
 public class UploadResponseHandler extends SimpleChannelInboundHandler<UploadResponseMessage> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, UploadResponseMessage msg) throws Exception {
-        // 传输完成
-        if (msg.getStatusEnum() == FileStatusEnum.FINISHED) {
-            // 计数加一
-            FileUploadService.SEMAPHORE.release();
-            return;
-        }
-        UploadMessage fileTransferMessage = new UploadMessage();
-        fileTransferMessage.setOperationEnum(msg.getOperationEnum());
-        fileTransferMessage.setStartPos(msg.getNextPos());
-        fileTransferMessage.setFilePath(msg.getFilePath());
-        // read file
-        FileUtil.readFile(fileTransferMessage);
-        fileTransferMessage.setLastModified(new File(msg.getFilePath()).lastModified());
-        // 传输数据
-        ctx.writeAndFlush(fileTransferMessage).sync();
+//        // 传输完成
+//        if (msg.getStatusEnum() == UploadStatusEnum.FINISHED) {
+//            // 计数加一
+//            FileUploadService.SEMAPHORE.release();
+//            return;
+//        }
+//        UploadMessage fileTransferMessage = new UploadMessage();
+//        fileTransferMessage.setOperationEnum(msg.getOperationEnum());
+//        fileTransferMessage.setStartPos(msg.getNextPos());
+//        fileTransferMessage.setFilePath(msg.getFilePath());
+//        // read file
+//        FileUtil.readFile(fileTransferMessage);
+//        fileTransferMessage.setLastModified(new File(msg.getFilePath()).lastModified());
+//        // 传输数据
+//        ctx.writeAndFlush(fileTransferMessage).sync();
     }
 }

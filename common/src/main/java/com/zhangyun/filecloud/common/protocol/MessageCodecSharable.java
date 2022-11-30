@@ -3,6 +3,7 @@ package com.zhangyun.filecloud.common.protocol;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.zhangyun.filecloud.common.message.Message;
+import com.zhangyun.filecloud.common.message.PingMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -32,6 +33,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
 
     /**
      * 消息编码：从MessageDTO对象转为byte[]对象
+     *
      * @param cxt
      * @param message
      * @param list
@@ -39,7 +41,9 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
      */
     @Override
     protected void encode(ChannelHandlerContext cxt, Message message, List<Object> list) throws Exception {
-        log.info("发送消息: {}", JSONObject.toJSONString(message));
+        if (message.getClass() != PingMessage.class) {
+            log.info("发送消息: {}", JSONObject.toJSONString(message));
+        }
         ByteBuf out = cxt.alloc().buffer();
         // magic --- 12bytes
         out.writeBytes(new byte[]{0x70, 0x6f, 0x72, 0x74, 0x61, 0x6c,
@@ -55,23 +59,35 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         Arrays.fill(alignBytes, (byte) 0xff);
         out.writeBytes(alignBytes);
 
-        // 消息体
         byte[] messageBody = message.getMessageBody();
-        // 消息对象 --> byte数组
         message.setMessageBody(null);
         byte[] messageHeader = JSONObject.toJSONString(message).getBytes();
 
-        // 消息体: messageHeaderLength(int) + messageHeader + messageBodyLength(int) + messageBody
-        if (ObjectUtil.isEmpty(messageBody)) {
-            // 长度
-            out.writeInt(messageHeader.length + 2 * 4);
+        // 消息结构: messageHeaderLength(int) + messageHeader + messageBodyLength(int) + messageBody
+
+        if (messageBody == null) {
+            // 消息长度
+            out.writeInt(messageHeader.length + 4 * 2);
+            // 消息头
             out.writeInt(messageHeader.length);
             out.writeBytes(messageHeader);
+            // 消息体
+            out.writeInt(-1);
+        } else if (messageBody.length == 0) {
+            // 消息长度
+            out.writeInt(messageHeader.length + 4 * 2);
+            // 消息头
+            out.writeInt(messageHeader.length);
+            out.writeBytes(messageHeader);
+            // 消息体
             out.writeInt(0);
         } else {
-            out.writeInt(messageHeader.length + messageBody.length + 2 * 4);
+            // 消息长度
+            out.writeInt(messageHeader.length + messageBody.length + 4 * 2);
+            // 消息头
             out.writeInt(messageHeader.length);
             out.writeBytes(messageHeader);
+            // 消息体
             out.writeInt(messageBody.length);
             out.writeBytes(messageBody);
         }
@@ -81,6 +97,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
 
     /**
      * 消息解码
+     *
      * @param cxt
      * @param in
      * @param list
@@ -102,8 +119,6 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
 
         // 消息长度
         int length = in.readInt();
-        // 消息
-        byte[] bytes = new byte[length];
 
         // 消息头
         int messageHeaderLength = in.readInt();
@@ -114,13 +129,19 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         // 消息体
         int messageBodyLength = in.readInt();
         byte[] messageBody = null;
-        if (messageBodyLength != 0) {
+        if (messageBodyLength == -1) {
+            messageBody = null;
+        } else if (messageBodyLength == 0) {
+            messageBody = new byte[0];
+        } else if (messageBodyLength > 0) {
             messageBody = new byte[messageBodyLength];
             in.readBytes(messageBody, 0, messageBodyLength);
         }
 
         message.setMessageBody(messageBody);
-        log.info("接收消息: {}", JSONObject.toJSONString(message));
+        if (message.getClass() != PingMessage.class) {
+            log.info("接收消息: {}", JSONObject.toJSONString(message));
+        }
         list.add(message);
     }
 }

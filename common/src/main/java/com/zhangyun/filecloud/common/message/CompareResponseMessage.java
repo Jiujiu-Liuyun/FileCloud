@@ -23,6 +23,6 @@ public class CompareResponseMessage extends Message{
 
     @Override
     public int getMessageType() {
-        return FILE_COMPARE_RESPONSE_CMD;
+        return FILE_COMPARE_RESPONSE_MSG;
     }
 }

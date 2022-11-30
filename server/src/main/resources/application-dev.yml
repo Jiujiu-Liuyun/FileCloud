@@ -1,7 +1,7 @@
 file:
   server:
     host: localhost
-    path: /Users/zhangyun/test/target
+    rootPath: /Users/zhangyun/Documents/javaProject/FileCloud/serverRootPath
   client:
     path: /Users/zhangyun/test/source
     maxsize: 10
@@ -10,10 +10,10 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.1.198:3306/file_cloud?servertimezone=Asia?Shanghai&useUnicode=true&charaterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/file_cloud?servertimezone=Asia?Shanghai&useUnicode=true&charaterEncoding=utf-8&useSSL=false
     username: root
     password: H2r9P4_f*21L9
   redis:
-    host: 192.168.1.198
+    host: 127.0.0.1
     port: 6379
     password:
