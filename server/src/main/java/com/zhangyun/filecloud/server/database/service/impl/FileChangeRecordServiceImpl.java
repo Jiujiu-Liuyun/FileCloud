@@ -174,6 +174,9 @@ public class FileChangeRecordServiceImpl extends ServiceImpl<FileChangeRecordMap
      */
     @Override
     public FileTrfBO convertFileChangeRecordToFTBO(FileChangeRecord fileChangeRecord) {
+        if (fileChangeRecord == null) {
+            return null;
+        }
         FileTrfBO fileTrfBO = new FileTrfBO();
         fileTrfBO.setRelativePath(fileChangeRecord.getRelativePath());
         fileTrfBO.setFileTypeEnum(FileTypeEnum.getTypeName(fileChangeRecord.getFileType()));

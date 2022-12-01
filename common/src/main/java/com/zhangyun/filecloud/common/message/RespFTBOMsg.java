@@ -5,8 +5,6 @@ import com.zhangyun.filecloud.common.enums.RespEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.List;
-
 /**
  * description:
  *
@@ -21,11 +19,11 @@ public class RespFTBOMsg extends Message{
     /**
      * 待处理的 FTBO
      */
-    private FileTrfBO fileTrfBOS;
+    private FileTrfBO fileTrfBO;
 
     @Override
     public int getMessageType() {
-        return REQ_FTBO_LIST_MSG;
+        return RESP_FTBO_LIST_MSG;
     }
 }
 

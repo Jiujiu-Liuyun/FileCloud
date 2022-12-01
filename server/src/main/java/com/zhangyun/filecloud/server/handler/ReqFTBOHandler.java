@@ -13,8 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 /**
  * description:
  *
@@ -37,7 +35,7 @@ public class ReqFTBOHandler extends SimpleChannelInboundHandler<ReqFTBOMsg> {
             respFTBOMsg.setRespEnum(RespEnum.NO_MORE_FTBO);
         } else {
             FileTrfBO fileTrfBO = fileChangeRecordService.convertFileChangeRecordToFTBO(fileChangeRecord);
-            respFTBOMsg.setFileTrfBOS(fileTrfBO);
+            respFTBOMsg.setFileTrfBO(fileTrfBO);
             respFTBOMsg.setRespEnum(RespEnum.OK);
         }
         ctx.writeAndFlush(respFTBOMsg);

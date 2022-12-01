@@ -52,7 +52,7 @@ public class RespFTBOHandler extends SimpleChannelInboundHandler<RespFTBOMsg> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RespFTBOMsg msg) throws Exception {
         // 校验消息
-        if (msg == null || msg.getRespEnum() != RespEnum.OK || msg.getFileTrfBOS() == null) {
+        if (msg == null || msg.getRespEnum() != RespEnum.OK || msg.getFileTrfBO() == null) {
             return;
         }
         // 尝试开启消息链
@@ -62,7 +62,7 @@ public class RespFTBOHandler extends SimpleChannelInboundHandler<RespFTBOMsg> {
             return;
         }
         // 处理FTBO并发送FTM
-        FileTrfMsg fileTrfMsg = handleFTBO(msg.getFileTrfBOS());
+        FileTrfMsg fileTrfMsg = handleFTBO(msg.getFileTrfBO());
         ctx.writeAndFlush(fileTrfMsg);
     }
 

@@ -13,10 +13,8 @@ CREATE TABLE `file_change_record` (
    `max_read_length` bigint COMMENT '消息体最大长度',
    `deleted` int default(0) comment '逻辑删除字段',
    `create_time` datetime COMMENT '创建时间',
-   `modified_time` datetime COMMENT '修改时间'
+   `modified_time` datetime COMMENT '修改时间',
+   index file_change_record(device_id, relative_path(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-create index device_file_index 
-on `file_change_record`(device_id, relative_path(255));
 
 select * from `file_change_record`;

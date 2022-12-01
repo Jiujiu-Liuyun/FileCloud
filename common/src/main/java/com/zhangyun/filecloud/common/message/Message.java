@@ -52,10 +52,6 @@ public abstract class Message implements Serializable {
     /**
      * 消息指令类型 - 文件标记指令
      */
-    public static final int FILE_UPLOAD_MSG = 1;
-    public static final int FILE_UPLOAD_RESPONSE_MSG = 2;
-    public static final int FILE_COMPARE_MSG = 3;
-    public static final int FILE_COMPARE_RESPONSE_MSG = 4;
     public static final int LOGIN_MSG = 5;
     public static final int LOGIN_RESPONSE_MSG = 6;
 
@@ -75,10 +71,6 @@ public abstract class Message implements Serializable {
     private static final Map<Integer, Class<? extends Message>> MESSAGE_CLASSES = new HashMap<>();
 
     static {
-        MESSAGE_CLASSES.put(FILE_UPLOAD_MSG, UploadMessage.class);
-        MESSAGE_CLASSES.put(FILE_UPLOAD_RESPONSE_MSG, UploadResponseMessage.class);
-        MESSAGE_CLASSES.put(FILE_COMPARE_MSG, CompareMessage.class);
-        MESSAGE_CLASSES.put(FILE_COMPARE_RESPONSE_MSG, CompareResponseMessage.class);
         MESSAGE_CLASSES.put(LOGIN_MSG, LoginMsg.class);
         MESSAGE_CLASSES.put(LOGIN_RESPONSE_MSG, LoginRespMsg.class);
         MESSAGE_CLASSES.put(INIT_DEVICE_MSG, RegisterDeviceMessage.class);
