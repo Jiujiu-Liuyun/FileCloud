@@ -1,4 +1,4 @@
 fileCloud:
   server:
-    port: 8090
+    nettyPort: 8090
     host: localhost

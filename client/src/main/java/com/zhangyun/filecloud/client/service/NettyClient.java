@@ -34,13 +34,15 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Service
 public class NettyClient {
-    @Value("${fileCloud.server.port}")
+    @Value("${fileCloud.server.nettyPort}")
     private int serverPort;
     @Value("${fileCloud.server.host}")
     private String serverHost;
 
     @Autowired
     private LoginRespHandler loginRespHandler;
+    @Autowired
+    private NotifyChangeHandler NOTIFY_CHANGE_HANDLER;
     @Autowired
     private RegDeviceRespHandler REG_DEVICE_RESP_HANDLER;
     @Autowired
@@ -92,6 +94,8 @@ public class NettyClient {
                         ch.pipeline().addLast(loginRespHandler);
                         ch.pipeline().addLast(REG_DEVICE_RESP_HANDLER);
                         ch.pipeline().addLast(REG_USER_RESP_HANDLER);
+
+                        ch.pipeline().addLast(NOTIFY_CHANGE_HANDLER);
                         ch.pipeline().addLast(fileTrfRespMsgHandler);
                         ch.pipeline().addLast(respFTBOHandler);
                     }
