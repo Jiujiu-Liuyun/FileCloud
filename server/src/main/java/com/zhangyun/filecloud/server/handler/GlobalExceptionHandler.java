@@ -31,6 +31,6 @@ public class GlobalExceptionHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         sessionService.unbind(ctx.channel());
-        log.info("连接 {} 异常, {}", ctx.channel(), cause.getMessage());
+        log.info("连接 {} 异常, {}", ctx.channel(), cause);
     }
 }

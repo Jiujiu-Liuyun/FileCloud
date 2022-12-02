@@ -23,20 +23,33 @@ public class SessionService {
 
     @TraceLog
     public void bind(Channel channel, String deviceId) {
-        channelToDeviceMap.put(channel, deviceId);
-        deviceToChannelMap.put(deviceId, channel);
+        try {
+            channelToDeviceMap.put(channel, deviceId);
+            deviceToChannelMap.put(deviceId, channel);
+        } catch (Exception e) {
+            log.error("绑定失败!", e);
+        }
     }
 
     @TraceLog
     public void unbind(Channel channel) {
-        String deviceId = channelToDeviceMap.remove(channel);
-        if (deviceId != null) {
-            deviceToChannelMap.remove(deviceId);
+        try {
+            String deviceId = channelToDeviceMap.remove(channel);
+            if (deviceId != null) {
+                deviceToChannelMap.remove(deviceId);
+            }
+        } catch (Exception e) {
+            log.error("解绑失败!", e);
         }
     }
 
     public Channel getChannel(String deviceId) {
-        return deviceToChannelMap.get(deviceId);
+        try {
+            return deviceToChannelMap.get(deviceId);
+        } catch (Exception e) {
+            log.error("获取连接异常!", e);
+            return null;
+        }
     }
 
     public boolean isOnline(String deviceId) {

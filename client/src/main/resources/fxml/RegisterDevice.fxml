@@ -8,7 +8,7 @@
 
 
 <AnchorPane prefHeight="250.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.zhangyun.filecloud.client.controller.RegisterDeviceController">
+            fx:controller="com.zhangyun.filecloud.client.controller.RegDeviceController">
    <children>
       <TextField fx:id="deviceNameField" layoutX="150.0" layoutY="20.0" prefHeight="50.0" prefWidth="200.0" />
       <Label alignment="CENTER" layoutX="10.0" layoutY="20.0" prefHeight="50.0" prefWidth="120.0" text="请输入设备名称" />

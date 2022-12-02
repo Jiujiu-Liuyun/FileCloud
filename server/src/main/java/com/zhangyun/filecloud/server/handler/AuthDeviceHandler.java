@@ -33,6 +33,7 @@ public class AuthDeviceHandler extends SimpleChannelInboundHandler<Msg> {
             // 认证成功
             ctx.fireChannelRead(msg);
         } else {
+            log.info("auth fail: {}", msg);
             ctx.writeAndFlush(new RespMsg(respEnum));
         }
     }

@@ -49,17 +49,18 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMsg> {
     protected void channelRead0(ChannelHandlerContext ctx, LoginMsg msg) throws Exception {
         log.info("========>>>>>>>> {}", msg);
         LoginRespMsg loginRespMsg = authLoginMsg(msg);
-        if (loginRespMsg.getRespBO() == RespEnum.OK) {
+        if (loginRespMsg.getRespBO() == RespEnum.OK && loginRespMsg.getIsRegister()) {
             // 将连接加入会话管理器
             sessionService.bind(ctx.channel(), msg.getDeviceId());
             // 当设备有效时生成token，否则在注册设备时生成token
-            if (loginRespMsg.getIsRegister()) {
-                // 生成token
-                String token = redisService.genToken(msg.getUsername(), msg.getDeviceId());
-                loginRespMsg.setToken(token);
-            }
+            String token = redisService.genToken(msg.getUsername(), msg.getDeviceId());
+            loginRespMsg.setToken(token);
+            ctx.writeAndFlush(loginRespMsg);
+        } else {
+            ctx.writeAndFlush(loginRespMsg);
+            // 关闭连接
+            ctx.channel().close();
         }
-        ctx.writeAndFlush(loginRespMsg);
     }
 
     private LoginRespMsg authLoginMsg(LoginMsg msg) {

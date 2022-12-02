@@ -37,9 +37,11 @@ public class NettyServer {
     private SessionService sessionService;
 
     @Autowired
+    private RegUserHandler REG_USER_HANDLER;
+    @Autowired
     private LoginHandler LOGIN_HANDLER;
     @Autowired
-    private RegisterDeviceHandler REGISTER_DEVICE_HANDLER;
+    private RegDeviceHandler REGISTER_DEVICE_HANDLER;
     @Autowired
     private AuthTokenHandler AUTH_TOKEN_HANDLER;
     @Autowired
@@ -91,6 +93,8 @@ public class NettyServer {
                             }
                         });
 
+                        // 0. 注册
+                        ch.pipeline().addLast(REG_USER_HANDLER);
                         // 1. 登录认证
                         ch.pipeline().addLast(LOGIN_HANDLER);
                         // 2. 注册设备

@@ -5,7 +5,7 @@ import com.zhangyun.filecloud.client.handler.RespFTBOHandler;
 import com.zhangyun.filecloud.client.service.ChangeViewService;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.client.service.nettyservice.LoginService;
-import com.zhangyun.filecloud.client.service.nettyservice.RegisterDeviceService;
+import com.zhangyun.filecloud.client.service.nettyservice.RegDeviceService;
 import com.zhangyun.filecloud.client.service.nettyservice.SettingService;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.ActionEvent;
@@ -37,7 +37,7 @@ public class AppController implements Initializable {
     @Autowired
     private FileMonitorService fileMonitorService;
     @Autowired
-    private RegisterDeviceService registerDeviceService;
+    private RegDeviceService regDeviceService;
     @Autowired
     private RespFTBOHandler respFTBOHandler;
 

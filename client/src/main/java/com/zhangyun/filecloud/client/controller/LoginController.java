@@ -7,7 +7,8 @@ import com.zhangyun.filecloud.client.service.NettyClient;
 import com.zhangyun.filecloud.client.service.nettyservice.FileChangeService;
 import com.zhangyun.filecloud.client.service.monitor.FileMonitorService;
 import com.zhangyun.filecloud.client.service.nettyservice.LoginService;
-import com.zhangyun.filecloud.client.service.nettyservice.RegisterDeviceService;
+import com.zhangyun.filecloud.client.service.nettyservice.RegDeviceService;
+import com.zhangyun.filecloud.client.utils.JavaFXUtil;
 import com.zhangyun.filecloud.client.utils.PropertyUtil;
 import com.zhangyun.filecloud.common.enums.RespEnum;
 import com.zhangyun.filecloud.common.message.LoginRespMsg;
@@ -20,7 +21,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -51,7 +51,7 @@ public class LoginController implements Initializable {
     @Autowired
     private FileChangeService fileChangeService;
     @Autowired
-    private RegisterDeviceService registerDeviceService;
+    private RegDeviceService regDeviceService;
     @Autowired
     private NettyClient nettyClient;
 
@@ -69,31 +69,33 @@ public class LoginController implements Initializable {
         passwordField.setText("1120");
     }
 
-    @FXML
     public void login() throws IOException {
         String username = textField.getText();
         String password = passwordField.getText();
+        if (username == null || password == null) {
+            JavaFXUtil.alertWarning("用户信息输入不完整");
+            return;
+        }
         // 读取用户配置
         UserInfo userInfo = getProperties(username);
-        userInfo.setUsername(username);
-        appController.setUserInfo(userInfo);
         // 发送登录信息，获取Server端的响应信息
         LoginRespMsg responseMessage = loginService.login(username, password, userInfo.getDeviceId());
 
-        // 登录失败
         if (responseMessage == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "服务器连接超时，请检查网络，或稍后重试");
-            alert.showAndWait();
+            JavaFXUtil.alertWarning("服务器连接超时，请检查网络，或稍后重试");
             return;
         }
+
         // 验证失败
         if (responseMessage.getRespBO() != RespEnum.OK) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, responseMessage.getRespBO().getDesc());
-            alert.showAndWait();
+            JavaFXUtil.alertWarning(responseMessage.getRespBO().getDesc());
             return;
         } else {
-            // 登录成功
-            log.info("登录成功");
+            // 用户名、密码 验证成功
+            log.info("用户名、密码 验证成功");
+            userInfo.setUsername(username);
+            userInfo.setPassword(password);
+            appController.setUserInfo(userInfo);
         }
 
         // 设备已注册
@@ -155,4 +157,10 @@ public class LoginController implements Initializable {
         return userInfo;
     }
 
+    /**
+     * 跳转注册
+     */
+    public void register() {
+        changeViewService.goRegisterUserView();
+    }
 }

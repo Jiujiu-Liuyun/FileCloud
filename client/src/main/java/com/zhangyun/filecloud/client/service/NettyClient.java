@@ -42,7 +42,9 @@ public class NettyClient {
     @Autowired
     private LoginRespHandler loginRespHandler;
     @Autowired
-    private RegisterDeviceRespHandler registerDeviceRespHandler;
+    private RegDeviceRespHandler REG_DEVICE_RESP_HANDLER;
+    @Autowired
+    private RegUserRespHandler REG_USER_RESP_HANDLER;
     @Autowired
     private FileTrfRespMsgHandler fileTrfRespMsgHandler;
     @Autowired
@@ -88,7 +90,8 @@ public class NettyClient {
                         });
 
                         ch.pipeline().addLast(loginRespHandler);
-                        ch.pipeline().addLast(registerDeviceRespHandler);
+                        ch.pipeline().addLast(REG_DEVICE_RESP_HANDLER);
+                        ch.pipeline().addLast(REG_USER_RESP_HANDLER);
                         ch.pipeline().addLast(fileTrfRespMsgHandler);
                         ch.pipeline().addLast(respFTBOHandler);
                     }

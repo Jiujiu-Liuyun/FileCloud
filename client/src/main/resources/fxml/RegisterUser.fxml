@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhangyun.filecloud.client.controller.RegUserController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="14.0" prefHeight="27.0" prefWidth="57.0" text="用户名" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textField" layoutX="115.0" layoutY="14.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="63.0" prefHeight="27.0" prefWidth="57.0" text="密码" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passwordField" layoutX="115.0" layoutY="63.0" />
+      <Button layoutX="39.0" layoutY="100.0" mnemonicParsing="false" onAction="#register" prefHeight="38.0" prefWidth="85.0" text="注册">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="185.0" layoutY="100.0" mnemonicParsing="false" onAction="#returnLog" prefHeight="38.0" prefWidth="101.0" text="返回登录">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

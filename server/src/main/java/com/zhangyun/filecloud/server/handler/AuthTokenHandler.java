@@ -34,6 +34,7 @@ public class AuthTokenHandler extends SimpleChannelInboundHandler<Msg> {
             ctx.fireChannelRead(msg);
         } else {
             // 通知客户端
+            log.info("auth fail: {}", msg);
             ctx.writeAndFlush(new RespMsg(respEnum));
         }
     }

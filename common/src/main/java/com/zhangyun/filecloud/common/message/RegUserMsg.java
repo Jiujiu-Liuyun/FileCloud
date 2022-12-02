@@ -12,11 +12,11 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class RegisterUserMsg extends Msg {
+public class RegUserMsg extends Msg {
     private String password;
 
     @Override
     public int getMessageType() {
-        return 0;
+        return REG_USER_MSG;
     }
 }

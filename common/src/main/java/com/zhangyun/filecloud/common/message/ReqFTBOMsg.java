@@ -11,9 +11,6 @@ import lombok.Data;
  */
 @Data
 public class ReqFTBOMsg extends Msg {
-    {
-        isNeedLog = false;
-    }
 
     @Override
     public int getMessageType() {

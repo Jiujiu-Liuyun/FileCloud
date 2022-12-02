@@ -20,6 +20,8 @@ public enum RespEnum {
     LOCK_DEVICE_FAIL(8, "lock device fail"),
     FCR_NOT_EXIST(9, "file change record is empty"),
     NO_MORE_FTBO(10, "no more file transfer BO"),
+    USER_HAS_BEEN_REGISTERED(11, "user has been registered"),
+    REGISTER_USER_FAIL(12, "register user fail"),
     ;
 
     private Integer code;

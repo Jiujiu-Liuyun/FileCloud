@@ -18,7 +18,6 @@ import java.util.Map;
 public abstract class Msg implements Serializable {
     {
         msgDesc = getClass().getSimpleName();
-        isNeedLog = true;
     }
 
     private static final long serialVersionUID = 1L;
@@ -43,11 +42,6 @@ public abstract class Msg implements Serializable {
     private String msgDesc;
 
     /**
-     * 是否需要打印
-     */
-    protected Boolean isNeedLog;
-
-    /**
      * 返回消息类型
      *
      * @return
@@ -61,8 +55,8 @@ public abstract class Msg implements Serializable {
     public static final int LOGIN_MSG = 5;
     public static final int LOGIN_RESPONSE_MSG = 6;
 
-    public static final int INIT_DEVICE_MSG = 8;
-    public static final int INIT_DEVICE_RESPONSE_MSG = 9;
+    public static final int REG_DEVICE_MSG = 8;
+    public static final int REG_DEVICE_RESP_MSG = 9;
     public static final int LOGOUT_MSG = 10;
 
     public static final int FILE_CHANGE_MSG = 12;
@@ -72,6 +66,8 @@ public abstract class Msg implements Serializable {
     public static final int REQ_FTBO_MSG = 16;
     public static final int RESP_FTBO_LIST_MSG = 17;
     public static final int NOTIFY_CHANGE_MSG = 18;
+    public static final int REG_USER_MSG = 19;
+    public static final int REG_USER_RESP_MSG = 20;
 
 
     private static final Map<Integer, Class<? extends Msg>> MESSAGE_CLASSES = new HashMap<>();
@@ -79,8 +75,8 @@ public abstract class Msg implements Serializable {
     static {
         MESSAGE_CLASSES.put(LOGIN_MSG, LoginMsg.class);
         MESSAGE_CLASSES.put(LOGIN_RESPONSE_MSG, LoginRespMsg.class);
-        MESSAGE_CLASSES.put(INIT_DEVICE_MSG, RegisterDeviceMsg.class);
-        MESSAGE_CLASSES.put(INIT_DEVICE_RESPONSE_MSG, RegisterDeviceRespMsg.class);
+        MESSAGE_CLASSES.put(REG_DEVICE_MSG, RegDeviceMsg.class);
+        MESSAGE_CLASSES.put(REG_DEVICE_RESP_MSG, RegDeviceRespMsg.class);
         MESSAGE_CLASSES.put(LOGOUT_MSG, LogoutMsg.class);
         MESSAGE_CLASSES.put(FILE_CHANGE_MSG, FileChangeMsg.class);
         MESSAGE_CLASSES.put(FILE_TRANSFER_MSG, FileTrfMsg.class);
@@ -89,6 +85,8 @@ public abstract class Msg implements Serializable {
         MESSAGE_CLASSES.put(REQ_FTBO_MSG, ReqFTBOMsg.class);
         MESSAGE_CLASSES.put(RESP_FTBO_LIST_MSG, RespFTBOMsg.class);
         MESSAGE_CLASSES.put(NOTIFY_CHANGE_MSG, NotifyChangeMsg.class);
+        MESSAGE_CLASSES.put(REG_USER_MSG, RegUserMsg.class);
+        MESSAGE_CLASSES.put(REG_USER_RESP_MSG, RegUserRespMsg.class);
     }
 
     /**
