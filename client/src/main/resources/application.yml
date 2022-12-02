@@ -7,8 +7,7 @@ logging:
     com.zhangyun.portalknight.client: info
   config: classpath:logback-spring.xml
 
-file:
-  client:
-    interval: 3000
-  server:
-    port: 8090
+# spring web
+server:
+  port: 8081
+

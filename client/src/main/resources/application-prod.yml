@@ -4,5 +4,3 @@ file:
   client:
     path: /Users/zhangyun/test/source
     maxsize: 10
-server:
-  port: 8081

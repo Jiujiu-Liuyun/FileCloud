@@ -30,7 +30,7 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Service
 public class NettyServer {
-    @Value("${file.server.port}")
+    @Value("${fileCloud.server.nettyPort}")
     private int serverPort;
 
     @Autowired

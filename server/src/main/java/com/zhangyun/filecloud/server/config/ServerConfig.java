@@ -18,9 +18,9 @@ import java.util.concurrent.*;
 @Configuration
 @Slf4j
 public class ServerConfig {
-    @Value("${file.server.rootPath}")
+    @Value("${fileCloud.server.rootPath}")
     private String rootPath;
-    @Value("${file.server.maxReadLength}")
+    @Value("${fileCloud.server.maxReadLength}")
     private String maxReadLength;
 
     public static String ROOT_PATH;

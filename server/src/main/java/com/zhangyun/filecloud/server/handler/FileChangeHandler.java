@@ -42,7 +42,7 @@ public class FileChangeHandler extends SimpleChannelInboundHandler<FileChangeMsg
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, FileChangeMsg msg) throws Exception {
-        log.info("========>>>>>>>> {}", msg);
+        log.info(">>>>>>>>>>>>>>>> {}", msg);
         FileChangeBO fileChangeBO = msg.getFileChangeBO();
         // 1. c ==》 s
         FileChangeRecord fileChangeRecord = new FileChangeRecord();

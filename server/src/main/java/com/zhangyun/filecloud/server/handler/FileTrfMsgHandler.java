@@ -53,7 +53,7 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
     @Override
     @Transactional
     protected void channelRead0(ChannelHandlerContext ctx, FileTrfMsg msg) throws Exception {
-        log.info("========>>>>>>>> {}", msg);
+        log.info(">>>>>>>>>>>>>>>> {}", msg);
         // 1. 校验消息
         boolean auth = authFileTrfBO(msg);
         if (!auth) {
@@ -154,14 +154,19 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
             }
         } else if (fileTrfBO.getTransferModeEnum() == TransferModeEnum.DOWNLOAD) {
             if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.FILE &&
-                    (fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CREATE || fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CHANGE)) {
+                    (fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CREATE ||
+                            fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CHANGE)) {
                 // 2.2 读出文件，传给客户端
                 byte[] bytes = FileUtil.readFile(absolutePath.toString(), fileTrfBO.getStartPos(), fileTrfBO.getMaxReadLength());
                 fileTrfRespMsg.setMessageBody(bytes);
                 if (bytes.length < fileTrfBO.getMaxReadLength()) {
                     fileTrfBO.setStatusEnum(StatusEnum.FINISHED);
+                } else {
+                    fileTrfBO.setStatusEnum(StatusEnum.GOING);
                 }
                 fileTrfRespMsg.setNextPos(fileTrfBO.getStartPos() + bytes.length);
+            } else {
+                fileTrfBO.setStatusEnum(StatusEnum.FINISHED);
             }
         }
         fileTrfRespMsg.setRespEnum(RespEnum.OK);
@@ -181,9 +186,6 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
         if (fileTrfBO.getTransferModeEnum() == null || fileTrfBO.getFileTypeEnum() == null || fileTrfBO.getMaxReadLength() == null
                 || fileTrfBO.getOperationTypeEnum() == null || fileTrfBO.getRelativePath() == null || fileTrfBO.getStartPos() == null
                 || fileTrfBO.getStatusEnum() == null || fileTrfBO.getDeviceId() == null) {
-            return false;
-        }
-        if (fileTrfBO.getTransferModeEnum() == TransferModeEnum.UPLOAD && fileTrfMsg.getMessageBody() == null) {
             return false;
         }
         return true;

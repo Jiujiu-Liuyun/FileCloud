@@ -16,21 +16,17 @@ spring:
     username: guest     #mq服务器username,默认为gust
     password: guest     #mq服务器password,默认为guest
 
-server:
-  port: 5672
-
-
 logging:
   level:
     com.zhangyun.portalknight.client: info
   config: classpath:logback-spring.xml
 
-file:
-  client:
-    interval: 3000
+fileCloud:
   server:
-    port: 8090
-    maxReadLength: 10240 #10kb
+    nettyPort: 8090
+    maxReadLength: 11 #10kb
+    rootPath: /Users/zhangyun/Documents/javaProject/FileCloud/serverRootPath
+
 mybatis-plus:
   mapper-locations: classpath:com/zhangyun/filecloud/server/database/mapper/xml/*Mapper.xml
   type-aliases-package: com.zhangyun.filecloud.server.database.entity
@@ -45,3 +41,6 @@ mybatis-plus:
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
 
+# spring web
+server:
+  port: 8080

@@ -47,7 +47,7 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMsg> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginMsg msg) throws Exception {
-        log.info("========>>>>>>>> {}", msg);
+        log.info(">>>>>>>>>>>>>>>> {}", msg);
         LoginRespMsg loginRespMsg = authLoginMsg(msg);
         if (loginRespMsg.getRespBO() == RespEnum.OK && loginRespMsg.getIsRegister()) {
             // 将连接加入会话管理器

@@ -1,12 +1,3 @@
-file:
-  server:
-    host: localhost
-    rootPath: /Users/zhangyun/Documents/javaProject/FileCloud/serverRootPath
-  client:
-    path: /Users/zhangyun/test/source
-    maxsize: 10
-server:
-  port: 8080
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

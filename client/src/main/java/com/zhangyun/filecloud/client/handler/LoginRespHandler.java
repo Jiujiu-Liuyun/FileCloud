@@ -28,7 +28,7 @@ public class LoginRespHandler extends SimpleChannelInboundHandler<LoginRespMsg> 
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRespMsg msg) throws Exception {
-        log.info("========>>>>>>>> {}", msg);
+        log.info(">>>>>>>>>>>>>>>> {}", msg);
         loginService.setData(msg);
         loginService.dataIsReady();
     }
