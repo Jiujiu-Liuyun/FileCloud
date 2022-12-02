@@ -1,7 +1,6 @@
 package com.zhangyun.filecloud.client.handler;
 
 import com.zhangyun.filecloud.client.controller.AppController;
-import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.entity.FileTrfBO;
 import com.zhangyun.filecloud.common.enums.FileTypeEnum;
 import com.zhangyun.filecloud.common.enums.OperationTypeEnum;
@@ -22,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * description:
@@ -34,6 +35,35 @@ import java.nio.file.Path;
 @Component
 @ChannelHandler.Sharable
 public class FileTrfRespMsgHandler extends SimpleChannelInboundHandler<FileTrfRespMsg> {
+    private ConcurrentHashMap<String, ConcurrentHashMap<OperationTypeEnum, AtomicInteger>> changeCount = new ConcurrentHashMap<>();
+
+    public void addCount(String absolutePath, OperationTypeEnum operationTypeEnum) {
+        ConcurrentHashMap<OperationTypeEnum, AtomicInteger> operationTypeCount = changeCount.getOrDefault(absolutePath, new ConcurrentHashMap<>());
+        AtomicInteger count = operationTypeCount.getOrDefault(operationTypeEnum, new AtomicInteger());
+        count.incrementAndGet();
+        operationTypeCount.put(operationTypeEnum, count);
+        changeCount.put(absolutePath, operationTypeCount);
+    }
+
+    public boolean releaseCount(String absolutePath, OperationTypeEnum operationTypeEnum) {
+        ConcurrentHashMap<OperationTypeEnum, AtomicInteger> operationTypeCount = changeCount.getOrDefault(absolutePath, null);
+        if (operationTypeCount == null) {
+            return false;
+        }
+        AtomicInteger count = operationTypeCount.getOrDefault(operationTypeEnum, null);
+        if (count == null) {
+            return false;
+        }
+        if (count.get() <= 0) {
+            return false;
+        }
+        int i = count.decrementAndGet();
+        if (i == 0 && operationTypeEnum == OperationTypeEnum.DELETE) {
+            changeCount.remove(absolutePath);
+        }
+        return true;
+    }
+
     @Autowired
     private AppController appController;
     @Autowired
@@ -63,6 +93,7 @@ public class FileTrfRespMsgHandler extends SimpleChannelInboundHandler<FileTrfRe
 
     /**
      * 处理FTBO 下载消息
+     *
      * @param msg
      * @throws IOException
      */
@@ -72,17 +103,27 @@ public class FileTrfRespMsgHandler extends SimpleChannelInboundHandler<FileTrfRe
         if (fileTrfBO.getTransferModeEnum() == TransferModeEnum.DOWNLOAD) {
             // 2.1 写
             if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.DIRECTORY && fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CREATE) {
-                FileUtil.createDir(absolutePath);
+                boolean create = FileUtil.createDir(absolutePath);
+                if (create) {
+                    addCount(String.valueOf(absolutePath), fileTrfBO.getOperationTypeEnum());
+                }
             } else if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.DIRECTORY && fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CHANGE) {
                 FileUtil.changeDir(absolutePath);
             } else if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.DIRECTORY && fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.DELETE) {
-                FileUtil.deleteDir(absolutePath);
+                boolean delete = FileUtil.deleteDir(absolutePath);
+                if (delete) {
+                    addCount(String.valueOf(absolutePath), fileTrfBO.getOperationTypeEnum());
+                }
             } else if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.FILE &&
                     (fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CREATE || fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.CHANGE)) {
-                FileUtil.writeFile(absolutePath.toString(), fileTrfBO.getStartPos(), msg.getMessageBody());
+                boolean write = FileUtil.writeFile(absolutePath.toString(), fileTrfBO.getStartPos(), msg.getMessageBody());
+                if (write) {
+                    addCount(String.valueOf(absolutePath), fileTrfBO.getOperationTypeEnum());
+                }
             } else if (fileTrfBO.getFileTypeEnum() == FileTypeEnum.FILE && fileTrfBO.getOperationTypeEnum() == OperationTypeEnum.DELETE) {
                 if (new File(absolutePath.toString()).isFile()) {
                     Files.delete(absolutePath);
+                    addCount(String.valueOf(absolutePath), fileTrfBO.getOperationTypeEnum());
                 }
             }
         }

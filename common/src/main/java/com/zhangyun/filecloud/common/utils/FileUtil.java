@@ -52,45 +52,52 @@ public class FileUtil {
         return bytes;
     }
 
-    public static void writeFile(String absolutePath, Long startPos, byte[] bytes) throws IOException {
+    public static boolean writeFile(String absolutePath, Long startPos, byte[] bytes) throws IOException {
         if (absolutePath == null || startPos == null || bytes == null) {
             log.warn("写文件，非法参数");
-            return;
+            return false;
         }
         // 写文件
         RandomAccessFile randomAccessFile = new RandomAccessFile(absolutePath, "rw");
         randomAccessFile.seek(startPos);
         randomAccessFile.write(bytes);
         randomAccessFile.close();
+        return true;
     }
 
-    public static void deleteDir(Path absolutePath) throws IOException {
+    public static boolean deleteDir(Path absolutePath) throws IOException {
         if (!Files.exists(absolutePath) || new File(absolutePath.toString()).isFile()) {
-            return;
+            return false;
         }
-        Files.walkFileTree(absolutePath, new FileVisitor<Path>() {
-            @Override
-            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-                return FileVisitResult.CONTINUE;
-            }
+        try {
+            Files.walkFileTree(absolutePath, new FileVisitor<Path>() {
+                @Override
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                    return FileVisitResult.CONTINUE;
+                }
 
-            @Override
-            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                Files.delete(file);
-                return FileVisitResult.CONTINUE;
-            }
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return FileVisitResult.CONTINUE;
+                }
 
-            @Override
-            public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
-                return FileVisitResult.CONTINUE;
-            }
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+                    return FileVisitResult.CONTINUE;
+                }
 
-            @Override
-            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                Files.delete(dir);
-                return FileVisitResult.CONTINUE;
-            }
-        });
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    Files.delete(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            log.error("delete dir error!", e);
+            return false;
+        }
     }
 
     public static void changeDir(Path absolutePath) throws IOException {
@@ -100,15 +107,17 @@ public class FileUtil {
         }
     }
 
-    public static void createDir(Path absolutePath) throws IOException {
+    public static boolean createDir(Path absolutePath) throws IOException {
         try {
             Files.createDirectories(absolutePath);
+            return true;
         } catch (FileAlreadyExistsException e) {
             log.info("file {} already exists", absolutePath);
             // 删除文件
             Files.deleteIfExists(absolutePath);
             // 创建目录
             Files.createDirectories(absolutePath);
+            return false;
         }
     }
 }
