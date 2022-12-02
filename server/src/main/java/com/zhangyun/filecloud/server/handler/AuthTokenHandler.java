@@ -11,9 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * description: 权限认证，非法消息过滤掉
  *
@@ -24,14 +21,13 @@ import java.util.List;
 @Slf4j
 @ChannelHandler.Sharable
 @Component
-public class AuthTokenHandler extends SimpleChannelInboundHandler<Message> {
+public class AuthTokenHandler extends SimpleChannelInboundHandler<Msg> {
 
     @Autowired
     private RedisService redisService;
 
     @Override
-    @TraceLog
-    protected void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Msg msg) throws Exception {
         RespEnum respEnum = authToken(msg);
         if (respEnum == RespEnum.OK) {
             // 认证成功，向后传递消息
@@ -43,7 +39,7 @@ public class AuthTokenHandler extends SimpleChannelInboundHandler<Message> {
     }
 
     @TraceLog
-    private RespEnum authToken(Message msg) {
+    private RespEnum authToken(Msg msg) {
         if (msg.getUsername() ==null || msg.getToken() == null) {
             return RespEnum.MSG_FORMAT_ERROR;
         }

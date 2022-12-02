@@ -11,7 +11,7 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class RespMsg extends Message{
+public class RespMsg extends Msg {
     private RespEnum respEnum;
 
     @Override

@@ -25,8 +25,8 @@ public class RegisterDeviceRespHandler extends SimpleChannelInboundHandler<Regis
     private RegisterDeviceService registerDeviceService;
 
     @Override
-    @TraceLog
     protected void channelRead0(ChannelHandlerContext ctx, RegisterDeviceRespMsg msg) throws Exception {
+        log.info("========>>>>>>>> {}", msg);
         registerDeviceService.setData(msg);
         registerDeviceService.dataIsReady();
     }

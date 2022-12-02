@@ -88,7 +88,7 @@ public class MysqlGenerator {
          strategy.setTableFillList(tableFills);
 
         // 设置需要操作的表名
-        strategy.setInclude("file_change_record");
+        strategy.setInclude("file");
         // strategy.setTablePrefix(pc.getModuleName() + "_");
         autoGenerator.setStrategy(strategy);
 

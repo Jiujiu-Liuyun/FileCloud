@@ -68,9 +68,6 @@ public class AppController implements Initializable {
         userInfo = null;
         // 3. 关闭文件监听器
         fileMonitorService.stopMonitor();
-        // refresh service
-        loginService.serviceRefresh();
-        registerDeviceService.serviceRefresh();
         respFTBOHandler.handlerRefresh();
         // 4.切换视图
         changeViewService.goLoginView();

@@ -1,8 +1,6 @@
 package com.zhangyun.filecloud.client.service;
 
-import com.zhangyun.filecloud.client.config.ClientConfig;
 import com.zhangyun.filecloud.client.handler.*;
-import com.zhangyun.filecloud.common.message.PingMessage;
 import com.zhangyun.filecloud.common.message.ReqFTBOMsg;
 import com.zhangyun.filecloud.common.protocol.FrameDecoder;
 import com.zhangyun.filecloud.common.protocol.MessageCodecSharable;
@@ -125,4 +123,5 @@ public class NettyClient {
         // 关闭group
         group.shutdownGracefully();
     }
+
 }

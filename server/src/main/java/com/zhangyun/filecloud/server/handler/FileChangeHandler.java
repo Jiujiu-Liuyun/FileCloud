@@ -1,27 +1,20 @@
 package com.zhangyun.filecloud.server.handler;
 
+import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.entity.FileChangeBO;
 import com.zhangyun.filecloud.common.enums.StatusEnum;
 import com.zhangyun.filecloud.common.enums.TransferModeEnum;
-import com.zhangyun.filecloud.common.message.FileChangeMessage;
-import com.zhangyun.filecloud.common.message.NotifyChangeMsg;
+import com.zhangyun.filecloud.common.message.FileChangeMsg;
 import com.zhangyun.filecloud.server.config.ServerConfig;
 import com.zhangyun.filecloud.server.database.entity.FileChangeRecord;
 import com.zhangyun.filecloud.server.database.service.DeviceService;
-import com.zhangyun.filecloud.server.service.FileTransferService;
 import com.zhangyun.filecloud.server.database.service.FileChangeRecordService;
-import com.zhangyun.filecloud.server.service.session.SessionService;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * description:
@@ -33,11 +26,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @ChannelHandler.Sharable
 @Component
-public class FileChangeHandler extends SimpleChannelInboundHandler<FileChangeMessage> {
+public class FileChangeHandler extends SimpleChannelInboundHandler<FileChangeMsg> {
     @Autowired
     private DeviceService deviceService;
-    @Autowired
-    private SessionService sessionService;
     @Autowired
     private FileChangeRecordService fileChangeRecordService;
 
@@ -50,8 +41,8 @@ public class FileChangeHandler extends SimpleChannelInboundHandler<FileChangeMes
      * @throws Exception
      */
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, FileChangeMessage msg) throws Exception {
-        List<FileChangeRecord> fileChangeRecords = new ArrayList<>();
+    protected void channelRead0(ChannelHandlerContext ctx, FileChangeMsg msg) throws Exception {
+        log.info("========>>>>>>>> {}", msg);
         FileChangeBO fileChangeBO = msg.getFileChangeBO();
         // 1. c ==》 s
         FileChangeRecord fileChangeRecord = new FileChangeRecord();
@@ -63,40 +54,8 @@ public class FileChangeHandler extends SimpleChannelInboundHandler<FileChangeMes
         fileChangeRecord.setStatus(StatusEnum.GOING.getCode());
         fileChangeRecord.setStartPos(0L);
         fileChangeRecord.setMaxReadLength(ServerConfig.MAX_READ_LENGTH);
-        fileChangeRecords.add(fileChangeRecord);
-        // 2. s ==> others
-        // 获取username对应的其他设备
-        List<String> deviceIds = deviceService.selectDeviceIdsByUsername(msg.getUsername());
-        List<String> others = deviceIds.stream()
-                .filter(deviceId -> !deviceId.equals(msg.getDeviceId()))
-                .collect(Collectors.toList());
-        for (String deviceId : others) {
-            FileChangeRecord fileChangeRecordForOthers = new FileChangeRecord();
-            fileChangeRecordForOthers.setRelativePath(fileChangeBO.getRelativePath());
-            fileChangeRecordForOthers.setFileType(fileChangeBO.getFileTypeEnum().getCode());
-            fileChangeRecordForOthers.setOperationType(fileChangeBO.getOperationTypeEnum().getCode());
-            fileChangeRecordForOthers.setDeviceId(deviceId);
-            fileChangeRecordForOthers.setTransferMode(TransferModeEnum.DOWNLOAD.getCode());
-            fileChangeRecordForOthers.setStatus(StatusEnum.GOING.getCode());
-            fileChangeRecordForOthers.setStartPos(0L);
-            fileChangeRecordForOthers.setMaxReadLength(ServerConfig.MAX_READ_LENGTH);
-            // 记录数据库
-            fileChangeRecords.add(fileChangeRecordForOthers);
-        }
         // 批量插入数据库
-        fileChangeRecordService.insertBatch(fileChangeRecords);
-        // 通知在线客户端
-        notifyOnlineDevices(deviceIds);
+        fileChangeRecordService.insertOne(fileChangeRecord);
     }
 
-    private void notifyOnlineDevices(List<String> deviceIds) {
-        NotifyChangeMsg notifyChangeMsg = new NotifyChangeMsg();
-        for (String deviceId : deviceIds) {
-            Channel channel = sessionService.getChannel(deviceId);
-            // 客户端在线，发送通知消息
-            if (channel != null) {
-                channel.writeAndFlush(notifyChangeMsg);
-            }
-        }
-    }
 }

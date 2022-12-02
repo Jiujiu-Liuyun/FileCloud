@@ -54,20 +54,6 @@ public class FileChangeRecordServiceImpl extends ServiceImpl<FileChangeRecordMap
     }
 
     /**
-     * 更新传输位置
-     * @param startPos
-     * @param relativePath
-     * @param deviceId
-     */
-    @Override
-    public void updateStartPosById(Long startPos, Integer id) {
-        FileChangeRecord fileChangeRecord =  new FileChangeRecord();
-        fileChangeRecord.setId(id);
-        fileChangeRecord.setStartPos(startPos);
-        fileChangeRecordMapper.updateById(fileChangeRecord);
-    }
-
-    /**
      * 批量插入数据
      * @param fileChangeRecords
      */
@@ -79,6 +65,20 @@ public class FileChangeRecordServiceImpl extends ServiceImpl<FileChangeRecordMap
             }
         }
 
+    }
+
+    /**
+     * 更新传输位置
+     * @param startPos
+     * @param relativePath
+     * @param deviceId
+     */
+    @Override
+    public void updateStartPosById(Long startPos, Integer id) {
+        FileChangeRecord fileChangeRecord =  new FileChangeRecord();
+        fileChangeRecord.setId(id);
+        fileChangeRecord.setStartPos(startPos);
+        fileChangeRecordMapper.updateById(fileChangeRecord);
     }
 
     @Override
@@ -107,6 +107,9 @@ public class FileChangeRecordServiceImpl extends ServiceImpl<FileChangeRecordMap
      */
     @Override
     public FileChangeRecord selectNextFCR(String deviceId) {
+        if (deviceId == null) {
+            return null;
+        }
         // 根据deviceId获取FCR
         Page<FileChangeRecord> page = new Page<>(1, 1);
         QueryWrapper<FileChangeRecord> wrapper = new QueryWrapper<>();

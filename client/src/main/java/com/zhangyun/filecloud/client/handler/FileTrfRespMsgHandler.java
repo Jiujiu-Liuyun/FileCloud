@@ -1,6 +1,7 @@
 package com.zhangyun.filecloud.client.handler;
 
 import com.zhangyun.filecloud.client.controller.AppController;
+import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.entity.FileTrfBO;
 import com.zhangyun.filecloud.common.enums.FileTypeEnum;
 import com.zhangyun.filecloud.common.enums.OperationTypeEnum;
@@ -40,6 +41,7 @@ public class FileTrfRespMsgHandler extends SimpleChannelInboundHandler<FileTrfRe
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, FileTrfRespMsg msg) throws Exception {
+        log.info("========>>>>>>>> {}", msg);
         if (msg == null || msg.getRespEnum() != RespEnum.OK || msg.getNextPos() == null) {
             log.info("FileTrfRespMsg消息错误, {}", msg);
             return;
@@ -55,6 +57,7 @@ public class FileTrfRespMsgHandler extends SimpleChannelInboundHandler<FileTrfRe
             // 处理下一个FTBO
             FileTrfMsg fileTrfMsg = respFTBOHandler.handleFTBO(msg.getNextFileTrfBO());
             ctx.writeAndFlush(fileTrfMsg);
+            log.info("<<<<<<<<======== {}", fileTrfMsg);
         }
     }
 

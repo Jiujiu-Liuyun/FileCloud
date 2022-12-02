@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class FileTrfRespMsg extends Message{
+public class FileTrfRespMsg extends Msg {
     private RespEnum respEnum;
     private FileTrfBO fileTrfBO;
     private FileTrfBO nextFileTrfBO;

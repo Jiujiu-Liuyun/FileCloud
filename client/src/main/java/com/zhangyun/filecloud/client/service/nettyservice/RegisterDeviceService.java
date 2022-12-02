@@ -1,14 +1,12 @@
 package com.zhangyun.filecloud.client.service.nettyservice;
 
 import com.zhangyun.filecloud.client.service.NettyClient;
-import com.zhangyun.filecloud.common.message.RegisterDeviceMessage;
+import com.zhangyun.filecloud.common.message.RegisterDeviceMsg;
 import com.zhangyun.filecloud.common.message.RegisterDeviceRespMsg;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.concurrent.Semaphore;
 
 /**
  * description:
@@ -25,11 +23,11 @@ public class RegisterDeviceService extends AbstractNettyService<RegisterDeviceRe
 
     public RegisterDeviceRespMsg registerDevice(String username, String deviceName, String rootPath) throws InterruptedException {
         Channel channel = nettyClient.getChannel();
-        RegisterDeviceMessage registerDeviceMessage = new RegisterDeviceMessage();
-        registerDeviceMessage.setUsername(username);
-        registerDeviceMessage.setDeviceName(deviceName);
-        registerDeviceMessage.setRootPath(rootPath);
-        channel.writeAndFlush(registerDeviceMessage);
+        RegisterDeviceMsg registerDeviceMsg = new RegisterDeviceMsg();
+        registerDeviceMsg.setUsername(username);
+        registerDeviceMsg.setDeviceName(deviceName);
+        registerDeviceMsg.setRootPath(rootPath);
+        channel.writeAndFlush(registerDeviceMsg);
         // 等待响应
         return super.waitForData();
     }

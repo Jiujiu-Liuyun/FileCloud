@@ -1,19 +1,14 @@
 package com.zhangyun.filecloud.client.service.nettyservice;
 
 import com.zhangyun.filecloud.client.service.NettyClient;
-import com.zhangyun.filecloud.client.service.nettyservice.AbstractNettyService;
 import com.zhangyun.filecloud.common.entity.FileChangeBO;
-import com.zhangyun.filecloud.common.message.FileChangeMessage;
+import com.zhangyun.filecloud.common.message.FileChangeMsg;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -40,7 +35,7 @@ public class FileChangeService {
         // 建立连接
         Channel channel = nettyClient.getChannel();
         // 构造message
-        FileChangeMessage fileChangeMessage = new FileChangeMessage();
+        FileChangeMsg fileChangeMessage = new FileChangeMsg();
         fileChangeMessage.setFileChangeBO(fileChangeBO);
         // send message
         channel.writeAndFlush(fileChangeMessage);

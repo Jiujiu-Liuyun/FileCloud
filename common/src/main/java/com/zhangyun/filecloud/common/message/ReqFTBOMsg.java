@@ -10,11 +10,13 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class ReqFTBOMsg extends Message{
-
+public class ReqFTBOMsg extends Msg {
+    {
+        isNeedLog = false;
+    }
 
     @Override
     public int getMessageType() {
-        return REQ_FTBO_LIST_MSG;
+        return REQ_FTBO_MSG;
     }
 }

@@ -12,7 +12,10 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class NotifyChangeMsg extends Message{
+public class NotifyChangeMsg extends Msg {
+    {
+        isNeedLog = false;
+    }
 
     @Override
     public int getMessageType() {

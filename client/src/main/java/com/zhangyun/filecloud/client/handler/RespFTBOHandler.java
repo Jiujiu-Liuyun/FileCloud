@@ -1,6 +1,7 @@
 package com.zhangyun.filecloud.client.handler;
 
 import com.zhangyun.filecloud.client.controller.AppController;
+import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.entity.FileTrfBO;
 import com.zhangyun.filecloud.common.enums.*;
 import com.zhangyun.filecloud.common.message.FileTrfMsg;
@@ -55,6 +56,7 @@ public class RespFTBOHandler extends SimpleChannelInboundHandler<RespFTBOMsg> {
         if (msg == null || msg.getRespEnum() != RespEnum.OK || msg.getFileTrfBO() == null) {
             return;
         }
+        log.info("========>>>>>>>> {}", msg);
         // 尝试开启消息链
         boolean setSuccess = tryStartReqChain();
         if (!setSuccess) {
@@ -64,6 +66,7 @@ public class RespFTBOHandler extends SimpleChannelInboundHandler<RespFTBOMsg> {
         // 处理FTBO并发送FTM
         FileTrfMsg fileTrfMsg = handleFTBO(msg.getFileTrfBO());
         ctx.writeAndFlush(fileTrfMsg);
+        log.info("<<<<<<<<======== {}", fileTrfMsg);
     }
 
     /**

@@ -46,8 +46,8 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginMsg> {
     private FileChangeRecordService fileChangeRecordService;
 
     @Override
-    @TraceLog
     protected void channelRead0(ChannelHandlerContext ctx, LoginMsg msg) throws Exception {
+        log.info("========>>>>>>>> {}", msg);
         LoginRespMsg loginRespMsg = authLoginMsg(msg);
         if (loginRespMsg.getRespBO() == RespEnum.OK) {
             // 将连接加入会话管理器

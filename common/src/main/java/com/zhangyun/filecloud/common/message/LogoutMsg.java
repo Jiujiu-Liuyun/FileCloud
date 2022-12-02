@@ -10,7 +10,7 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class LogoutMessage extends Message{
+public class LogoutMsg extends Msg {
     @Override
     public int getMessageType() {
         return LOGOUT_MSG;

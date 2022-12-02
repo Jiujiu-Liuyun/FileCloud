@@ -2,7 +2,7 @@ package com.zhangyun.filecloud.server.handler;
 
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.enums.RespEnum;
-import com.zhangyun.filecloud.common.message.RegisterDeviceMessage;
+import com.zhangyun.filecloud.common.message.RegisterDeviceMsg;
 import com.zhangyun.filecloud.common.message.RegisterDeviceRespMsg;
 import com.zhangyun.filecloud.server.database.service.DeviceService;
 import com.zhangyun.filecloud.server.database.service.UserService;
@@ -26,7 +26,7 @@ import java.util.UUID;
 @Slf4j
 @ChannelHandler.Sharable
 @Component
-public class RegisterDeviceHandler extends SimpleChannelInboundHandler<RegisterDeviceMessage> {
+public class RegisterDeviceHandler extends SimpleChannelInboundHandler<RegisterDeviceMsg> {
     @Autowired
     private DeviceService deviceService;
     @Autowired
@@ -35,8 +35,8 @@ public class RegisterDeviceHandler extends SimpleChannelInboundHandler<RegisterD
     private UserService userService;
 
     @Override
-    @TraceLog
-    protected void channelRead0(ChannelHandlerContext ctx, RegisterDeviceMessage msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, RegisterDeviceMsg msg) throws Exception {
+        log.info("========>>>>>>>> {}", msg);
         // 1. 验证username password
         RespEnum respEnum = userService.authUsernameAndPassword(msg.getUsername(), msg.getPassword());
         RegisterDeviceRespMsg respMsg = new RegisterDeviceRespMsg();

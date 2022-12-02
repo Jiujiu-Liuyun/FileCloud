@@ -11,7 +11,7 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class LoginRespMsg extends Message{
+public class LoginRespMsg extends Msg {
     private RespEnum respBO;
     // 该设备是否注册
     private Boolean isRegister;

@@ -1,6 +1,7 @@
 package com.zhangyun.filecloud.server.handler;
 
-import com.zhangyun.filecloud.common.message.LogoutMessage;
+import com.zhangyun.filecloud.common.annotation.TraceLog;
+import com.zhangyun.filecloud.common.message.LogoutMsg;
 import com.zhangyun.filecloud.server.service.RedisService;
 import com.zhangyun.filecloud.server.service.session.SessionService;
 import io.netty.channel.ChannelHandler;
@@ -20,14 +21,15 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @ChannelHandler.Sharable
 @Component
-public class LogoutHandler extends SimpleChannelInboundHandler<LogoutMessage> {
+public class LogoutHandler extends SimpleChannelInboundHandler<LogoutMsg> {
     @Autowired
     private SessionService sessionService;
     @Autowired
     private RedisService redisService;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, LogoutMessage msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, LogoutMsg msg) throws Exception {
+        log.info("========>>>>>>>> {}", msg);
         // 1.删除token
         redisService.delToken(msg.getUsername(), msg.getDeviceId());
         // 2.解除会话连接

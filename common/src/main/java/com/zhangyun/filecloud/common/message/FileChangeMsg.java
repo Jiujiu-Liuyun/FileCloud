@@ -11,7 +11,7 @@ import lombok.Data;
  * @since: 1.0
  */
 @Data
-public class FileChangeMessage extends Message{
+public class FileChangeMsg extends Msg {
     private FileChangeBO fileChangeBO;
 
     @Override

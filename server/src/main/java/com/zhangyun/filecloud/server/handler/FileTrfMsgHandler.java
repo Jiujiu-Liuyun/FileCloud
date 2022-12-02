@@ -1,9 +1,11 @@
 package com.zhangyun.filecloud.server.handler;
 
+import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.entity.FileTrfBO;
 import com.zhangyun.filecloud.common.enums.*;
 import com.zhangyun.filecloud.common.message.FileTrfMsg;
 import com.zhangyun.filecloud.common.message.FileTrfRespMsg;
+import com.zhangyun.filecloud.common.message.NotifyChangeMsg;
 import com.zhangyun.filecloud.common.utils.FileUtil;
 import com.zhangyun.filecloud.common.utils.PathUtil;
 import com.zhangyun.filecloud.server.config.ServerConfig;
@@ -11,6 +13,8 @@ import com.zhangyun.filecloud.server.database.entity.FileChangeRecord;
 import com.zhangyun.filecloud.server.database.service.DeviceService;
 import com.zhangyun.filecloud.server.database.service.FileChangeRecordService;
 import com.zhangyun.filecloud.server.service.RedisService;
+import com.zhangyun.filecloud.server.service.session.SessionService;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -22,6 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * description:
@@ -40,10 +47,13 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
     private RedisService redisService;
     @Autowired
     private DeviceService deviceService;
+    @Autowired
+    private SessionService sessionService;
 
     @Override
     @Transactional
     protected void channelRead0(ChannelHandlerContext ctx, FileTrfMsg msg) throws Exception {
+        log.info("========>>>>>>>> {}", msg);
         // 1. 校验消息
         boolean auth = authFileTrfBO(msg);
         if (!auth) {
@@ -71,6 +81,33 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
         if (fileTrfRespMsg.getFileTrfBO().getStatusEnum() == StatusEnum.FINISHED) {
             // 删除FCR
             fileChangeRecordService.deleteById(fileChangeRecord.getId());
+            // 上传
+            if (fileTrfRespMsg.getFileTrfBO().getTransferModeEnum() == TransferModeEnum.UPLOAD) {
+                // 2. s ==> others
+                List<FileChangeRecord> fileChangeRecords = new ArrayList<>();
+                // 获取username对应的其他设备
+                List<String> deviceIds = deviceService.selectDeviceIdsByUsername(msg.getUsername());
+                List<String> others = deviceIds.stream()
+                        .filter(deviceId -> !deviceId.equals(msg.getDeviceId()))
+                        .collect(Collectors.toList());
+                for (String deviceId : others) {
+                    FileChangeRecord fcrForOthers = new FileChangeRecord();
+                    fcrForOthers.setRelativePath(fileTrfRespMsg.getFileTrfBO().getRelativePath());
+                    fcrForOthers.setFileType(fileTrfRespMsg.getFileTrfBO().getFileTypeEnum().getCode());
+                    fcrForOthers.setOperationType(fileTrfRespMsg.getFileTrfBO().getOperationTypeEnum().getCode());
+                    fcrForOthers.setDeviceId(deviceId);
+                    fcrForOthers.setTransferMode(TransferModeEnum.DOWNLOAD.getCode());
+                    fcrForOthers.setStatus(StatusEnum.GOING.getCode());
+                    fcrForOthers.setStartPos(0L);
+                    fcrForOthers.setMaxReadLength(ServerConfig.MAX_READ_LENGTH);
+                    // 记录数据库
+                    fileChangeRecords.add(fcrForOthers);
+                }
+                // 批量插入数据库
+                fileChangeRecordService.insertBatch(fileChangeRecords);
+                // 通知在线客户端
+                notifyOnlineDevices(deviceIds);
+            }
         } else if (fileTrfRespMsg.getFileTrfBO().getStatusEnum() == StatusEnum.GOING) {
             // 更新startPos
             fileChangeRecordService.updateStartPosById(fileTrfRespMsg.getNextPos(), fileChangeRecord.getId());
@@ -150,5 +187,20 @@ public class FileTrfMsgHandler extends SimpleChannelInboundHandler<FileTrfMsg> {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 通知其他在线客户端
+     * @param deviceIds
+     */
+    private void notifyOnlineDevices(List<String> deviceIds) {
+        NotifyChangeMsg notifyChangeMsg = new NotifyChangeMsg();
+        for (String deviceId : deviceIds) {
+            Channel channel = sessionService.getChannel(deviceId);
+            // 客户端在线，发送通知消息
+            if (channel != null) {
+                channel.writeAndFlush(notifyChangeMsg);
+            }
+        }
     }
 }

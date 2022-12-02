@@ -2,7 +2,7 @@ package com.zhangyun.filecloud.server.handler;
 
 import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.enums.RespEnum;
-import com.zhangyun.filecloud.common.message.Message;
+import com.zhangyun.filecloud.common.message.Msg;
 import com.zhangyun.filecloud.common.message.RespMsg;
 import com.zhangyun.filecloud.server.database.service.DeviceService;
 import io.netty.channel.ChannelHandler;
@@ -22,14 +22,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @ChannelHandler.Sharable
 @Component
-public class AuthDeviceHandler extends SimpleChannelInboundHandler<Message> {
+public class AuthDeviceHandler extends SimpleChannelInboundHandler<Msg> {
     @Autowired
     private DeviceService deviceService;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Message msg) {
+    protected void channelRead0(ChannelHandlerContext ctx, Msg msg) {
         RespEnum respEnum = authDevice(msg);
-
         if (respEnum == RespEnum.OK) {
             // 认证成功
             ctx.fireChannelRead(msg);
@@ -39,7 +38,7 @@ public class AuthDeviceHandler extends SimpleChannelInboundHandler<Message> {
     }
 
     @TraceLog
-    private RespEnum authDevice(Message msg) {
+    private RespEnum authDevice(Msg msg) {
         if (msg.getUsername() ==null || msg.getDeviceId() == null) {
             return RespEnum.MSG_FORMAT_ERROR;
         }

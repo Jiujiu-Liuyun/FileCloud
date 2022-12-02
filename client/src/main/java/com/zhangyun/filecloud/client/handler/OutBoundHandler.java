@@ -1,7 +1,7 @@
 package com.zhangyun.filecloud.client.handler;
 
 import com.zhangyun.filecloud.client.controller.AppController;
-import com.zhangyun.filecloud.common.message.Message;
+import com.zhangyun.filecloud.common.message.Msg;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOutboundHandlerAdapter;
@@ -27,8 +27,8 @@ public class OutBoundHandler extends ChannelOutboundHandlerAdapter {
 
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-        if (msg instanceof Message) {
-            Message message = (Message) msg;
+        if (msg instanceof Msg) {
+            Msg message = (Msg) msg;
             message.setToken(appController.getUserInfo().getToken());
             message.setUsername(appController.getUserInfo().getUsername());
             message.setDeviceId(appController.getUserInfo().getDeviceId());

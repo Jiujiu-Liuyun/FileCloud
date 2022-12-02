@@ -1,9 +1,7 @@
 package com.zhangyun.filecloud.common.protocol;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.zhangyun.filecloud.common.message.Message;
-import com.zhangyun.filecloud.common.message.PingMessage;
+import com.zhangyun.filecloud.common.message.Msg;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -23,7 +21,7 @@ import java.util.List;
  */
 @ChannelHandler.Sharable
 @Slf4j
-public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message> {
+public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Msg> {
 
     @Value("${codec.version}")
     private int version;
@@ -40,10 +38,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
      * @throws Exception
      */
     @Override
-    protected void encode(ChannelHandlerContext cxt, Message message, List<Object> list) throws Exception {
-        if (message.getClass() != PingMessage.class) {
-            log.info("发送消息: {}", JSONObject.toJSONString(message));
-        }
+    protected void encode(ChannelHandlerContext cxt, Msg message, List<Object> list) throws Exception {
         ByteBuf out = cxt.alloc().buffer();
         // magic --- 12bytes
         out.writeBytes(new byte[]{0x70, 0x6f, 0x72, 0x74, 0x61, 0x6c,
@@ -113,7 +108,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         byte serialAlgorithm = in.readByte();
         // 指令类型
         int messageType = in.readInt();
-        Class<? extends Message> messageClass = Message.getMessageClass(messageType);
+        Class<? extends Msg> messageClass = Msg.getMessageClass(messageType);
         // 对齐填充
         in.readBytes(14);
 
@@ -125,7 +120,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         byte[] messageHeader = new byte[messageHeaderLength];
         in.readBytes(messageHeader, 0, messageHeaderLength);
 //        log.info("messageHeader: {}, messageClass: {}", new String(messageHeader), messageClass);
-        Message message = JSONObject.parseObject(new String(messageHeader), messageClass);
+        Msg message = JSONObject.parseObject(new String(messageHeader), messageClass);
         // 消息体
         int messageBodyLength = in.readInt();
         byte[] messageBody = null;
@@ -139,9 +134,6 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         }
 
         message.setMessageBody(messageBody);
-        if (message.getClass() != PingMessage.class) {
-            log.info("接收消息: {}", JSONObject.toJSONString(message));
-        }
         list.add(message);
     }
 }

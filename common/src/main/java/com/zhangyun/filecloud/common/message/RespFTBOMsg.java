@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class RespFTBOMsg extends Message{
+public class RespFTBOMsg extends Msg {
     private RespEnum respEnum;
     /**
      * 待处理的 FTBO

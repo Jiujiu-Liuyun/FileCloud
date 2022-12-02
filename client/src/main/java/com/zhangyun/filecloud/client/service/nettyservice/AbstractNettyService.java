@@ -1,13 +1,11 @@
 package com.zhangyun.filecloud.client.service.nettyservice;
 
 import com.zhangyun.filecloud.client.config.ClientConfig;
-import com.zhangyun.filecloud.common.message.LoginRespMsg;
-import com.zhangyun.filecloud.common.message.Message;
+import com.zhangyun.filecloud.common.message.Msg;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * description:
@@ -17,7 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @since: 1.0
  */
 @Slf4j
-public abstract class AbstractNettyService<T extends Message> {
+public abstract class AbstractNettyService<T extends Msg> {
     /**
      * 标识是否接收到来自服务器的登录响应消息
      */
@@ -26,11 +24,6 @@ public abstract class AbstractNettyService<T extends Message> {
      * 存储netty传来的数据
      */
     private T data;
-
-    public void serviceRefresh() {
-        semaphore = new Semaphore(0);
-        data = null;
-    }
 
     public void dataIsReady() {
         semaphore.release();
@@ -48,6 +41,9 @@ public abstract class AbstractNettyService<T extends Message> {
      * 是否在TIMEOUT时间内返回
      */
     public T waitForData() {
+        // init
+        semaphore = new Semaphore(0);
+        data = null;
         // 等待响应
         try {
             boolean acquire = semaphore.tryAcquire(ClientConfig.NETTY_TIMEOUT_SECONDS, TimeUnit.SECONDS);

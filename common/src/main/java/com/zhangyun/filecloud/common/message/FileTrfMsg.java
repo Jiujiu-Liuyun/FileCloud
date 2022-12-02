@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class FileTrfMsg extends Message{
+public class FileTrfMsg extends Msg {
     private FileTrfBO fileTrfBO;
     @Override
     public int getMessageType() {

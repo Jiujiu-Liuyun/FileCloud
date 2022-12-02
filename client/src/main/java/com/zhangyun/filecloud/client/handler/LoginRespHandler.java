@@ -1,6 +1,7 @@
 package com.zhangyun.filecloud.client.handler;
 
 import com.zhangyun.filecloud.client.service.nettyservice.LoginService;
+import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.message.LoginRespMsg;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -27,6 +28,7 @@ public class LoginRespHandler extends SimpleChannelInboundHandler<LoginRespMsg> 
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRespMsg msg) throws Exception {
+        log.info("========>>>>>>>> {}", msg);
         loginService.setData(msg);
         loginService.dataIsReady();
     }

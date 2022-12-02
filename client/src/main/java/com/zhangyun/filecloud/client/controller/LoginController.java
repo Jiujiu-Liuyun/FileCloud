@@ -90,6 +90,7 @@ public class LoginController implements Initializable {
         if (responseMessage.getRespBO() != RespEnum.OK) {
             Alert alert = new Alert(Alert.AlertType.WARNING, responseMessage.getRespBO().getDesc());
             alert.showAndWait();
+            return;
         } else {
             // 登录成功
             log.info("登录成功");

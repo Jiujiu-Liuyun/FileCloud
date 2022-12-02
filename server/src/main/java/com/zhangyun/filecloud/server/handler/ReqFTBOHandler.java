@@ -1,5 +1,6 @@
 package com.zhangyun.filecloud.server.handler;
 
+import com.zhangyun.filecloud.common.annotation.TraceLog;
 import com.zhangyun.filecloud.common.entity.FileTrfBO;
 import com.zhangyun.filecloud.common.enums.RespEnum;
 import com.zhangyun.filecloud.common.message.ReqFTBOMsg;

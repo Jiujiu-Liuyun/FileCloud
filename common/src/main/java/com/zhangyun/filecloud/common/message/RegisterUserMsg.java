@@ -1,22 +1,22 @@
 package com.zhangyun.filecloud.common.message;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
- * description: 登录消息
+ * description: 注册用户
  *
  * @author: zhangyun
- * @date: 2022/11/2 22:31
+ * @date: 2022/12/2 12:00
  * @since: 1.0
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class RegisterDeviceMessage extends Message {
+public class RegisterUserMsg extends Msg {
     private String password;
-    private String deviceName;
-    private String rootPath;
 
     @Override
     public int getMessageType() {
-        return INIT_DEVICE_MSG;
+        return 0;
     }
 }
