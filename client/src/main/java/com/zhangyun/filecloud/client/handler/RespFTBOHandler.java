@@ -43,11 +43,15 @@ public class RespFTBOHandler extends SimpleChannelInboundHandler<RespFTBOMsg> {
     }
 
     public boolean tryStartReqChain() {
-        return inReqChainBoolean.compareAndSet(false, true);
+        boolean set = inReqChainBoolean.compareAndSet(false, true);
+        log.info("try start req chain: {}", set);
+        return set;
     }
 
     public boolean tryStopReqChain() {
-        return inReqChainBoolean.compareAndSet(true, false);
+        boolean set = inReqChainBoolean.compareAndSet(true, false);
+        log.info("try stop req chain: {}", set);
+        return set;
     }
 
     @Override
@@ -56,7 +60,7 @@ public class RespFTBOHandler extends SimpleChannelInboundHandler<RespFTBOMsg> {
         if (msg == null || msg.getRespEnum() != RespEnum.OK || msg.getFileTrfBO() == null) {
             return;
         }
-        log.info("========>>>>>>>> {}", msg);
+        log.info(">>>>>>>>>>>>>>>> {}", msg);
         // 尝试开启消息链
         boolean setSuccess = tryStartReqChain();
         if (!setSuccess) {
@@ -66,7 +70,7 @@ public class RespFTBOHandler extends SimpleChannelInboundHandler<RespFTBOMsg> {
         // 处理FTBO并发送FTM
         FileTrfMsg fileTrfMsg = handleFTBO(msg.getFileTrfBO());
         ctx.writeAndFlush(fileTrfMsg);
-        log.info("<<<<<<<<======== {}", fileTrfMsg);
+        log.info("<<<<<<<<<<<<<<<< {}", fileTrfMsg);
     }
 
     /**
@@ -91,6 +95,8 @@ public class RespFTBOHandler extends SimpleChannelInboundHandler<RespFTBOMsg> {
                 } else {
                     fileTrfBO.setStatusEnum(StatusEnum.GOING);
                 }
+            } else {
+                fileTrfBO.setStatusEnum(StatusEnum.FINISHED);
             }
         }
         return fileTrfMsg;

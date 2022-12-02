@@ -28,7 +28,7 @@ public class RegUserHandler extends SimpleChannelInboundHandler<RegUserMsg> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RegUserMsg msg) throws Exception {
-        log.info("========>>>>>>>> {}", msg);
+        log.info(">>>>>>>>>>>>>>>> {}", msg);
         RespEnum respEnum = authMsg(msg);
         if (respEnum != RespEnum.OK) {
             ctx.writeAndFlush(new RegUserRespMsg(respEnum));

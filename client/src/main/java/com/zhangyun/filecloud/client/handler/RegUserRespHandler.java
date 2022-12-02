@@ -26,7 +26,7 @@ public class RegUserRespHandler extends SimpleChannelInboundHandler<RegUserRespM
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RegUserRespMsg msg) throws Exception {
-        log.info("========>>>>>>>> {}", msg);
+        log.info(">>>>>>>>>>>>>>>> {}", msg);
         regUserService.setData(msg);
         regUserService.dataIsReady();
     }

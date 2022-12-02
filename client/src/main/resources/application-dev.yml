@@ -1,8 +1,4 @@
-file:
+fileCloud:
   server:
+    port: 8090
     host: localhost
-  client:
-    path: /Users/zhangyun/test/source
-    maxsize: 10
-server:
-  port: 8081

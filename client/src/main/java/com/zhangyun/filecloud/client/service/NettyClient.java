@@ -34,9 +34,9 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Service
 public class NettyClient {
-    @Value("${file.server.port}")
+    @Value("${fileCloud.server.port}")
     private int serverPort;
-    @Value("${file.server.host}")
+    @Value("${fileCloud.server.host}")
     private String serverHost;
 
     @Autowired

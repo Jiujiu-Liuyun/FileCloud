@@ -38,14 +38,14 @@ public class RegDeviceHandler extends SimpleChannelInboundHandler<RegDeviceMsg> 
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RegDeviceMsg msg) throws Exception {
-        log.info("========>>>>>>>> {}", msg);
+        log.info(">>>>>>>>>>>>>>>> {}", msg);
         // 1. 验证username password
         RespEnum respEnum = userService.authUsernameAndPassword(msg.getUsername(), msg.getPassword());
         RegDeviceRespMsg respMsg = new RegDeviceRespMsg();
         respMsg.setRespEnum(respEnum);
         if (respEnum != RespEnum.OK) {
             ctx.writeAndFlush(respMsg);
-            log.info("<<<<<<<<======== {}", respMsg);
+            log.info("<<<<<<<<<<<<<<<< {}", respMsg);
             return;
         }
         // todo: 限制设备个数
@@ -64,6 +64,6 @@ public class RegDeviceHandler extends SimpleChannelInboundHandler<RegDeviceMsg> 
             log.warn("设备创建失败");
         }
         ctx.writeAndFlush(respMsg);
-        log.info("<<<<<<<<======== {}", respMsg);
+        log.info("<<<<<<<<<<<<<<<< {}", respMsg);
     }
 }

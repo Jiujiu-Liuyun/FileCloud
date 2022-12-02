@@ -41,8 +41,8 @@ public class FileTrfRespMsgHandler extends SimpleChannelInboundHandler<FileTrfRe
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, FileTrfRespMsg msg) throws Exception {
-        log.info("========>>>>>>>> {}", msg);
-        if (msg == null || msg.getRespEnum() != RespEnum.OK || msg.getNextPos() == null) {
+        log.info(">>>>>>>>>>>>>>>> {}", msg);
+        if (msg == null || msg.getRespEnum() != RespEnum.OK) {
             log.info("FileTrfRespMsg消息错误, {}", msg);
             return;
         }
@@ -57,7 +57,7 @@ public class FileTrfRespMsgHandler extends SimpleChannelInboundHandler<FileTrfRe
             // 处理下一个FTBO
             FileTrfMsg fileTrfMsg = respFTBOHandler.handleFTBO(msg.getNextFileTrfBO());
             ctx.writeAndFlush(fileTrfMsg);
-            log.info("<<<<<<<<======== {}", fileTrfMsg);
+            log.info("<<<<<<<<<<<<<<<< {}", fileTrfMsg);
         }
     }
 
